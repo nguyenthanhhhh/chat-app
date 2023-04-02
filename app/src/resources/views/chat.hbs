@@ -1,0 +1,35 @@
+<h1 class="title-chat">My Chat App</h1>
+
+
+<div id="block-chat">
+
+    <div id="list-user-block">
+        <h5>Danh sách người chat</h5>
+        <h5>{{room}}</h5>
+        <ul id="list-user"></ul>
+    </div>
+
+    <div id="message-block">
+    </div>
+</div>
+
+
+
+<div id="form-message-block">
+    <form id="form-message">
+        <div class="control-row">
+            <input type="text" id="input-message">
+            <button type="submit">Gửi</button>
+            <button type="button" id="btn-share-location">Gửi vị trí</button>
+        </div>
+    </form>
+
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.11.1/qs.min.js"
+    integrity="sha512-5Zv/hNtOKSkeScnIYOqGjng82gQSHsCoyqq9TgrJLgYa032cUYWH4kF1ayS8Gz1Jfge7e8MaBF6AeEvoQ92v8w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="/js/client-chat.js"></script>

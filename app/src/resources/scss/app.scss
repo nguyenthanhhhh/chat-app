@@ -1,0 +1,46 @@
+.title-chat {
+  margin-bottom: 50px;
+}
+
+.title-header {
+  color: white;
+}
+
+#input-name {
+  margin: 10px;
+}
+
+#input-room {
+  margin: 10px;
+}
+
+#input-message {
+  width: 60%;
+}
+
+.message__row1 {
+  display: flex;
+  align-items: flex-end;
+  p {
+    margin-bottom: 0;
+  }
+  .message__date {
+    margin-left: 30px;
+    color: #ccc;
+    font-size: 12px;
+  }
+}
+
+#block-chat {
+  display: flex;
+  width: 100%;
+  #list-user-block {
+    width: 30%;
+  }
+  #message-block {
+    height: 65vh;
+    overflow: auto;
+    margin-bottom: 12px;
+    flex: 1;
+  }
+}
