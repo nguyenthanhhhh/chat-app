@@ -5,7 +5,7 @@ const authenticate = (req, res, next) => {
   try {
     if (token) {
       try {
-        const decoded = jwt.verify(token, "thanh");
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
         req.user = decoded;
         res.cookie("userInfo", req.user);
         return next();

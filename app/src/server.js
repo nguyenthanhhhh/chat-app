@@ -9,6 +9,7 @@ const cookieParser = require("cookie-parser");
 const http = require("http");
 const socketio = require("socket.io");
 const Filter = require("bad-words");
+require("dotenv").config();
 const createMessage = require("./utils/CreateMessage");
 const {
   getUserList,
@@ -17,7 +18,7 @@ const {
   findUser,
 } = require("./utils/UserListInRoom");
 
-const port = 3002;
+const port = process.env.PORT;
 
 const filter = new Filter();
 const publicPath = path.join(__dirname, "../public");

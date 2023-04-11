@@ -15,7 +15,6 @@ class UserController {
     try {
       const newUser = await Users.build(user); // Tạo một đối tượng mô hình mới
       await newUser.validate();
-      console.log("HELLO");
       const salt = bcrypt.genSaltSync(10);
       const hash = bcrypt.hashSync(password, salt);
       Users.create(
@@ -61,8 +60,8 @@ class UserController {
         if (auth) {
           const token = jwt.sign(
             { userName: userLog.userName, email: userLog.email },
-            "thanh",
-            { expiresIn: 30 * 60 }
+            process.env.JWT_SECRET,
+            { expiresIn: process.env.JWT_EXPIRES_IN }
           );
           res.cookie("auth", token);
           res.status(200).redirect("/");
