@@ -37,6 +37,7 @@ const io = socketio(server);
 //xử lý socket io
 //Khi client connect
 io.on("connection", (socket) => {
+  console.log("New connection");
   socket.emit("default-message", {
     name: "ADMIN",
     message: createMessage(
@@ -68,13 +69,13 @@ io.on("connection", (socket) => {
     //xử lý tin nhắn (chat)
     socket.on("send-message-to-server", (data, callback) => {
       let message = data.message;
-      // try {
-      //   message = filter.clean(message);
-      //   message = createMessage(message);
-      // } catch (error) {
-      //   console.log(error);
-      // }
-      message = createMessage(message);
+      try {
+        message = filter.clean(message);
+        message = createMessage(message);
+      } catch (error) {
+        console.log(error);
+      }
+      // message = createMessage(message);
 
       io.to(room).emit("server-send-message-to-client", { name, message });
       callback();

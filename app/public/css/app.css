@@ -1,35 +1,50 @@
 .title-chat {
-  margin-bottom: 50px; }
+  margin-bottom: 50px;
+}
 
 .title-header {
-  color: white; }
+  color: white;
+}
 
 #input-name {
-  margin: 10px; }
+  margin: 10px;
+}
 
 #input-room {
-  margin: 10px; }
+  margin: 10px;
+}
 
 #input-message {
-  width: 60%; }
+  width: 60%;
+}
 
 .message__row1 {
   display: flex;
-  align-items: flex-end; }
-  .message__row1 p {
-    margin-bottom: 0; }
-  .message__row1 .message__date {
-    margin-left: 30px;
-    color: #181010;
-    font-size: 12px; }
+  align-items: flex-end;
+}
+.message__row1 p {
+  margin-bottom: 0;
+}
+.message__row1 .message__date {
+  margin-left: 30px;
+  color: #181010;
+  font-size: 12px;
+}
 
 #block-chat {
   display: flex;
-  width: 100%; }
-  #block-chat #list-user-block {
-    width: 30%; }
-  #block-chat #message-block {
-    height: 65vh;
-    overflow: auto;
-    margin-bottom: 12px;
-    flex: 1; }
+  width: 100%;
+}
+#block-chat #list-user-block {
+  width: 30%;
+}
+#block-chat #message-block {
+  height: 65vh;
+  overflow: auto;
+  margin-bottom: 12px;
+  flex: 1;
+}
+
+.header-w {
+  width: 90%;
+}
