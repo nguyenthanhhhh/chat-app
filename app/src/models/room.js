@@ -1,32 +1,31 @@
 "use strict";
-const { Model } = require("sequelize");
+const { Model, STRING, INTEGER } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class Users extends Model {
+  class room extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({}) {
-      // define association here
-    }
+    static associate({}) {}
   }
-  Users.init(
+  room.init(
     {
-      userName: {
+      name: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
           len: {
-            args: [5, 15],
-            msg: "Tên đăng nhập phải dài từ 5 đến 15 ký tự",
+            args: [3, 10],
+            msg: "Tên phòng phải dài từ 3 đến 10 ký tự",
           },
           isUnique: function (value, next) {
-            Users.findOne({ where: { username: value } })
-              .then(function (user) {
+            room
+              .findOne({ where: { name: value } })
+              .then(function (rooms) {
                 // Reject if a different user wants to use the same email
-                if (user) {
-                  return next("Tên đăng nhập đã tồn tại");
+                if (rooms) {
+                  return next("Tên phòng đã tồn tại");
                 }
                 return next();
               })
@@ -37,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         unique: {
           arg: true,
-          msg: "Tên đăng nhập đã tồn tại",
+          msg: "Tên phòng đã tồn tại",
         },
       },
       password: {
@@ -45,8 +44,8 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         validate: {
           len: {
-            args: [5, 15],
-            msg: "Mật khẩu phải dài từ 5 đến 10 ký tự",
+            args: [3, 9],
+            msg: "Mật khẩu phải dài từ 3 đến 9 ký tự",
           },
           is: {
             args: /^(?=.*[!@#$%^&*])/,
@@ -54,12 +53,11 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
-      email: { type: DataTypes.STRING, allowNull: false, unique: true },
     },
     {
       sequelize,
-      modelName: "Users",
+      modelName: "room",
     }
   );
-  return Users;
+  return room;
 };

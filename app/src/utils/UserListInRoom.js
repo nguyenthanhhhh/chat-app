@@ -23,4 +23,24 @@ const getUserList = (room) => userList.filter((user) => user.room === room);
 
 const findUser = (id) => userList.find((user) => user.id === id);
 
+// const addUser = async (user) => {
+//   await room.create(user);
+// };
+
+// const removeUser = async (userId) => {
+//   await room.destroy({
+//     where: {
+//       userId,
+//     },
+//   });
+// };
+
+// const getUserList = async (room) => {
+//   return await room.findAll({
+//     where: {
+//       name: room,
+//     },
+//   });
+// };
+
 module.exports = { getUserList, addUser, removeUser, findUser };

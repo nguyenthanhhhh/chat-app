@@ -52,7 +52,7 @@ io.on("connection", (socket) => {
   // join room
   socket.on("client join room", ({ name, room }) => {
     socket.join(room);
-    const newUser = { id: socket.id, name, room };
+    const newUser = { userId: socket.id, name, room };
     addUser(newUser);
 
     //Gửi lời chào tới room
@@ -63,6 +63,7 @@ io.on("connection", (socket) => {
 
     //Gửi danh sách user trong room về cho client
     const listUserInRoom = getUserList(room);
+
     io.emit("server send user list", listUserInRoom);
 
     //xử lý tin nhắn (chat)

@@ -9,6 +9,7 @@ userRouter.post("/registerPost", UserController.registerPost);
 userRouter.get("/login", UserController.loginGet);
 userRouter.post("/loginPost", UserController.loginPost);
 userRouter.get("/logout", UserController.logout);
+userRouter.post("/chat", authenticate, UserController.joinChat);
 userRouter.get("/chat", authenticate, UserController.joinChat);
 
 module.exports = userRouter;

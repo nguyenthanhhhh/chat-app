@@ -4,6 +4,10 @@ const jwt = require("jsonwebtoken");
 const { dataToObj } = require("../utils/dataToObj");
 
 class UserController {
+  home(req, res) {
+    res.render("home");
+  }
+
   registerGet(req, res) {
     res.render("user/register");
   }
@@ -87,7 +91,10 @@ class UserController {
   }
 
   joinChat(req, res) {
-    const { name, room } = req.query;
+    const user = req.user;
+    const { name, room, password } = req.body;
+    console.log(password);
+    // const name = user.userName;
     res.render("chat.hbs", { name: dataToObj(name), room: dataToObj(room) });
   }
 }
