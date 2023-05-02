@@ -1,13 +1,9 @@
-const { Users } = require("../models");
+const { Users, room } = require("../models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { dataToObj } = require("../utils/dataToObj");
 
 class UserController {
-  home(req, res) {
-    res.render("home");
-  }
-
   registerGet(req, res) {
     res.render("user/register");
   }
@@ -90,12 +86,37 @@ class UserController {
     console.log("Logout");
   }
 
-  joinChat(req, res) {
+  async joinChat(req, res) {
     const user = req.user;
-    const { name, room, password } = req.body;
-    console.log(password);
-    // const name = user.userName;
-    res.render("chat.hbs", { name: dataToObj(name), room: dataToObj(room) });
+    const { userName, roomName, password } = req.body;
+
+    try {
+      const roomJoin = await room.findOne({
+        where: {
+          roomName,
+        },
+      });
+      if (roomJoin) {
+        if (roomJoin.password) {
+          const auth = await bcrypt.compare(password, roomJoin.password);
+          if (auth) {
+            res.render("chat.hbs", {
+              userName: dataToObj(userName),
+              roomName: dataToObj(roomName),
+            });
+            console.log("Join room thanh cong");
+          } else {
+            res
+              .status(401)
+              .send("mật khẩu phòng không hợp lệ.  <a href=/>Quay lại </>");
+          }
+        }
+      } else {
+        res.status(401).send("Tên phòng không hợp lệ. <a href=/>Quay lại </>");
+      }
+    } catch (error) {
+      res.send({ message: error.message });
+    }
   }
 }
 

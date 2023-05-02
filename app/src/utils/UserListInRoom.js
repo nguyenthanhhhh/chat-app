@@ -1,15 +1,4 @@
-let userList = [
-  {
-    id: "1",
-    name: "ADMIN",
-    room: "Room 1",
-  },
-  {
-    id: "2",
-    name: "ADMIN",
-    room: "Room 2",
-  },
-];
+let userList = [];
 
 const addUser = (user) => (userList = [...userList, user]);
 

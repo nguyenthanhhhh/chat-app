@@ -8,8 +8,8 @@
 <div id="block-chat">
 
     <div id="list-user-block">
-        <h5>Danh sách người chat</h5>
-        <h5>{{room}}</h5>
+        <h5>Danh sách người chat phòng</h5>
+        <h5>{{roomName}}</h5>
         <ul id="list-user"></ul>
     </div>
 
@@ -68,8 +68,8 @@
         return html;
     };
 
-    const name = '{{ name }}';
-    const room = '{{room}}'
+    const name = '{{ userName }}';
+    const room = '{{roomName}}'
 
     const renderMessage = (message) => {
         const html = `

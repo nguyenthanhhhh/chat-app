@@ -4,19 +4,27 @@ const jwt = require("jsonwebtoken");
 const { dataToObj } = require("../utils/dataToObj");
 
 class RoomController {
+  async home(req, res) {
+    const listRoom = await room.findAll({
+      attributes: ["roomName"],
+    });
+    res.render("home", { listRoom: dataToObj(listRoom) });
+  }
+
   createRoomGet(req, res) {
     res.render("room/createRoom");
   }
+
   async createRoomPost(req, res) {
-    const { name, password } = req.body;
-    const createRoom = { name, password };
+    const { roomName, password } = req.body;
+    const createRoom = { roomName, password };
     try {
       const newRoom = await room.build(createRoom); // Tạo một đối tượng mô hình mới
       await newRoom.validate();
       const salt = bcrypt.genSaltSync(10);
       const hash = bcrypt.hashSync(password, salt);
       await room.create(
-        { name, password: hash },
+        { roomName, password: hash },
         {
           validate: false,
         }

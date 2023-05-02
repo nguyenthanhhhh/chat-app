@@ -52,7 +52,7 @@ io.on("connection", (socket) => {
   // join room
   socket.on("client join room", ({ name, room }) => {
     socket.join(room);
-    const newUser = { userId: socket.id, name, room };
+    const newUser = { id: socket.id, name, room };
     addUser(newUser);
 
     //Gửi lời chào tới room

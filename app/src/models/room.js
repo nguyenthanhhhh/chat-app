@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   room.init(
     {
-      name: {
+      roomName: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
           },
           isUnique: function (value, next) {
             room
-              .findOne({ where: { name: value } })
+              .findOne({ where: { roomName: value } })
               .then(function (rooms) {
                 // Reject if a different user wants to use the same email
                 if (rooms) {
@@ -53,7 +53,12 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
+      userName: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
     },
+
     {
       sequelize,
       modelName: "room",

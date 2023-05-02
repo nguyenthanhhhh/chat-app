@@ -9,10 +9,13 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      name: {
+      roomName: {
         type: Sequelize.STRING,
       },
       password: {
+        type: Sequelize.STRING,
+      },
+      userName: {
         type: Sequelize.STRING,
       },
       createdAt: {

@@ -1,8 +1,10 @@
+const userNameChat = "{{name}}";
+
 const renderMessage = (message) => {
   const html = `
         <div class="message-item" id="message-item">
             <div class="message__row1">
-              <p class="message__name">${message.name}</p>
+              <p class="message__name">${userNameChat}</p>
               <p class="message__date">${message.message.createdAt}</p>
             </div>
             <div class="message__row2">
@@ -30,8 +32,8 @@ const queryString = location.search;
 const params = Qs.parse(queryString, {
   ignoreQueryPrefix: true,
 });
-const { name, room } = params;
-
+const name = "{{{name}}}";
+const room = "{{room}}";
 //Xử lý tin nhắn mặc định
 socket.on("default-message", (data) => {
   html += renderMessage(data);
