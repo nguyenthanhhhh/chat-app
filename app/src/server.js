@@ -37,7 +37,6 @@ const io = socketio(server);
 //xử lý socket io
 //Khi client connect
 io.on("connection", (socket) => {
-  console.log("New connection");
   socket.emit("default-message", {
     name: "ADMIN",
     message: createMessage(

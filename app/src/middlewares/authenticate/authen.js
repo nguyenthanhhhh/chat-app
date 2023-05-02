@@ -18,11 +18,13 @@ const authenticate = (req, res, next) => {
           );
       }
     } else {
-      res
-        .status(403)
-        .send(
-          "Bạn chưa đăng nhập. <a href = /user/login>Đăng nhập </a>.  <a href = /user/register>Đăng Ký </a>"
-        );
+      // res
+      //   .status(403)
+      //   .send(
+      //     "Bạn chưa đăng nhập. <a href = /user/login>Đăng nhập </a>.  <a href = /user/register>Đăng Ký </a>"
+      //   );
+
+      res.status(403).redirect("user/login");
     }
   } catch (error) {
     res.send({ message: error.message });

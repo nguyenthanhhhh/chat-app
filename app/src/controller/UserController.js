@@ -36,6 +36,7 @@ class UserController {
       res.status(400).send(err + " <a href=/>Quay lại </a>");
     }
   }
+
   loginGet(req, res) {
     res.render("user/login");
   }
@@ -87,7 +88,6 @@ class UserController {
 
   joinChat(req, res) {
     const { name, room } = req.query;
-    console.log(name, room);
     res.render("chat.hbs", { name: dataToObj(name), room: dataToObj(room) });
   }
 }
