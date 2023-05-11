@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "root",
-    "password": "172002",
-    "database": "my-chat-app",
+    "password": "hieu12345",
+    "database": "chatapp",
     "host": "127.0.0.1",
     "dialect": "mysql",
     "logging": true

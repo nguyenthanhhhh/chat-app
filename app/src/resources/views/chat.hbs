@@ -1,4 +1,4 @@
-<h1 class="title-chat">My Chat App</h1>
+<h1 class="title-chat">WEBSITE NHẮN TIN AN TOÀN</h1>
 
 <form class="form-inline my-2 my-lg-0" action="/user/logout">
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Đăng xuất</button>
@@ -6,15 +6,15 @@
 
 
 <div id="block-chat">
-
+    <div class="full-message-block">
+        <div id="message-block">
+        </div>
+    </div>
     <div id="list-user-block">
-        <h5>Danh sách người chat phòng</h5>
-        <h5>{{roomName}}</h5>
+        <h5>Danh sách người chat phòng {{roomName}}:</h5>
+        
         <ul id="list-user"></ul>
-    </div>
-
-    <div id="message-block">
-    </div>
+    </div>   
 </div>
 
 
@@ -23,8 +23,8 @@
     <form id="form-message">
         <div class="control-row">
             <input type="text" id="input-message">
-            <button type="submit">Gửi</button>
-            <button type="button" id="btn-share-location">Gửi vị trí</button>
+            <button class="btn-send-mess" type="submit">Gửi</button>
+            <button class="btn-send-mess" type="button" id="btn-share-location">Gửi vị trí</button>
         </div>
     </form>
 

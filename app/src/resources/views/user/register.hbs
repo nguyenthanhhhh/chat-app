@@ -1,19 +1,20 @@
-<form action="/user/registerPost" , method="POST">
-    <h3>Đăng ký</h3>
-    <div class="form-group">
-        <label for="userName">Tài khoản</label>
-        <input type="text" name="userName" class="form-control" id="userName" placeholder="Nhập tài khoản">
-    </div>
-    <div class="form-group">
-        <label for="passwordUser">Mật khẩu</label>
-        <input type="password" name="password" class="form-control" id="passwordUser" placeholder="Nhập mật khẩu">
-    </div>
-
-    <div class="form-group">
-        <label for="exampleInputEmail1">Email</label>
-        <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+<div class="form-room">
+    <div class="input-form-room">
+        <form action="/user/registerPost" , method="POST">
+            <h3 class="title">Đăng ký</h3>
+            
+            <label class="label-form-create" for="userName">Tài khoản</label>
+            <input class="input-info-room" type="text" name="userName" class="form-control" id="userName" placeholder="Nhập tài khoản">       
+            <label class="label-form-create" for="passwordUser">Mật khẩu</label>
+            <input class="input-info-room" type="password" name="password" class="form-control" id="passwordUser" placeholder="Nhập mật khẩu">
+            <label class="label-form-create" for="exampleInputEmail1">Email</label>
+            <input class="input-info-room" type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
             placeholder="Nhập email">
+            <div class="block-btn-login">
+                
+                <button class="btn-login" type="submit" class="btn btn-primary">Đăng ký</button>
+                <a class="link-create-room" href="/user/login">Đăng nhập</a>
+            </div>
+        </form>
     </div>
-
-    <button type="submit" class="btn btn-primary">Đăng ký</button>
-</form>
+</div>

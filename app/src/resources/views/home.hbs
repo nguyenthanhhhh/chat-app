@@ -9,33 +9,41 @@
 </head>
 
 <body>
-    <form action="/user/chat" method="post">
-        <h2>Join room</h2>
-        <div id="input-name">
-            <input type="text" required name="userName" placeholder="Name">
-        </div>
-        <div id="input-room">
-            <select type="text" name="roomName" placeholder="Room">
-                {{#each listRoom}}
-                <option value="{{this.roomName}}">{{this.roomName}}</option>
-                {{/each}}
-            </select>
-        </div>
-        <div id="input-password">
-            <input type="password" id="password" name="password" placeholder="Password">
-        </div>
-        <div>
-            <button type="submit">
-                Join
-            </button>
-        </div>
-    </form>
-    <button>
-        <a href="/room/createGet">Tạo phòng mới</a>
-    </button>
     <form class="form-inline my-2 my-lg-0" action="/user/logout">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Đăng xuất</button>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Đăng xuất</button>
     </form>
+    <div class="form-room">  
+        <div class="input-form-room">
+            <h2 class="title">GIA NHẬP PHÒNG</h2>
+            <form class="form-input-room" action="/user/chat" method="post">
+                <div id="input-room" >
+                    <select class="input-info-room" type="text" name="roomName" placeholder="Room">
+                        {{#each listRoom}}
+                        <option value="{{this.roomName}}">{{this.roomName}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div id="input-name">
+                    <input  class="input-info-room" type="text" required name="userName" placeholder="Tên hiển thị">
+                </div>
+                
+                <div id="input-password">
+                    <input  class="input-info-room" type="password" id="password" name="password" placeholder="Mật khẩu phòng">
+                </div>
+                <div class="block-btn-login">
+                    <button class="btn-login" type="submit">
+                        Gia nhập
+                    </button>
+                    <a class="link-create-room" href="/room/createGet">Tạo phòng</a>
+                </div>
+            </form>
+            
+            
+            
+        </div>
+    </div>
+    
+    
 </body>
 
 </html>

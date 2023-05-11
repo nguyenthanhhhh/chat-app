@@ -1,5 +1,9 @@
 .title-chat {
-  margin-bottom: 50px;
+  margin-bottom: 30px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  color: rgb(215, 74, 74);
 }
 
 .title-header {
@@ -7,17 +11,23 @@
 }
 
 #input-name {
-  margin: 10px;
+  margin: 10px 0px;
 }
 
 #input-room {
-  margin: 10px;
+  margin: 10px 0px;
 }
 
 #input-message {
-  width: 60%;
+  width: calc(100% - 135px);
+  font-size: 16px;
+  padding: 2px 8px;
+  border-radius: 4px;
 }
-
+.navbar-expand-lg.navbar{
+  font-size: 20px;
+  background-image: linear-gradient(to bottom, #f1f1f1, #ddd);
+}
 .message__row1 {
   display: flex;
   align-items: flex-end;
@@ -34,13 +44,136 @@
 #block-chat {
   display: flex;
   width: 100%;
+  margin-bottom: 12px;
   #list-user-block {
-    width: 30%;
+    padding: 20px;
+    width: calc(30% - 12px);
+    border: 2px solid #35d568;
+    animation: pulse-border 2s infinite;
+    border-radius: 20px;
+    margin-left: 12px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    background-color: #f5f5f5;
+    background-color: #fff;
+    background-image: none;
   }
   #message-block {
-    height: 65vh;
+    height: 60vh;
+    width: 100%;
     overflow: auto;
-    margin-bottom: 12px;
-    flex: 1;
+    flex: 1; 
   }
+  .full-message-block{
+    width: 70%;
+    border: 2px solid #35d568;
+    animation: pulse-border 2s infinite;
+    border-radius: 20px;
+    background: linear-gradient(to bottom, #fff, #b5b1b1);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+  }
+  h5{
+    margin-left: 10px;
+  }
+}
+@keyframes pulse-border {
+  0% {
+    border-color: #35d568;
+  }
+  50% {
+    border-color: #05763a;
+  }
+  100% {
+    border-color: #35d568;
+  }
+}
+
+.btn-outline-success{
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  border-radius: 8px;
+  font-size: 20px;
+}
+
+.form-room{
+  width: 60vw;
+  height: 60vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: solid 0.1px #0084ff;
+  border-radius: 50px;
+  background: linear-gradient(to bottom, rgba(0, 153, 255, 0), rgba(0, 153, 255, 0.5));
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+.title{
+  display: flex;
+  justify-content: center;
+  color:#0063bf;
+}
+.input-info-room{
+  padding: 10px 40px;
+  width: 100%;
+  font-size: 20px;
+  border: solid 0.1px;
+  border-radius: 10px;
+}
+.input-form-room{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.form-input-room{
+  width: 500px;
+}
+
+.link-create-room{
+  font-size: 20px;
+  margin-left: 10px;
+  
+}
+.label-form-create{
+  font-size: 20px;
+  
+  margin: 13px 0px 2px 5px;
+}
+.btn-send-mess{
+  padding: 2px 8px;
+  font-size: 16px;
+  background-color: #0084ff;
+  color: #fff;
+  border-color: #0084ff;
+  border-radius: 4px;
+}
+.btn-send-mess:hover{
+  opacity: 0.6;
+}
+.input-login{
+  padding: 10px 40px;
+  width: 100%;
+  font-size: 20px;
+}
+.lable-login{
+  font-size: 20px;
+  
+  margin: 13px 0px 2px 5px;
+}
+.btn-login{
+  font-size: 20px;
+  padding: 2px 8px;
+
+  background-color: #0084ff;
+  color: #fff;
+  border-color: #0084ff;
+  border-radius: 4px;
+}
+.btn-login:hover{
+  opacity: 0.6;
+}
+
+.block-btn-login{
+  margin-top: 10px;
 }
