@@ -1,10 +1,28 @@
-const userNameChat = "{{name}}";
+const renderDefaultMessage = (message) => {
+  const html = `
+        <div class="message-item" id="message-item">
+            <div class="message__row1">
+              <p class="message__name">ADMIN</p>
+              <p class="message__date">${message.message.createdAt}</p>
+            </div>
+            <div class="message__row2">
+              <p class="message__content">
+                ${message.message.message}
+              </p>
+            </div>
+          </div>
+    `;
+  return html;
+};
+
+const name = "{{ userChat.userName }}";
+const room = "defaultRoom";
 
 const renderMessage = (message) => {
   const html = `
         <div class="message-item" id="message-item">
             <div class="message__row1">
-              <p class="message__name">${userNameChat}</p>
+              <p class="message__name">${name}</p>
               <p class="message__date">${message.message.createdAt}</p>
             </div>
             <div class="message__row2">
@@ -32,31 +50,9 @@ const queryString = location.search;
 const params = Qs.parse(queryString, {
   ignoreQueryPrefix: true,
 });
-const name = "{{{name}}}";
-const room = "{{room}}";
-//Xử lý tin nhắn mặc định
-socket.on("default-message", (data) => {
-  html += renderMessage(data);
-  document.getElementById("message-block").innerHTML = html;
-});
 
 //join room
 socket.emit("client join room", { name, room });
-
-//xử lý lời chào room
-socket.on("welcome to room", (message) => {
-  html += renderMessage(message);
-  document.getElementById("message-block").innerHTML = html;
-});
-
-//hiển thị danh sách người chat:
-socket.on("server send user list", (data) => {
-  let userListHtml = ``;
-  data.forEach((ele) => {
-    userListHtml += `<li>${ele.name}</li>`;
-  });
-  document.getElementById("list-user").innerHTML = userListHtml;
-});
 
 //gửi tin nhắn lên server
 formMessage.addEventListener("submit", (e) => {
@@ -88,11 +84,6 @@ const messages = document.getElementById("messages");
 socket.on("server-send-message-to-client", (data) => {
   html += renderMessage(data);
   document.getElementById("message-block").innerHTML = html;
-  // const chatItem = document.createElement("li");
-  // console.log(data);
-  // chatItem.textContent = `${data.name}: ${data.message.message}`;
-  // messages.appendChild(chatItem);
-  // console.log(data);
 });
 
 //Gửi vĩ độ, kink độ lên server
@@ -125,15 +116,4 @@ socket.on("server-send-location-to-client", (data) => {
     `;
 
   document.getElementById("message-block").innerHTML = html;
-
-  // const chatItem = document.createElement("li");
-  // const chatLink = document.createElement("a");
-  // chatLink.href = data.message.message;
-  // chatLink.textContent = ` Vị trí của tôi`;
-  // chatLink.target = "_blank";
-  // chatItem.textContent = `${data.name}: `;
-
-  // chatItem.appendChild(chatLink);
-  // // chatItem2.appendChild(chatItem)
-  // messages.appendChild(chatItem);
 });

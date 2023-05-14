@@ -9,7 +9,11 @@ userRouter.post("/registerPost", UserController.registerPost);
 userRouter.get("/login", UserController.loginGet);
 userRouter.post("/loginPost", UserController.loginPost);
 userRouter.get("/logout", UserController.logout);
-userRouter.post("/chat", authenticate, UserController.joinChat);
-userRouter.get("/chat", authenticate, UserController.joinChat);
+userRouter.post("/addFriend", UserController.addFriend);
+userRouter.post("/inbox/:userName", authenticate, UserController.inbox);
+userRouter.post("/createMessage", authenticate, UserController.createMessage);
+
+// userRouter.post("/chat", authenticate, UserController.joinChat);
+// userRouter.get("/chat", authenticate, UserController.joinChat);
 
 module.exports = userRouter;
