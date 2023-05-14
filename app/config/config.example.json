@@ -1,11 +1,11 @@
 {
   "development": {
-    "username": "root",
-    "password": "172002",
-    "database": "my-chat-app",
-    "host": "127.0.0.1",
-    "dialect": "mysql",
-    "logging": false
+    "username": "",
+    "password": "",
+    "database": "",
+    "host": "",
+    "dialect": "",
+    "logging": true
   },
   "test": {
     "username": "root",

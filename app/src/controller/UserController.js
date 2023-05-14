@@ -1,9 +1,33 @@
-const { Users, room } = require("../models");
+const { Users, userFriend, MessageModel } = require("../models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { dataToObj } = require("../utils/dataToObj");
+const { Op } = require("sequelize");
+const moment = require("moment");
 
 class UserController {
+  async home(req, res) {
+    try {
+      const user = req.user;
+      const { userName } = user;
+      const allFr = await userFriend.findAll({
+        where: {
+          userName: userName,
+        },
+      });
+
+      const allMessage = await MessageModel.findAll();
+
+      res.render("chat", {
+        userChat: dataToObj(user),
+        allFriend: dataToObj(allFr),
+        allMessage: dataToObj(allMessage),
+      });
+    } catch (error) {
+      console.log("[UserController][home] error: " + error);
+    }
+  }
+
   registerGet(req, res) {
     res.render("user/register");
   }
@@ -11,7 +35,6 @@ class UserController {
   async registerPost(req, res) {
     const { userName, password, email } = req.body;
     const user = { userName, password, email };
-    console.log(user);
     try {
       const newUser = await Users.build(user); // Tạo một đối tượng mô hình mới
       await newUser.validate();
@@ -23,8 +46,10 @@ class UserController {
           validate: false,
         }
       )
-        .then(() => {
-          res.send("Tao tai khoan thanh cong <a href=/>Quay lại </a>");
+        .then(async () => {
+          res
+            .status(201)
+            .send("Tạo tài khoản thành công. <a href=/>Quay lại </a>");
         })
         .catch((err) => {
           res.send({ message: err.message });
@@ -86,36 +111,83 @@ class UserController {
     console.log("Logout");
   }
 
-  async joinChat(req, res) {
-    const user = req.user;
-    const { userName, roomName, password } = req.body;
+  // async joinChat(req, res) {
+  //   const user = req.user;
+  //   const name = user.name;
+  //   try {
+  //     const auth = await bcrypt.compare(password, roomJoin.password);
+  //     if (auth) {
+  //       res.render("chat.hbs", {
+  //         userName: dataToObj(name),
+  //       });
+  //     } else {
+  //       res.status(401).send("Đăng nhập thất bại.  <a href=/>Quay lại </>");
+  //     }
+  //   } catch (error) {
+  //     res.send({ message: error.message });
+  //   }
+  // }
 
+  async addFriend(req, res) {
+    const { userName, userNameFriend } = req.body;
+    await userFriend.create({
+      userName: userName,
+      userNameFriend: userNameFriend,
+    });
+    await userFriend.create({
+      userName: userNameFriend,
+      userNameFriend: userName,
+    });
+
+    res.status(201).send("Tao user friend thanh cong");
+  }
+
+  async inbox(req, res) {
+    const { userNameF, userNameT } = req.body;
+    const user = req.user;
+    const { userName } = user;
+    const allFr = await userFriend.findAll({
+      where: {
+        [Op.and]: [
+          { userName: userName },
+          { userNameFriend: { [Op.ne]: userNameT } },
+        ],
+      },
+    });
+
+    const allMessage = await MessageModel.findAll({
+      where: {
+        [Op.or]: [
+          { userNameF, userNameT },
+          { userNameF: userNameT, userNameT: userNameF },
+        ],
+      },
+    });
+
+    const allMessageFormat = allMessage.map((message) => {
+      let newData = dataToObj(message);
+      let time = newData.createdAt;
+      time = moment(time).format("DD/MM/YYYY - HH:mm:ss");
+      newData.createdAt = time;
+      return newData;
+    });
+
+    res.render("chat", {
+      userChat: dataToObj(user),
+      allFriend: dataToObj(allFr),
+      allMessage: dataToObj(allMessageFormat),
+      userNameT: dataToObj(userNameT),
+    });
+  }
+
+  async createMessage(req, res) {
     try {
-      const roomJoin = await room.findOne({
-        where: {
-          roomName,
-        },
-      });
-      if (roomJoin) {
-        if (roomJoin.password) {
-          const auth = await bcrypt.compare(password, roomJoin.password);
-          if (auth) {
-            res.render("chat.hbs", {
-              userName: dataToObj(userName),
-              roomName: dataToObj(roomName),
-            });
-            console.log("Join room thanh cong");
-          } else {
-            res
-              .status(401)
-              .send("mật khẩu phòng không hợp lệ.  <a href=/>Quay lại </>");
-          }
-        }
-      } else {
-        res.status(401).send("Tên phòng không hợp lệ. <a href=/>Quay lại </>");
-      }
+      const { userNameF, userNameT, message } = req.body;
+      console.log("MEsage: ");
+      console.log(message);
+      await MessageModel.create({ userNameF, userNameT, message });
     } catch (error) {
-      res.send({ message: error.message });
+      console.log("[UserController][createMEssage] error: " + error);
     }
   }
 }

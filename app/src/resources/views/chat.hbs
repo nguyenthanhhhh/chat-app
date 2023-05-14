@@ -1,3 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.11.1/qs.min.js"
+        integrity="sha512-5Zv/hNtOKSkeScnIYOqGjng82gQSHsCoyqq9TgrJLgYa032cUYWH4kF1ayS8Gz1Jfge7e8MaBF6AeEvoQ92v8w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+</head>
+
+<body>
+
+</body>
+
+</html>
+
+
 <h1 class="title-chat">WEBSITE NHẮN TIN AN TOÀN</h1>
 
 <form class="form-inline my-2 my-lg-0" action="/user/logout">
@@ -8,17 +31,38 @@
 <div id="block-chat">
     <div class="full-message-block">
         <div id="message-block">
+            {{#each allMessage}}
+            <div class="message-item" id="message-item">
+                <div class="message__row1">
+                    <p class="message__name">{{this.userNameF}}</p>
+                    <p class="message__date">{{this.createdAt}}</p>
+                </div>
+                <div class="message__row2">
+                    <p class="message__content">
+                        {{this.message}}
+                    </p>
+                </div>
+            </div>
+            {{/each}}
         </div>
     </div>
+
     <div id="list-user-block">
-        <h5>Danh sách người chat phòng {{roomName}}:</h5>
-        
-        <ul id="list-user"></ul>
-    </div>   
+        <h5>Danh sách bạn bè: </h5>
+        {{#each allFriend}}
+        <form action="/user/inbox/{{this.userNameFriend}}" method="post">
+            <input type="hidden" name="userNameF" value="{{this.userName}}">
+            <input type="hidden" name="userNameT" value="{{this.userNameFriend}}">
+            <button type="submit">{{this.userNameFriend}}</button>
+        </form>
+        {{/each}}
+
+    </div>
 </div>
 
 
 
+<h4>{{userNameT}}</h4>
 <div id="form-message-block">
     <form id="form-message">
         <div class="control-row">
@@ -30,52 +74,17 @@
 
 </div>
 
-
-
-
-
-
-
-
-<script src="/socket.io/socket.io.js"></script>
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.11.1/qs.min.js"
-    integrity="sha512-5Zv/hNtOKSkeScnIYOqGjng82gQSHsCoyqq9TgrJLgYa032cUYWH4kF1ayS8Gz1Jfge7e8MaBF6AeEvoQ92v8w=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-
-{{!--
-<script src="/js/client-chat.js"></script> --}}
-
-
+{{!-- PHẦN NÀY LÀ BACKEND --}}
 <script>
-
-    const renderDefaultMessage = (message) => {
-        const html = `
-        <div class="message-item" id="message-item">
-            <div class="message__row1">
-              <p class="message__name">ADMIN</p>
-              <p class="message__date">${message.message.createdAt}</p>
-            </div>
-            <div class="message__row2">
-              <p class="message__content">
-                ${message.message.message}
-              </p>
-            </div>
-          </div>
-    `;
-        return html;
-    };
-
-    const name = '{{ userName }}';
-    const room = '{{roomName}}'
+    const name = '{{ userChat.userName }}';
+    const room = "defaultRoom"
+    const userNameT = '{{userNameT}}'
 
     const renderMessage = (message) => {
         const html = `
         <div class="message-item" id="message-item">
             <div class="message__row1">
-              <p class="message__name">${name}</p>
+              <p class="message__name">${message.userNameF}</p>
               <p class="message__date">${message.message.createdAt}</p>
             </div>
             <div class="message__row2">
@@ -89,7 +98,6 @@
     };
 
     const socket = io();
-    let html = ``;
 
     const token = document.cookie;
     const userInfoStr = decodeURIComponent(token.split(";")[1].split("=")[1]);
@@ -103,29 +111,11 @@
     const params = Qs.parse(queryString, {
         ignoreQueryPrefix: true,
     });
-    //Xử lý tin nhắn mặc định
-    socket.on("default-message", (data) => {
-        html += renderDefaultMessage(data);
-        document.getElementById("message-block").innerHTML = html;
-    });
+
 
     //join room
     socket.emit("client join room", { name, room });
 
-    //xử lý lời chào room
-    socket.on("welcome to room", (message) => {
-        html += renderDefaultMessage(message);
-        document.getElementById("message-block").innerHTML = html;
-    });
-
-    //hiển thị danh sách người chat:
-    socket.on("server send user list", (data) => {
-        let userListHtml = ``;
-        data.forEach((ele) => {
-            userListHtml += `<li>${ele.name}</li>`;
-        });
-        document.getElementById("list-user").innerHTML = userListHtml;
-    });
 
     //gửi tin nhắn lên server
     formMessage.addEventListener("submit", (e) => {
@@ -143,10 +133,21 @@
         if (message.trim().length !== 0) {
             socket.emit(
                 "send-message-to-server",
-                { userName, message: inputMessage.value },
-                acknowledgements
+                { userNameF: name, userNameT: userNameT, message: inputMessage.value },
+
             );
+
         }
+
+        axios({
+            method: 'post',
+            url: '/user/createMessage',
+            data: {
+                userNameF: name,
+                userNameT: userNameT,
+                message: inputMessage.value
+            }
+        });
 
         inputMessage.value = "";
     });
@@ -155,13 +156,8 @@
 
     //Xử lý tin nhắn chat
     socket.on("server-send-message-to-client", (data) => {
-        html += renderMessage(data);
-        document.getElementById("message-block").innerHTML = html;
-        // const chatItem = document.createElement("li");
-        // console.log(data);
-        // chatItem.textContent = `${data.name}: ${data.message.message}`;
-        // messages.appendChild(chatItem);
-        // console.log(data);
+        let html = renderMessage(data);
+        document.getElementById("message-block").insertAdjacentHTML('beforeend', html);
     });
 
     //Gửi vĩ độ, kink độ lên server
@@ -172,17 +168,17 @@
             console.log(position);
             const { latitude, longitude } = position.coords;
             console.log(latitude, longitude);
-            socket.emit("share-location", { latitude, longitude });
+            socket.emit("share-location", { userNameF: name, userNameT: userNameT, latitude, longitude });
         });
     });
 
     //xử lý share location:
     socket.on("server-send-location-to-client", (data) => {
         // const chatItem2 = document.createElement("li");
-        html += `
+        let html = `
         <div class="message-item" id="message-item">
             <div class="message__row1">
-              <p class="message__name">${data.name}</p>
+              <p class="message__name">${data.userNameF}</p>
               <p class="message__date">${data.message.createdAt}</p>
             </div>
             <div class="message__row2">
@@ -192,19 +188,16 @@
             </div>
           </div>
     `;
-
-        document.getElementById("message-block").innerHTML = html;
-
-        // const chatItem = document.createElement("li");
-        // const chatLink = document.createElement("a");
-        // chatLink.href = data.message.message;
-        // chatLink.textContent = ` Vị trí của tôi`;
-        // chatLink.target = "_blank";
-        // chatItem.textContent = `${data.name}: `;
-
-        // chatItem.appendChild(chatLink);
-        // // chatItem2.appendChild(chatItem)
-        // messages.appendChild(chatItem);
+        axios({
+            method: 'post',
+            url: '/user/createMessage',
+            data: {
+                userNameF: name,
+                userNameT: userNameT,
+                message: data.message.message
+            }
+        });
+        document.getElementById("message-block").insertAdjacentHTML('beforeend', html);
     });
 
 </script>

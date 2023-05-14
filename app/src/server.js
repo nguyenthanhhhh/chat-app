@@ -9,14 +9,10 @@ const cookieParser = require("cookie-parser");
 const http = require("http");
 const socketio = require("socket.io");
 const Filter = require("bad-words");
+const { MessageModel } = require("./models");
+const axios = require("axios");
 require("dotenv").config();
 const createMessage = require("./utils/CreateMessage");
-const {
-  getUserList,
-  addUser,
-  removeUser,
-  findUser,
-} = require("./utils/UserListInRoom");
 
 const port = process.env.PORT;
 
@@ -33,73 +29,6 @@ app.use(express.json());
 
 const server = http.createServer(app);
 const io = socketio(server);
-
-//xử lý socket io
-//Khi client connect
-io.on("connection", (socket) => {
-  socket.emit("default-message", {
-    name: "ADMIN",
-    message: createMessage(
-      "Chào mừng bạn đến với ứng dụng chat của chúng tôi!"
-    ),
-  });
-
-  // socket.broadcast.emit(
-  //   "default-message",
-  //   createMessage("Có một thành viên mới tham gia")
-  // );
-
-  // join room
-  socket.on("client join room", ({ name, room }) => {
-    socket.join(room);
-    const newUser = { id: socket.id, name, room };
-    addUser(newUser);
-
-    //Gửi lời chào tới room
-    socket.broadcast.to(room).emit("welcome to room", {
-      name: "ADMIN",
-      message: createMessage(`${name} vừa tham gia vào phòng`),
-    });
-
-    //Gửi danh sách user trong room về cho client
-    const listUserInRoom = getUserList(room);
-
-    io.emit("server send user list", listUserInRoom);
-
-    //xử lý tin nhắn (chat)
-    socket.on("send-message-to-server", (data, callback) => {
-      let message = data.message;
-      try {
-        message = filter.clean(message);
-        message = createMessage(message);
-      } catch (error) {
-        console.log(error);
-      }
-      // message = createMessage(message);
-
-      io.to(room).emit("server-send-message-to-client", { name, message });
-      callback();
-    });
-
-    //xử lý share location
-    socket.on("share-location", (data) => {
-      const { latitude, longitude } = data;
-      const linkLocation = createMessage(
-        `https://www.google.com/maps?q=${latitude},${longitude}`
-      );
-      io.to(room).emit("server-send-location-to-client", {
-        name,
-        message: linkLocation,
-      });
-    });
-  });
-
-  // disconnect
-  socket.on("disconnect", () => {
-    console.log("One user left server");
-    removeUser(socket.id);
-  });
-});
 
 app.use(express.static(publicPath));
 
@@ -119,6 +48,50 @@ app.use(
   })
 );
 app.use(rootRouter);
+
+//xử lý socket io
+//Khi client connect
+io.on("connection", (socket) => {
+  // join room
+  socket.on("client join room", ({ name, room }) => {
+    socket.join(room);
+    //xử lý tin nhắn (chat)
+    socket.on("send-message-to-server", async (data, callback) => {
+      let message = data.message;
+      try {
+        message = filter.clean(message);
+        message = createMessage(message);
+      } catch (error) {
+        console.log(error);
+      }
+
+      io.to(room).emit("server-send-message-to-client", {
+        userNameF: data.userNameF,
+        userNameT: data.userNameT,
+        message,
+      });
+    });
+
+    //xử lý share location
+    socket.on("share-location", (data) => {
+      const { latitude, longitude } = data;
+      const linkLocation = createMessage(
+        `https://www.google.com/maps?q=${latitude},${longitude}`
+      );
+      io.to(room).emit("server-send-location-to-client", {
+        userNameF: data.userNameF,
+        userNameT: data.userNameT,
+        message: linkLocation,
+      });
+    });
+  });
+
+  // disconnect
+  socket.on("disconnect", () => {
+    // console.log("One user left server");
+    // removeUser(socket.id);
+  });
+});
 
 server.listen(port, async () => {
   try {
