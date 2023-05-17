@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,7 +31,7 @@
 
 <div id="block-chat">
     <div id="list-user-block">
-       
+
         {{#each allFriend}}
         <form action="/user/inbox/{{this.userNameFriend}}" method="post">
             <input type="hidden" name="userNameF" value="{{this.userName}}">
@@ -49,7 +49,7 @@
         <div id="message-block">
             {{#each allMessage}}
             <div class="message-item" id="message-item">
-                
+
                 <div class="message__row2">
                     <p class="message__content">
                         {{this.message}}
@@ -57,7 +57,7 @@
                     <p class="message__date">{{this.createdAt}}</p>
 
                 </div>
-                
+
             </div>
             {{/each}}
         </div>
@@ -65,15 +65,16 @@
             <form id="form-message">
                 <div class="control-row">
                     <input type="text" id="input-message" placeholder="Nhập tin nhắn">
-                    <button class="btn-send-mess" type="submit">Gửi</button>
-                    <button class="btn-send-mess" type="button" id="btn-share-location"><i class="ti-location-pin"></i></button>
+                    <button class="btn-send-mess" type="submit">Gửi </button>
+                    <button class="btn-send-mess" type="button" id="btn-share-location"><i
+                            class="ti-location-pin"></i></button>
                 </div>
             </form>
 
         </div>
     </div>
 
-    
+
 </div>
 
 

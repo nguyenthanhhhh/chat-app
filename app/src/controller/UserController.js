@@ -183,8 +183,6 @@ class UserController {
   async createMessage(req, res) {
     try {
       const { userNameF, userNameT, message } = req.body;
-      console.log("MEsage: ");
-      console.log(message);
       await MessageModel.create({ userNameF, userNameT, message });
     } catch (error) {
       console.log("[UserController][createMEssage] error: " + error);
