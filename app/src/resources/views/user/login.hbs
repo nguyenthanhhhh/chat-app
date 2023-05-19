@@ -1,16 +1,21 @@
-<div class="form-room">
-    <div class="input-form-room">
-        <form action="/user/loginPost" method="POST">
-            <h3 class="title">Đăng nhập</h3>
-        
-            <label class="label-form-create" for="userName">Tài khoản</label>
-            <input class="input-info-room" type="text" name="userName" class="form-control" id="userName" placeholder="Nhập tài khoản">      
-            <label class="label-form-create" for="passwordUser">Mật khẩu</label>
-            <input class="input-info-room" type="password" name="password" class="form-control" id="passwordUser" placeholder="Nhập mật khẩu">           
-            <div class="block-btn-login">
+<div class="full-form-login">
+    <div class="form-room">
+        <div class="input-form-room">
+            <form action="/user/loginPost" method="POST">
+                <h3 class="title">Đăng nhập</h3>
+            
+                <label class="label-form-create" for="userName">Tài khoản</label>
+                <input class="input-info-room" type="text" name="userName" class="form-control" id="userName" placeholder="Nhập tài khoản">      
+                <label class="label-form-create" for="passwordUser">Mật khẩu</label>
+                <input class="input-info-room" type="password" name="password" class="form-control" id="passwordUser" placeholder="Nhập mật khẩu">           
+                
                 <button class="btn-login" type="submit" class="btn btn-primary">Đăng nhập</button>
-                <a class="link-create-room" href="/user/register">Đăng ký</a>
-            </div>
-       </form>
+                <div class="block-create-account">
+                    <button>
+                        <a class="link-create-room" href="/user/register">Tạo tài khoản</a>
+                    </button>  
+                </div>              
+            </form>
+        </div>
     </div>
 </div>

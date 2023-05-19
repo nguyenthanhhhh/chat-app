@@ -13,6 +13,41 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light header-w">
+        <a class="navbar-brand" href="/">Trang chủ</a>
+
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Phòng <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Cài đặt</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Tùy chọn
+                    </a>
+                    {{!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div> --}}
+                </li>
+
+            </ul>
+            {{!-- <form class="form-inline my-2 my-lg-0" action="/user/logout">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Đăng xuất</button>
+            </form> --}}
+        </div>
+        <form class="form-inline my-2 my-lg-0" action="/user/logout">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Đăng xuất</button>
+        </form>
+    </nav>
 </head>
 
 <body>
@@ -24,14 +59,13 @@
 
 
 
-<form class="form-inline my-2 my-lg-0" action="/user/logout">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Đăng xuất</button>
-</form>
+
 
 
 <div id="block-chat">
     <div id="list-user-block">
-       
+       <input class="search-friend" type="text" placeholder="Tìm Kiếm">
+        <button></button>
         {{#each allFriend}}
         <form action="/user/inbox/{{this.userNameFriend}}" method="post">
             <input type="hidden" name="userNameF" value="{{this.userName}}">
@@ -44,7 +78,22 @@
 
     <div class="full-message-block">
         <div class="username-inbox">
-            <h4>{{userNameT}}</h4>
+            <div class="block-username">
+                <h4>{{userNameT}}</h4>
+                <label class="active-status" for="">Đang hoạt động</label>
+            </div>
+            <div class="block-call">
+                <button>
+                <i class="ti-search"></i>
+                </button>
+                <button>
+                <i class="ti-headphone-alt"></i>
+                </button>
+                <button>
+                <i class="ti-video-camera"></i>
+                </button>
+                
+            </div>
         </div>
         <div id="message-block">
             {{#each allMessage}}
@@ -65,7 +114,7 @@
             <form id="form-message">
                 <div class="control-row">
                     <input type="text" id="input-message" placeholder="Nhập tin nhắn">
-                    <button class="btn-send-mess" type="submit">Gửi</button>
+                    <button class="btn-send-mess" type="submit"><i class="ti-control-forward"></i></button>
                     <button class="btn-send-mess" type="button" id="btn-share-location"><i class="ti-location-pin"></i></button>
                 </div>
             </form>

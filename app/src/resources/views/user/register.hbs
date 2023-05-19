@@ -1,20 +1,23 @@
-<div class="form-room">
-    <div class="input-form-room">
+<div class="form-create-account">
+    <div class="create-account">
         <form action="/user/registerPost" , method="POST">
             <h3 class="title">Đăng ký</h3>
-            
-            <label class="label-form-create" for="userName">Tài khoản</label>
-            <input class="input-info-room" type="text" name="userName" class="form-control" id="userName" placeholder="Nhập tài khoản">       
-            <label class="label-form-create" for="passwordUser">Mật khẩu</label>
-            <input class="input-info-room" type="password" name="password" class="form-control" id="passwordUser" placeholder="Nhập mật khẩu">
-            <label class="label-form-create" for="exampleInputEmail1">Email</label>
-            <input class="input-info-room" type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-            placeholder="Nhập email">
-            <div class="block-btn-login">
-                
-                <button class="btn-login" type="submit" class="btn btn-primary">Đăng ký</button>
-                <a class="link-create-room" href="/user/login">Đăng nhập</a>
-            </div>
+            <input type="text" class="input-create-account" name="name" placeholder="Họ và tên">
+            <input class="input-create-account" type="text" name="userName" class="form-control" id="userName" placeholder="Tài khoản">       
+            <input class="input-create-account" type="password" name="password" class="form-control" id="passwordUser" placeholder="Mật khẩu">
+            <input class="input-create-account" type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            placeholder="Email">
+            <label for="male">Nam</label>
+            <input type="radio" class="input-gender" id="male" name="gender" value="male">
+
+            <label for="femal">Nữ</label>
+            <input type="radio" class="input-gender" id="female" name="gender" value="female">
+
+            <label for="other">Khác</label>
+            <input type="radio" class="input-gender" id="other" name="gender" value="other">
+
+            <input type="date" id="birthday" name="birthday">
+            <button class="btn-create-account" type="submit" class="btn btn-primary">Đăng ký</button>
         </form>
     </div>
 </div>
