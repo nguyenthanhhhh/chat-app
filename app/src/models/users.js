@@ -9,8 +9,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate({ userFriend }) {
       // define association here
-      this.hasOne(userFriend, { foreignKey: "userName" });
-      this.hasOne(userFriend, { foreignKey: "userNameFriend" });
+      this.hasMany(userFriend, { foreignKey: "userName", as: "userNameInf" });
+      this.hasMany(userFriend, {
+        foreignKey: "userNameFriend",
+        as: "userNameFriendInf",
+      });
     }
   }
   Users.init(
@@ -56,7 +59,19 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
+      fullName: { type: DataTypes.STRING, allowNull: false },
       email: { type: DataTypes.STRING, allowNull: false, unique: true },
+      sex: { type: DataTypes.STRING, allowNull: false },
+      birthday: { type: DataTypes.DATE, allowNull: false },
+      avatar: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue: "avatar",
+      },
+      status: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
     },
     {
       sequelize,

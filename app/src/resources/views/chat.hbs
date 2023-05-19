@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,8 +27,8 @@
                     <a class="nav-link" href="#">Cài đặt</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Tùy chọn
                     </a>
                     {{!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -64,41 +64,48 @@
 
 <div id="block-chat">
     <div id="list-user-block">
-       <input class="search-friend" type="text" placeholder="Tìm Kiếm">
+        <input class="search-friend" type="text" placeholder="Tìm Kiếm">
         <button></button>
         {{#each allFriend}}
         <form action="/user/inbox/{{this.userNameFriend}}" method="post">
             <input type="hidden" name="userNameF" value="{{this.userName}}">
             <input type="hidden" name="userNameT" value="{{this.userNameFriend}}">
-            <button class="friend-item" type="submit">{{this.userNameFriend}}</button>
+            <button class="friend-item" type="submit">{{this.userNameFriendFullName}}</button>
         </form>
         {{/each}}
 
     </div>
 
+    {{#if userNameT}}
     <div class="full-message-block">
         <div class="username-inbox">
             <div class="block-username">
-                <h4>{{userNameT}}</h4>
+                <h4>{{userNameT_fullName}}</h4>
+                {{#if status}}
                 <label class="active-status" for="">Đang hoạt động</label>
+                {{else}}
+                <label class="active-status" for="">Ngoại tuyến</label>
+                {{/if}}
+
             </div>
             <div class="block-call">
                 <button>
-                <i class="ti-search"></i>
+                    <i class="ti-search"></i>
                 </button>
                 <button>
-                <i class="ti-headphone-alt"></i>
+                    <i class="ti-headphone-alt"></i>
                 </button>
                 <button>
-                <i class="ti-video-camera"></i>
+                    <i class="ti-video-camera"></i>
                 </button>
-                
+
             </div>
         </div>
         <div id="message-block">
+
             {{#each allMessage}}
             <div class="message-item" id="message-item">
-                
+
                 <div class="message__row2">
                     <p class="message__content">
                         {{this.message}}
@@ -106,23 +113,31 @@
                     <p class="message__date">{{this.createdAt}}</p>
 
                 </div>
-                
+
             </div>
             {{/each}}
+
         </div>
         <div id="form-message-block">
             <form id="form-message">
                 <div class="control-row">
                     <input type="text" id="input-message" placeholder="Nhập tin nhắn">
                     <button class="btn-send-mess" type="submit"><i class="ti-control-forward"></i></button>
-                    <button class="btn-send-mess" type="button" id="btn-share-location"><i class="ti-location-pin"></i></button>
+                    <button class="btn-send-mess" type="button" id="btn-share-location"><i
+                            class="ti-location-pin"></i></button>
                 </div>
             </form>
 
         </div>
     </div>
+    {{else}}
+    <h3>Kiếm ảnh ở đây đi hiếu bl, làm mấy cái sl trôi trôi ý nhé.
+        làm profile với form kết bạn đi, tối thứ 7 xong nhé
+    </h3>
 
-    
+    {{/if}}
+
+
 </div>
 
 
@@ -132,23 +147,27 @@
 
 {{!-- PHẦN NÀY LÀ BACKEND --}}
 <script>
-    const name = '{{ userChat.userName }}';
+    const userNameF = '{{ userChat.userName }}';
+    const fullName = '{{userChat.fullName}}'
     const room = "defaultRoom"
     const userNameT = '{{userNameT}}'
+    const userNameT_FullName = '{{userNameT_fullName}}'
 
     const renderMessage = (message) => {
         const html = `
+
         <div class="message-item" id="message-item">
-            <div class="message__row1">
-              <p class="message__name">${message.userNameF}</p>
-              <p class="message__date">${message.message.createdAt}</p>
-            </div>
-            <div class="message__row2">
-              <p class="message__content">
-                ${message.message.message}
-              </p>
-            </div>
-          </div>
+                
+                <div class="message__row2">
+                    <p class="message__content">
+                        ${message.message.message}
+                    </p>
+                    <p class="message__date">${message.message.createdAt}</p>
+
+                </div>
+                
+        </div>
+
     `;
         return html;
     };
@@ -170,7 +189,7 @@
 
 
     //join room
-    socket.emit("client join room", { name, room });
+    socket.emit("client join room", { userNameF, room });
 
 
     //gửi tin nhắn lên server
@@ -199,8 +218,10 @@
             method: 'post',
             url: '/user/createMessage',
             data: {
-                userNameF: name,
-                userNameT: userNameT,
+                userNameF,
+                userNameT,
+                fullName,
+                userNameT_FullName,
                 message: inputMessage.value
             }
         });
@@ -243,6 +264,8 @@
               </a>
             </div>
           </div>
+
+          
     `;
         axios({
             method: 'post',

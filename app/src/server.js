@@ -3,6 +3,7 @@ const { engine } = require("express-handlebars");
 const path = require("path");
 const morgan = require("morgan");
 const rootRouter = require("./router");
+const qs = require("qs");
 const { sequelize } = require("./models");
 const cookieSession = require("cookie-session");
 const cookieParser = require("cookie-parser");
@@ -52,8 +53,28 @@ app.use(rootRouter);
 //xử lý socket io
 //Khi client connect
 io.on("connection", (socket) => {
+  let dataOn = {
+    status: true,
+  };
+
+  let dataOff = {
+    status: false,
+  };
   // join room
-  socket.on("client join room", ({ name, room }) => {
+  socket.on("client join room", async ({ userNameF, room }) => {
+    dataOn.userName = userNameF;
+    dataOff.userName = userNameF;
+
+    try {
+      const status = await axios.post(
+        "http://localhost:3002/user/updateStatus",
+        dataOn
+      );
+    } catch (error) {
+      console.log("co loix");
+      console.log(error);
+    }
+
     socket.join(room);
     //xử lý tin nhắn (chat)
     socket.on("send-message-to-server", async (data, callback) => {
@@ -87,9 +108,15 @@ io.on("connection", (socket) => {
   });
 
   // disconnect
-  socket.on("disconnect", () => {
-    // console.log("One user left server");
-    // removeUser(socket.id);
+  socket.on("disconnect", async () => {
+    try {
+      const status = await axios.post(
+        "http://localhost:3002/user/updateStatus",
+        dataOff
+      );
+    } catch (error) {
+      console.log("Loix off");
+    }
   });
 });
 

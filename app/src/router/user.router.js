@@ -12,6 +12,7 @@ userRouter.get("/logout", UserController.logout);
 userRouter.post("/addFriend", UserController.addFriend);
 userRouter.post("/inbox/:userName", authenticate, UserController.inbox);
 userRouter.post("/createMessage", authenticate, UserController.createMessage);
+userRouter.post("/updateStatus", UserController.updateStatus);
 
 // userRouter.post("/chat", authenticate, UserController.joinChat);
 // userRouter.get("/chat", authenticate, UserController.joinChat);

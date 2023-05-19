@@ -1,4 +1,4 @@
-const { Users, userFriend, MessageModel } = require("../models");
+const { Users, userFriend, MessageModel, sequelize } = require("../models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { dataToObj } = require("../utils/dataToObj");
@@ -10,18 +10,26 @@ class UserController {
     try {
       const user = req.user;
       const { userName } = user;
-      const allFr = await userFriend.findAll({
-        where: {
-          userName: userName,
-        },
+
+      const query = `
+      SELECT userFriends.*, u1.fullName AS userNameFullName, u2.fullName AS userNameFriendFullName
+      FROM userFriends
+      JOIN Users AS u1 ON userFriends.userName = u1.userName
+      JOIN Users AS u2 ON userFriends.userNameFriend = u2.userName
+      WHERE userFriends.userName = :userName
+    `;
+
+      const allFr = await sequelize.query(query, {
+        replacements: { userName },
+        type: sequelize.QueryTypes.SELECT,
       });
 
-      const allMessage = await MessageModel.findAll();
+      // const allMessage = await MessageModel.findAll();
 
       res.render("chat", {
         userChat: dataToObj(user),
         allFriend: dataToObj(allFr),
-        allMessage: dataToObj(allMessage),
+        // allMessage: dataToObj(allMessage),
       });
     } catch (error) {
       console.log("[UserController][home] error: " + error);
@@ -33,32 +41,66 @@ class UserController {
   }
 
   async registerPost(req, res) {
-    const { userName, password, email } = req.body;
-    const user = { userName, password, email };
+    const {
+      userName,
+      password,
+      retypepassword,
+      email,
+      fullName,
+      sex,
+      birthday,
+    } = req.body;
+    if (password === retypepassword) {
+      const user = { userName, password, email, fullName, sex, birthday };
+      try {
+        const newUser = await Users.build(user); // Tạo một đối tượng mô hình mới
+        await newUser.validate();
+        const salt = bcrypt.genSaltSync(10);
+        const hash = bcrypt.hashSync(password, salt);
+        Users.create(
+          { userName, password: hash, email, fullName, sex, birthday },
+          {
+            validate: false,
+          }
+        )
+          .then(async () => {
+            res
+              .status(201)
+              .send("Tạo tài khoản thành công. <a href=/>Quay lại </a>");
+          })
+          .catch((err) => {
+            res.send({ message: err.message });
+          });
+      } catch (error) {
+        let err = error.message;
+        err = err.replace(/Validation error: /g, "");
+        console.log(error);
+        res.status(400).send(err + " <a href=/>Quay lại </a>");
+      }
+    } else {
+      res.send(
+        "Nhập lại mật khẩu không khớp!. " +
+          " <a href=/user/register>Quay lại </a>"
+      );
+    }
+  }
+
+  async updateProfile(req, res) {
+    const { fullName, sex, birthday, avatar } = req.body;
+    console.log(fullName, sex, birthday, avatar);
     try {
-      const newUser = await Users.build(user); // Tạo một đối tượng mô hình mới
-      await newUser.validate();
-      const salt = bcrypt.genSaltSync(10);
-      const hash = bcrypt.hashSync(password, salt);
-      Users.create(
-        { userName, password: hash, email },
-        {
-          validate: false,
-        }
-      )
+      Users.update({ fullName, sex, birthday, avatar })
         .then(async () => {
           res
-            .status(201)
-            .send("Tạo tài khoản thành công. <a href=/>Quay lại </a>");
+            .status(200)
+            .send("Cập nhật tài khoản thành công. <a href=/>Quay lại </a>");
         })
         .catch((err) => {
           res.send({ message: err.message });
         });
     } catch (error) {
-      let err = error.message;
-      err = err.replace(/Validation error: /g, "");
-      console.log(err);
-      res.status(400).send(err + " <a href=/>Quay lại </a>");
+      console.log(error);
+      res.status(400).send(error + " <a href=/>Quay lại </a>");
     }
   }
 
@@ -85,7 +127,11 @@ class UserController {
         const auth = await bcrypt.compare(password, userLog.password);
         if (auth) {
           const token = jwt.sign(
-            { userName: userLog.userName, email: userLog.email },
+            {
+              userName: userLog.userName,
+              email: userLog.email,
+              fullName: userLog.fullName,
+            },
             process.env.JWT_SECRET,
             { expiresIn: process.env.JWT_EXPIRES_IN }
           );
@@ -146,14 +192,27 @@ class UserController {
     const { userNameF, userNameT } = req.body;
     const user = req.user;
     const { userName } = user;
-    const allFr = await userFriend.findAll({
-      where: {
-        [Op.and]: [
-          { userName: userName },
-          { userNameFriend: { [Op.ne]: userNameT } },
-        ],
-      },
+
+    const query = `
+      SELECT userFriends.*, u1.fullName AS userNameFullName, u2.fullName AS userNameFriendFullName
+      FROM userFriends
+      JOIN Users AS u1 ON userFriends.userName = u1.userName
+      JOIN Users AS u2 ON userFriends.userNameFriend = u2.userName
+      WHERE userFriends.userName = :userName and userFriends.userNameFriend != :userNameT
+    `;
+
+    const allFr = await sequelize.query(query, {
+      replacements: { userName, userNameT },
+      type: sequelize.QueryTypes.SELECT,
     });
+
+    const userNameTInstance = await Users.findOne({
+      where: { userName: userNameT },
+    });
+
+    const status = userNameTInstance.status;
+
+    const fullName_userNameT = userNameTInstance.fullName;
 
     const allMessage = await MessageModel.findAll({
       where: {
@@ -176,18 +235,34 @@ class UserController {
       userChat: dataToObj(user),
       allFriend: dataToObj(allFr),
       allMessage: dataToObj(allMessageFormat),
+      userNameT_fullName: dataToObj(fullName_userNameT),
       userNameT: dataToObj(userNameT),
+      status: dataToObj(status),
     });
   }
 
   async createMessage(req, res) {
     try {
       const { userNameF, userNameT, message } = req.body;
-      console.log("MEsage: ");
-      console.log(message);
       await MessageModel.create({ userNameF, userNameT, message });
     } catch (error) {
       console.log("[UserController][createMEssage] error: " + error);
+    }
+  }
+
+  async updateStatus(req, res) {
+    const { userName, status } = req.body;
+    try {
+      await Users.update(
+        { status },
+        {
+          where: {
+            userName,
+          },
+        }
+      );
+    } catch (error) {
+      res.send(`LOI: ${error}`);
     }
   }
 }
