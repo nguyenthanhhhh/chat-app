@@ -14,6 +14,7 @@ const { MessageModel } = require("./models");
 const axios = require("axios");
 require("dotenv").config();
 const createMessage = require("./utils/CreateMessage");
+const { CLIENT_RENEG_LIMIT } = require("tls");
 
 const port = process.env.PORT;
 
@@ -64,14 +65,12 @@ io.on("connection", (socket) => {
   socket.on("client join room", async ({ userNameF, room }) => {
     dataOn.userName = userNameF;
     dataOff.userName = userNameF;
-
     try {
       const status = await axios.post(
         "http://localhost:3002/user/updateStatus",
         dataOn
       );
     } catch (error) {
-      console.log("co loix");
       console.log(error);
     }
 
@@ -85,7 +84,7 @@ io.on("connection", (socket) => {
       } catch (error) {
         console.log(error);
       }
-
+      console.log("Send to server")
       io.to(room).emit("server-send-message-to-client", {
         userNameF: data.userNameF,
         userNameT: data.userNameT,
@@ -120,7 +119,9 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(port, async () => {
+server.listen(port, 'localhost')
+
+server.on('listening',async function() {
   try {
     await sequelize.authenticate();
     console.log("Connection has been established successfully.");

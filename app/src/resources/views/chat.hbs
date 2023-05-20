@@ -173,13 +173,12 @@
     };
 
     const socket = io();
-
     const token = document.cookie;
     const userInfoStr = decodeURIComponent(token.split(";")[1].split("=")[1]);
     const userInfo = JSON.parse(userInfoStr.replace("j:", ""));
     const { userName, email } = userInfo;
 
-    const formMessage = document.getElementById("form-message");
+
 
     // xử lý query string (thư viện)
     const queryString = location.search;
@@ -187,72 +186,72 @@
         ignoreQueryPrefix: true,
     });
 
-
+    const formMessage = document.getElementById("form-message");
     //join room
     socket.emit("client join room", { userNameF, room });
+    if (formMessage) {
 
+        //gửi tin nhắn lên server
+        formMessage.addEventListener("submit", (e) => {
+            e.preventDefault();
+            
+            const inputMessage = document.getElementById("input-message");
 
-    //gửi tin nhắn lên server
-    formMessage.addEventListener("submit", (e) => {
-        e.preventDefault();
+            //kiểm tra trạng thái tin nhắn
+            const acknowledgements = () => {
+                // console.log("Gửi tin nhắn thành công");s
+            };
 
-        const inputMessage = document.getElementById("input-message");
+            //gửi dữ tin nhắn lên server
+            const message = inputMessage.value;
+            if (message.trim().length !== 0) {
+                socket.emit(
+                    "send-message-to-server",
+                    { userNameF: name, userNameT: userNameT, message: inputMessage.value },
 
-        //kiểm tra trạng thái tin nhắn
-        const acknowledgements = () => {
-            // console.log("Gửi tin nhắn thành công");s
-        };
-
-        //gửi dữ tin nhắn lên server
-        const message = inputMessage.value;
-        if (message.trim().length !== 0) {
-            socket.emit(
-                "send-message-to-server",
-                { userNameF: name, userNameT: userNameT, message: inputMessage.value },
-
-            );
-
-        }
-
-        axios({
-            method: 'post',
-            url: '/user/createMessage',
-            data: {
-                userNameF,
-                userNameT,
-                fullName,
-                userNameT_FullName,
-                message: inputMessage.value
+                );
+            console.log("gui tin nhan len server")
             }
+
+            axios({
+                method: 'post',
+                url: '/user/createMessage',
+                data: {
+                    userNameF,
+                    userNameT,
+                    fullName,
+                    userNameT_FullName,
+                    message: inputMessage.value
+                }
+            });
+
+            inputMessage.value = "";
         });
 
-        inputMessage.value = "";
-    });
+        const messages = document.getElementById("messages");
 
-    const messages = document.getElementById("messages");
-
-    //Xử lý tin nhắn chat
-    socket.on("server-send-message-to-client", (data) => {
-        let html = renderMessage(data);
-        document.getElementById("message-block").insertAdjacentHTML('beforeend', html);
-    });
-
-    //Gửi vĩ độ, kink độ lên server
-    const btnShareLocation = document.getElementById("btn-share-location");
-    btnShareLocation.addEventListener("click", (e) => {
-        if (!navigator.geolocation) return alert("Trình duyệt của bạn không hỗ trợ");
-        navigator.geolocation.getCurrentPosition((position) => {
-            console.log(position);
-            const { latitude, longitude } = position.coords;
-            console.log(latitude, longitude);
-            socket.emit("share-location", { userNameF: name, userNameT: userNameT, latitude, longitude });
+        //Xử lý tin nhắn chat
+        socket.on("server-send-message-to-client", (data) => {
+            let html = renderMessage(data);
+            document.getElementById("message-block").insertAdjacentHTML('beforeend', html);
         });
-    });
 
-    //xử lý share location:
-    socket.on("server-send-location-to-client", (data) => {
-        // const chatItem2 = document.createElement("li");
-        let html = `
+        //Gửi vĩ độ, kink độ lên server
+        const btnShareLocation = document.getElementById("btn-share-location");
+        btnShareLocation.addEventListener("click", (e) => {
+            if (!navigator.geolocation) return alert("Trình duyệt của bạn không hỗ trợ");
+            navigator.geolocation.getCurrentPosition((position) => {
+                console.log(position);
+                const { latitude, longitude } = position.coords;
+                console.log(latitude, longitude);
+                socket.emit("share-location", { userNameF: name, userNameT: userNameT, latitude, longitude });
+            });
+        });
+
+        //xử lý share location:
+        socket.on("server-send-location-to-client", (data) => {
+            // const chatItem2 = document.createElement("li");
+            let html = `
         <div class="message-item" id="message-item">
             <div class="message__row1">
               <p class="message__name">${data.userNameF}</p>
@@ -267,16 +266,19 @@
 
           
     `;
-        axios({
-            method: 'post',
-            url: '/user/createMessage',
-            data: {
-                userNameF: name,
-                userNameT: userNameT,
-                message: data.message.message
-            }
+            axios({
+                method: 'post',
+                url: '/user/createMessage',
+                data: {
+                    userNameF: name,
+                    userNameT: userNameT,
+                    message: data.message.message
+                }
+            });
+            document.getElementById("message-block").insertAdjacentHTML('beforeend', html);
         });
-        document.getElementById("message-block").insertAdjacentHTML('beforeend', html);
-    });
+
+    }
+
 
 </script>
