@@ -70,7 +70,10 @@
         <form action="/user/inbox/{{this.userNameFriend}}" method="post">
             <input type="hidden" name="userNameF" value="{{this.userName}}">
             <input type="hidden" name="userNameT" value="{{this.userNameFriend}}">
+            <div>
             <button class="friend-item" type="submit">{{this.userNameFriendFullName}}</button>
+            <p>{{this.latestMessage}}</p>
+            </div>
         </form>
         {{/each}}
 
@@ -104,6 +107,20 @@
         <div id="message-block">
 
             {{#each allMessage}}
+            {{#if this.isLocate}}
+            <div class="message-item" id="message-item">
+            
+                <div class="message__row2">
+                    <a class="message__content" href="{{this.message}}" target="_blank">
+                        Vị trí của tôi
+                    </a>
+                    <p class="message__date">{{this.createdAt}}</p>
+            
+                </div>
+            
+            </div>
+
+            {{else}}
             <div class="message-item" id="message-item">
 
                 <div class="message__row2">
@@ -115,6 +132,7 @@
                 </div>
 
             </div>
+            {{/if}}
             {{/each}}
 
         </div>
@@ -131,9 +149,12 @@
         </div>
     </div>
     {{else}}
+    <div class="full-message-block">
     <h3>Kiếm ảnh ở đây đi hiếu bl, làm mấy cái sl trôi trôi ý nhé.
         làm profile với form kết bạn đi, tối thứ 7 xong nhé
     </h3>
+
+    </div>
 
     {{/if}}
 
@@ -171,6 +192,25 @@
     `;
         return html;
     };
+
+    const renderMessageLocation = (message) => {
+            const html = `
+
+        <div class="message-item" id="message-item">
+                
+                <div class="message__row2">
+                    <a class="message__content" href="${message.message.message}" target = "_blank" >
+                        Vị trí của tôi
+                    </a>
+                    <p class="message__date">${message.message.createdAt}</p>
+
+                </div>
+                
+        </div>
+
+    `;
+            return html;
+        };
 
     const socket = io();
     const token = document.cookie;
@@ -251,27 +291,15 @@
         //xử lý share location:
         socket.on("server-send-location-to-client", (data) => {
             // const chatItem2 = document.createElement("li");
-            let html = `
-        <div class="message-item" id="message-item">
-            <div class="message__row1">
-              <p class="message__name">${data.userNameF}</p>
-              <p class="message__date">${data.message.createdAt}</p>
-            </div>
-            <div class="message__row2">
-              <a href = "${data.message.message}" target = "_blank" class="message__content">
-               Vị trí của tôi
-              </a>
-            </div>
-          </div>
-
-          
-    `;
+            let html = renderMessageLocation(data)
             axios({
                 method: 'post',
                 url: '/user/createMessage',
                 data: {
-                    userNameF: name,
-                    userNameT: userNameT,
+                    userNameF,
+                    userNameT,
+                    fullName,
+                    userNameT_FullName, 
                     message: data.message.message
                 }
             });

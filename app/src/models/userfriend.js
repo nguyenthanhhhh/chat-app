@@ -1,5 +1,5 @@
-"use strict";
-const { Model } = require("sequelize");
+'use strict'
+const { Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
   class userFriend extends Model {
     /**
@@ -9,11 +9,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate({ Users }) {
       // define association here
-      this.belongsTo(Users, { foreignKey: "userName", as: "userNameInf" });
+      this.belongsTo(Users, { foreignKey: 'userName', as: 'userNameInf' })
       this.belongsTo(Users, {
-        foreignKey: "userNameFriend",
-        as: "userNameFriendInf",
-      });
+        foreignKey: 'userNameFriend',
+        as: 'userNameFriendInf',
+      })
     }
   }
   userFriend.init(
@@ -26,16 +26,19 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           isDifferentToUserName(value) {
             if (value === this.userName) {
-              throw new Error("userName and userNameFriend must different");
+              throw new Error('userName and userNameFriend must different')
             }
           },
         },
       },
+      latestMessage: {
+        type: DataTypes.STRING,
+      },
     },
     {
       sequelize,
-      modelName: "userFriend",
+      modelName: 'userFriend',
     }
-  );
-  return userFriend;
-};
+  )
+  return userFriend
+}

@@ -10,13 +10,13 @@ class UserController {
     try {
       const user = req.user
       const { userName } = user
-
       const query = `
       SELECT userFriends.*, u1.fullName AS userNameFullName, u2.fullName AS userNameFriendFullName
       FROM userFriends
       JOIN Users AS u1 ON userFriends.userName = u1.userName
       JOIN Users AS u2 ON userFriends.userNameFriend = u2.userName
       WHERE userFriends.userName = :userName
+      ORDER BY updatedAt DESC
     `
 
       const allFr = await sequelize.query(query, {
@@ -198,8 +198,10 @@ class UserController {
       FROM userFriends
       JOIN Users AS u1 ON userFriends.userName = u1.userName
       JOIN Users AS u2 ON userFriends.userNameFriend = u2.userName
-      WHERE userFriends.userName = :userName and userFriends.userNameFriend != :userNameT
+      WHERE userFriends.userName = :userName 
+      ORDER BY updatedAt DESC
     `
+    const temp = 'and userFriends.userNameFriend != :userNameT'
 
     const allFr = await sequelize.query(query, {
       replacements: { userName, userNameT },
@@ -228,6 +230,10 @@ class UserController {
       let time = newData.createdAt
       time = moment(time).format('DD/MM/YYYY - HH:mm:ss')
       newData.createdAt = time
+      const messLocate = newData.message
+      if (messLocate.indexOf('https://www.google.com') != -1) {
+        newData.isLocate = true
+      }
       return newData
     })
 
@@ -245,6 +251,15 @@ class UserController {
     try {
       const { userNameF, userNameT, message } = req.body
       await MessageModel.create({ userNameF, userNameT, message })
+      await userFriend.update(
+        { latestMessage: message },
+        {
+          where: {
+            userName: userNameF,
+            userNameFriend: userNameT,
+          },
+        }
+      )
     } catch (error) {
       console.log('[UserController][createMEssage] error: ' + error)
     }
@@ -267,6 +282,32 @@ class UserController {
         console.log(error)
         res.send(`LOI: ${error}`)
       }
+    }
+  }
+
+  async changePassword(req, res) {
+    const { oldPass, newPass, reNewPass } = req.body
+    const { user } = req
+    const userLog = Users.findOne({
+      where: {
+        userName: user.userName,
+      },
+    })
+    if (userLog) {
+      const auth = await bcrypt.compare(oldPass, userLog.password)
+      if (auth) {
+        if (newPass === reNewPass) {
+          const salt = bcrypt.genSaltSync(10)
+          const hash = bcrypt.hashSync(newPass, salt)
+          await Users.update({ password: hash })
+        } else {
+          res.status(400).send('Mật khẩu nhập lại của bạn không khớp')
+        }
+      } else {
+        res.status(400).send('Mật khẩu không đúng')
+      }
+    } else {
+      res.status(400).send('Bạn chưa đăng nhập')
     }
   }
 }
