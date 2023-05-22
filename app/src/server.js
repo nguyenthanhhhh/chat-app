@@ -78,13 +78,7 @@ io.on('connection', (socket) => {
     //xử lý tin nhắn (chat)
     socket.on('send-message-to-server', async (data, callback) => {
       let message = data.message
-      try {
-        message = filter.clean(message)
-        message = createMessage(message)
-      } catch (error) {
-        console.log(error)
-      }
-      console.log('Send to server')
+      message = createMessage(message)
       io.to(room).emit('server-send-message-to-client', {
         userNameF: data.userNameF,
         userNameT: data.userNameT,

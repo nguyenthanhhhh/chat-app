@@ -46,7 +46,10 @@
                     <h5>Thông tin tài khoản</h5>
                 </div>
                 <div class="profile-avatar">
-                    <div class="avatar-friend-item"></div>
+                    <div class="avatar-friend-item">
+                    <img src="{{userNameTInstance.avatar}}" alt="">
+
+                    </div>
                 </div>
                 <div class="profile-name">
                     <h5>Nguyễn Tuấn Thành</h5>
@@ -69,16 +72,16 @@
                     </div>
                     <div class="infomation">
                         <span>
-                            nguyentuanthanh
+                            {{userNameFInstance.userName}}
                         </span>
                         <span>
-                            nguyentuanthanh@gmail.com
+                            {{userNameFInstance.email}}
                         </span>
                         <span>
-                            Nam
+                            {{userNameFInstance.sex}}
                         </span>
                         <span>
-                            01 tháng 07,2002
+                            {{userNameFInstance.birthday}}
                         </span>
                     </div>
 
@@ -123,6 +126,8 @@
             <input type="hidden" name="userNameT" value="{{this.userNameFriend}}">
             <button type="submit" class="block-user-item friend-item">
                 <div class="avatar-friend-item">
+                    <img src="{{userNameTInstance.avatar}}" alt="AVT">
+
                 </div>
                 
                 <div>
@@ -140,7 +145,9 @@
     <div class="full-message-block js-message-block">
         <div class="username-inbox">
             <div class="block-username js-block-username" onclick="closeProfile()">
-                <div class="avatar-friend-item"></div>
+                <div class="avatar-friend-item">
+                    <img src="{{userNameTInstance.avatar}}" alt="">
+                </div>
                 <div>
                     <h4>{{userNameT_fullName}}</h4>
                     {{#if status}}
@@ -218,7 +225,7 @@
             {{else}}
             <div class="message-item" id="message-item">
                 <div class="block-message-content">
-                    <img class="avatar-friend-inbox" src="https://1.bp.blogspot.com/-tb6Jty3tGvI/XqGjhwS-9RI/AAAAAAAAikQ/MgRq5Ic_TC00ghFtSjAxleM-fDsmMUatwCLcBGAsYHQ/s1600/Hinh-anh-meo-ngau-nhat%2B%25288%2529.jpg" alt="">
+                    <img class="avatar-friend-inbox" src="{{userNameTInstance.avatar}}" alt="">
                     
                     <div class="message__row1">
                         <p class="message__content">
@@ -258,15 +265,19 @@
     </div>
 
     {{/if}}
+
+
     <div class="block-profile js-block-profile">
         <div class="header-profile">
             <h5>Thông tin tài khoản</h5>
         </div>
         <div class="profile-avatar">
-            <div class="avatar-friend-item"></div>
+            <div class="avatar-friend-item">
+                <img src="{{userNameTInstance.avatar}}" alt="">
+            </div>
         </div>
         <div class="profile-name">
-            <h5>Nguyễn Tuấn Thành</h5>
+            <h5>{{userNameTInstance.fullName}}</h5>
         </div>
         <h6 class="header-info">Thông tin cá nhân</h6>
         <div class="profile-infomation">
@@ -283,13 +294,13 @@
             </div>
             <div class="infomation">
                 <span>
-                    nguyentuanthanh
+                    {{userNameTInstance.userName}}
                 </span>
                 <span>
-                    Nam
+                    {{userNameTInstance.sex}}
                 </span>
                 <span>
-                    01 tháng 07,2002
+                    {{userNameTInstance.birthday}}
                 </span>
             </div>
 

@@ -1,5 +1,5 @@
-"use strict";
-const { Model } = require("sequelize");
+'use strict'
+const { Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
   class Users extends Model {
     /**
@@ -9,11 +9,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate({ userFriend }) {
       // define association here
-      this.hasMany(userFriend, { foreignKey: "userName", as: "userNameInf" });
+      this.hasMany(userFriend, { foreignKey: 'userName', as: 'userNameInf' })
       this.hasMany(userFriend, {
-        foreignKey: "userNameFriend",
-        as: "userNameFriendInf",
-      });
+        foreignKey: 'userNameFriend',
+        as: 'userNameFriendInf',
+      })
     }
   }
   Users.init(
@@ -24,25 +24,25 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           len: {
             args: [5, 15],
-            msg: "Tên đăng nhập phải dài từ 5 đến 15 ký tự",
+            msg: 'Tên đăng nhập phải dài từ 5 đến 15 ký tự',
           },
           isUnique: function (value, next) {
             Users.findOne({ where: { username: value } })
               .then(function (user) {
                 // Reject if a different user wants to use the same email
                 if (user) {
-                  return next("Tên đăng nhập đã tồn tại");
+                  return next('Tên đăng nhập đã tồn tại')
                 }
-                return next();
+                return next()
               })
               .catch(function (err) {
-                return next(err);
-              });
+                return next(err)
+              })
           },
         },
         unique: {
           arg: true,
-          msg: "Tên đăng nhập đã tồn tại",
+          msg: 'Tên đăng nhập đã tồn tại',
         },
       },
       password: {
@@ -51,11 +51,11 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           len: {
             args: [5, 15],
-            msg: "Mật khẩu phải dài từ 5 đến 10 ký tự",
+            msg: 'Mật khẩu phải dài từ 5 đến 10 ký tự',
           },
           is: {
             args: /^(?=.*[!@#$%^&*])/,
-            msg: "Mật khẩu phải có ký tự đặc biệt",
+            msg: 'Mật khẩu phải có ký tự đặc biệt',
           },
         },
       },
@@ -66,7 +66,8 @@ module.exports = (sequelize, DataTypes) => {
       avatar: {
         type: DataTypes.STRING,
         allowNull: true,
-        defaultValue: "avatar",
+        defaultValue:
+          'https://1.bp.blogspot.com/-tb6Jty3tGvI/XqGjhwS-9RI/AAAAAAAAikQ/MgRq5Ic_TC00ghFtSjAxleM-fDsmMUatwCLcBGAsYHQ/s1600/Hinh-anh-meo-ngau-nhat%2B%25288%2529.jpg',
       },
       status: {
         type: DataTypes.BOOLEAN,
@@ -75,8 +76,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "Users",
+      modelName: 'Users',
     }
-  );
-  return Users;
-};
+  )
+  return Users
+}

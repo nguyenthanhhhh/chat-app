@@ -208,7 +208,7 @@ class UserController {
       type: sequelize.QueryTypes.SELECT,
     })
 
-    const userNameTInstance = await Users.findOne({
+    let userNameTInstance = await Users.findOne({
       where: { userName: userNameT },
     })
 
@@ -239,6 +239,23 @@ class UserController {
       return newData
     })
 
+    userNameTInstance = dataToObj(userNameTInstance)
+    let time = userNameTInstance.birthday
+    time = moment(time).format('DD/MM/YYYY')
+    userNameTInstance.birthday = time
+
+    let userNameFInstance = await Users.findOne({
+      where: {
+        userName,
+      },
+    })
+
+    userNameFInstance = dataToObj(userNameFInstance)
+    let time2 = userNameFInstance.birthday
+    time2 = moment(time2).format('DD/MM/YYYY')
+    userNameFInstance.birthday = time2
+    console.log(userNameFInstance)
+
     res.render('chat', {
       userChat: dataToObj(user),
       allFriend: dataToObj(allFr),
@@ -247,6 +264,8 @@ class UserController {
       userNameT: dataToObj(userNameT),
       userNameF: dataToObj(userNameF),
       status: dataToObj(status),
+      userNameTInstance: dataToObj(userNameTInstance),
+      userNameFInstance: dataToObj(userNameFInstance),
     })
   }
 
