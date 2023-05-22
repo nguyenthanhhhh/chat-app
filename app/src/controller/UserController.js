@@ -234,6 +234,8 @@ class UserController {
       if (messLocate.indexOf('https://www.google.com') != -1) {
         newData.isLocate = true
       }
+
+      if (message.userNameF === user.userName) newData.isSend = true
       return newData
     })
 
@@ -243,6 +245,7 @@ class UserController {
       allMessage: dataToObj(allMessageFormat),
       userNameT_fullName: dataToObj(fullName_userNameT),
       userNameT: dataToObj(userNameT),
+      userNameF: dataToObj(userNameF),
       status: dataToObj(status),
     })
   }

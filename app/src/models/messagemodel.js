@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       userNameT: { type: DataTypes.STRING, allowNull: true },
       message: DataTypes.STRING,
       isLocate: { type: DataTypes.BOOLEAN, defaultValue: false },
+      isSend: { type: DataTypes.BOOLEAN, defaultValue: false },
     },
     {
       sequelize,

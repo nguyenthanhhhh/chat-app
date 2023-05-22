@@ -107,6 +107,8 @@
         <div id="message-block">
 
             {{#each allMessage}}
+            {{!-- đây là bên gửi --}}
+            {{#if this.isSend}}
             {{#if this.isLocate}}
             <div class="message-item" id="message-item">
             
@@ -124,7 +126,7 @@
             <div class="message-item" id="message-item">
 
                 <div class="message__row2">
-                    <p class="message__content">
+                    <p class="message__content2">
                         {{this.message}}
                     </p>
                     <p class="message__date">{{this.createdAt}}</p>
@@ -132,6 +134,38 @@
                 </div>
 
             </div>
+            {{/if}}
+            {{!-- đây là bên nhận tin nhắn --}}
+            {{else}}
+
+            {{#if this.isLocate}}
+            <div class="message-item" id="message-item">
+            
+                <div class="message__row2">
+                    <a class="message__content" href="{{this.message}}" target="_blank">
+                        Vị trí của tôi
+                    </a>
+                    <p class="message__date">{{this.createdAt}}</p>
+            
+                </div>
+            
+            </div>
+            
+            {{else}}
+            <div class="message-item" id="message-item">
+            
+                <div class="message__row2">
+                    <p class="message__content">
+                        {{this.message}}
+                    </p>
+                    <p class="message__date">{{this.createdAt}}</p>
+            
+                </div>
+            
+            </div>
+            {{/if}}
+
+
             {{/if}}
             {{/each}}
 
