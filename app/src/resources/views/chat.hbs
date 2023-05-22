@@ -113,7 +113,7 @@
             <div class="message-item" id="message-item">
             
                 <div class="message__row2">
-                    <a class="message__content" href="{{this.message}}" target="_blank">
+                    <a class="message__content2" href="{{this.message}}" target="_blank">
                         Vị trí của tôi
                     </a>
                     <p class="message__date">{{this.createdAt}}</p>
@@ -202,14 +202,34 @@
 
 {{!-- PHẦN NÀY LÀ BACKEND --}}
 <script>
+    const userNameFNhan = '{{userNameF}}'
     const userNameF = '{{ userChat.userName }}';
     const fullName = '{{userChat.fullName}}'
     const room = "defaultRoom"
     const userNameT = '{{userNameT}}'
     const userNameT_FullName = '{{userNameT_fullName}}'
 
-    const renderMessage = (message) => {
+    const renderMessageSend = (message) => {
         const html = `
+
+        <div class="message-item" id="message-item">
+                
+                <div class="message__row2">
+                    <p class="message__content2">
+                        ${message.message.message}
+                    </p>
+                    <p class="message__date">${message.message.createdAt}</p>
+
+                </div>
+                
+        </div>
+
+    `;
+        return html;
+    };
+
+    const renderMessageSendReceive = (message) => {
+            const html = `
 
         <div class="message-item" id="message-item">
                 
@@ -224,11 +244,30 @@
         </div>
 
     `;
-        return html;
-    };
+            return html;
+        };
 
-    const renderMessageLocation = (message) => {
+    const renderMessageLocationSend = (message) => {
             const html = `
+
+        <div class="message-item" id="message-item">
+                
+                <div class="message__row2">
+                    <a class="message__content2" href="${message.message.message}" target = "_blank" >
+                        Vị trí của tôi
+                    </a>
+                    <p class="message__date">${message.message.createdAt}</p>
+
+                </div>
+                
+        </div>
+
+    `;
+            return html;
+        };
+
+    const renderMessageLocationReceive = (message) => {
+                const html = `
 
         <div class="message-item" id="message-item">
                 
@@ -243,8 +282,8 @@
         </div>
 
     `;
-            return html;
-        };
+                return html;
+            };
 
     const socket = io();
     const token = document.cookie;
@@ -306,8 +345,13 @@
 
         //Xử lý tin nhắn chat
         socket.on("server-send-message-to-client", (data) => {
-            let html = renderMessage(data);
+            if(userNameFNhan === userNameF){
+            let html = renderMessageSend(data);
             document.getElementById("message-block").insertAdjacentHTML('beforeend', html);
+            } else {
+            let html = renderMessageSendReceive(data);
+            document.getElementById("message-block").insertAdjacentHTML('beforeend', html);
+            }
         });
 
         //Gửi vĩ độ, kink độ lên server
@@ -325,7 +369,7 @@
         //xử lý share location:
         socket.on("server-send-location-to-client", (data) => {
             // const chatItem2 = document.createElement("li");
-            let html = renderMessageLocation(data)
+            
             axios({
                 method: 'post',
                 url: '/user/createMessage',
@@ -337,7 +381,13 @@
                     message: data.message.message
                 }
             });
-            document.getElementById("message-block").insertAdjacentHTML('beforeend', html);
+            if (userNameFNhan === userNameF) {
+                let html = renderMessageLocationSend(data)
+                document.getElementById("message-block").insertAdjacentHTML('beforeend', html);
+            } else {
+                let html = renderMessageLocationReceive(data)
+                document.getElementById("message-block").insertAdjacentHTML('beforeend', html);
+            }
         });
 
     }

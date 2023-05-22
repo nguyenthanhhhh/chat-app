@@ -313,6 +313,14 @@ class UserController {
       res.status(400).send('Bạn chưa đăng nhập')
     }
   }
+
+  async getProfile(req, res) {
+    const { id } = req.body
+    const profile = await Users.findOne({ id })
+    res.send('chat', {
+      profile: dataToObj(profile),
+    })
+  }
 }
 
 module.exports = new UserController()
