@@ -1,5 +1,6 @@
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden; }
 
 .title-chat {
   margin-bottom: 30px;
@@ -82,49 +83,176 @@ body {
 .message__row2:hover > .message__date {
   display: block; }
 
+.avatar-friend-item {
+  height: 49.4px;
+  width: 49.4px;
+  margin-bottom: -5px;
+  border-radius: 50%;
+  background-image: url("https://1.bp.blogspot.com/-tb6Jty3tGvI/XqGjhwS-9RI/AAAAAAAAikQ/MgRq5Ic_TC00ghFtSjAxleM-fDsmMUatwCLcBGAsYHQ/s1600/Hinh-anh-meo-ngau-nhat%2B%25288%2529.jpg");
+  background-size: 100%; }
+
 #block-chat {
   display: flex;
   width: 100%;
-  height: calc(100vh - 55.6px);
+  height: 100vh;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); }
+  #block-chat .taskbar {
+    width: 4vw;
+    background-color: #0084ff;
+    position: relative; }
+    #block-chat .taskbar img {
+      width: 3.9vw;
+      height: 3.9vw;
+      border-radius: 50%;
+      margin-top: 20px; }
+    #block-chat .taskbar .icon-taskbar-chat {
+      color: #fff;
+      width: 100%;
+      padding: 16px 0;
+      background: rgba(0, 0, 0, 0.1);
+      border: none;
+      margin-top: 20px; }
+      #block-chat .taskbar .icon-taskbar-chat i {
+        font-size: 24px; }
+    #block-chat .taskbar .icon-taskbar-chat:hover {
+      cursor: pointer; }
+    #block-chat .taskbar .icon-taskbar-chat:focus {
+      outline: none; }
+    #block-chat .taskbar .btn-logout {
+      background-color: #0084ff;
+      color: #fff;
+      width: 100%;
+      padding: 16px 0;
+      position: absolute;
+      bottom: 10px;
+      border: none; }
+      #block-chat .taskbar .btn-logout i {
+        font-size: 24px; }
+    #block-chat .taskbar .btn-logout:hover {
+      cursor: pointer;
+      background: rgba(0, 0, 0, 0.1); }
+    #block-chat .taskbar .btn-logout:focus {
+      outline: none; }
+    #block-chat .taskbar .modal-myprofile {
+      width: 100vw;
+      height: 100vh;
+      display: none;
+      position: absolute;
+      bottom: 0;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.4); }
+      #block-chat .taskbar .modal-myprofile .my-profile {
+        width: 400px;
+        height: 500px;
+        border-radius: 50px;
+        animation: modalFadeIn ease 0.5s; }
+    #block-chat .taskbar .modal-myprofile.open {
+      display: flex; }
   #block-chat #list-user-block {
     width: 20vw;
-    border: 1px solid #b5b0b0;
+    border-right: 1px solid #b5b0b0;
     background-color: #f5f5f5;
     background-color: #fff;
     background-image: none; }
-    #block-chat #list-user-block .search-friend {
-      width: calc(100% - 10px);
-      margin: 5px;
+    #block-chat #list-user-block .header-list-user {
+      margin-bottom: 10px; }
+      #block-chat #list-user-block .header-list-user .search-friend {
+        width: calc(100% - 60px);
+        margin: 5px;
+        padding: 6px 10px;
+        border-radius: 40px;
+        background-color: #F0F2F5;
+        border: none; }
+      #block-chat #list-user-block .header-list-user .search-friend:focus {
+        outline: none; }
+      #block-chat #list-user-block .header-list-user .btn-add-form {
+        border: none;
+        border-radius: 20px;
+        padding: 6px 10px; }
+      #block-chat #list-user-block .header-list-user .btn-add-form:hover {
+        cursor: pointer;
+        background-color: #ddd; }
+      #block-chat #list-user-block .header-list-user .btn-add-form:focus {
+        outline: none; }
+      #block-chat #list-user-block .header-list-user .modal-add-friend {
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        top: 0;
+        left: 0;
+        justify-content: center;
+        align-items: center;
+        display: none;
+        background-color: rgba(0, 0, 0, 0.4); }
+        #block-chat #list-user-block .header-list-user .modal-add-friend .form-add-friend {
+          width: 400px;
+          height: 40vh;
+          background-color: #fff;
+          animation: modalFadeIn ease 0.5s;
+          padding: 16px 24px;
+          border-radius: 40px; }
+          #block-chat #list-user-block .header-list-user .modal-add-friend .form-add-friend .input-username-add {
+            margin-left: 50%;
+            margin-bottom: 30px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            transform: translateX(-50%);
+            background-color: #F0F2F5;
+            border: none; }
+          #block-chat #list-user-block .header-list-user .modal-add-friend .form-add-friend .input-username-add:focus {
+            outline: .7px solid #0084ff; }
+          #block-chat #list-user-block .header-list-user .modal-add-friend .form-add-friend label, #block-chat #list-user-block .header-list-user .modal-add-friend .form-add-friend p {
+            display: inline-block; }
+          #block-chat #list-user-block .header-list-user .modal-add-friend .form-add-friend label {
+            width: 100px;
+            margin-left: 20px; }
+          #block-chat #list-user-block .header-list-user .modal-add-friend .form-add-friend button {
+            margin-left: 50%;
+            margin-top: 20px;
+            padding: 6px 10px;
+            border: none;
+            border-radius: 10px;
+            transform: translateX(-50%);
+            background-color: #0084ff;
+            color: #fff; }
+          #block-chat #list-user-block .header-list-user .modal-add-friend .form-add-friend button:hover {
+            cursor: pointer;
+            opacity: 0.7; }
+          #block-chat #list-user-block .header-list-user .modal-add-friend .form-add-friend button:focus {
+            outline: none; }
+      #block-chat #list-user-block .header-list-user .modal-add-friend.open {
+        display: flex; }
+    #block-chat #list-user-block .block-user-item {
+      margin: 0 10px;
+      width: calc(100% - 20px);
       padding: 6px 10px;
-      border-radius: 40px;
-      border: none;
-      background-color: #F0F2F5; }
-    #block-chat #list-user-block .search-friend:focus {
-      outline: none; }
-    #block-chat #list-user-block .friend-item {
-      margin: 0 5px;
-      width: calc(100% - 10px);
-      padding: 10px 10px;
       font-size: 18px;
-      font-weight: 450;
+      border: none;
       background-color: #fff;
-      border: none; }
-    #block-chat #list-user-block .friend-item:hover {
-      background-color: #dad5d5;
+      text-align: left; }
+      #block-chat #list-user-block .block-user-item div {
+        display: inline-block; }
+      #block-chat #list-user-block .block-user-item p {
+        font-size: 16px;
+        margin-bottom: 0; }
+    #block-chat #list-user-block .block-user-item:hover {
       cursor: pointer;
-      border-radius: 8px; }
+      border-radius: 8px;
+      background-color: #dad5d5; }
+    #block-chat #list-user-block .block-user-item:focus {
+      outline: none; }
   #block-chat #message-block {
     height: calc(100% - 72.8px - 48px);
     width: 100%;
     overflow: auto;
     flex: 1;
     padding: 0 20px;
-    border: 1px solid #b5b0b0;
+    border-top: 1px solid #b5b0b0;
+    border-bottom: 1px solid #b5b0b0;
     background: #dcdcdc; }
   #block-chat .full-message-block {
-    width: 80vw;
-    border: 1px solid #b5b0b0; }
+    width: 56vw; }
     #block-chat .full-message-block .username-inbox {
       background-color: #fff;
       width: 100%;
@@ -132,13 +260,21 @@ body {
       #block-chat .full-message-block .username-inbox .block-username {
         display: inline-block;
         padding: 0 10px; }
+        #block-chat .full-message-block .username-inbox .block-username div {
+          display: inline-block; }
         #block-chat .full-message-block .username-inbox .block-username h4 {
           display: block;
           margin-bottom: 0; }
-        #block-chat .full-message-block .username-inbox .block-username .active-status {
+        #block-chat .full-message-block .username-inbox .block-username .active-status-on {
           margin-bottom: 0;
           font-size: 13px;
           color: #42B72A; }
+        #block-chat .full-message-block .username-inbox .block-username .active-status-off {
+          margin-bottom: 0;
+          font-size: 13px;
+          color: #d63434; }
+        #block-chat .full-message-block .username-inbox .block-username label:hover {
+          cursor: pointer; }
       #block-chat .full-message-block .username-inbox .block-username:hover {
         cursor: pointer;
         background-color: #e6e4e4;
@@ -159,13 +295,46 @@ body {
           border-radius: 10px; }
         #block-chat .full-message-block .username-inbox .block-call button:focus {
           outline: none; }
-
-.btn-outline-success {
-  position: absolute;
-  top: 8px;
-  right: 10px;
-  border-radius: 8px;
-  font-size: 20px; }
+  #block-chat .full-message-block.extend {
+    width: 76vw; }
+  #block-chat .block-profile {
+    width: 20vw;
+    background-color: #fff;
+    border-left: 1px solid #b5b0b0; }
+    #block-chat .block-profile .header-profile {
+      height: 72.8px;
+      border-bottom: solid 1px #b5b0b0;
+      display: flex;
+      justify-content: center;
+      align-items: center; }
+    #block-chat .block-profile .profile-avatar {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center; }
+      #block-chat .block-profile .profile-avatar div {
+        width: 80px;
+        height: 80px; }
+    #block-chat .block-profile .profile-name {
+      margin-top: 15px;
+      padding-bottom: 20px;
+      display: flex;
+      justify-content: center;
+      border-bottom: solid 8px #dcdcdc; }
+    #block-chat .block-profile .header-info {
+      margin: 20px 0 10px 20px; }
+    #block-chat .block-profile .profile-infomation {
+      display: flex;
+      padding: 0 20px; }
+      #block-chat .block-profile .profile-infomation .name-info {
+        width: 35%;
+        display: block; }
+      #block-chat .block-profile .profile-infomation .infomation {
+        display: block; }
+      #block-chat .block-profile .profile-infomation span {
+        display: block;
+        margin-bottom: 8px; }
+  #block-chat .block-profile.close {
+    display: none; }
 
 .full-form-login {
   width: 100vw;
@@ -315,3 +484,11 @@ body {
 
 .btn-login:hover {
   opacity: 0.6; }
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(300px); }
+  to {
+    opacity: 1;
+    transform: translateY(0); } }

@@ -14,40 +14,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light header-w">
-        <a class="navbar-brand" href="/">Trang chủ</a>
-
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Phòng <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Cài đặt</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Tùy chọn
-                    </a>
-                    {{!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div> --}}
-                </li>
-
-            </ul>
-            {{!-- <form class="form-inline my-2 my-lg-0" action="/user/logout">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Đăng xuất</button>
-            </form> --}}
-        </div>
-        <form class="form-inline my-2 my-lg-0" action="/user/logout">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Đăng xuất</button>
-        </form>
-    </nav>
+    
 </head>
 
 <body>
@@ -63,35 +30,128 @@
 
 
 <div id="block-chat">
+    <div class="taskbar">
+        <img class="js-my-avatar" src="https://1.bp.blogspot.com/-tb6Jty3tGvI/XqGjhwS-9RI/AAAAAAAAikQ/MgRq5Ic_TC00ghFtSjAxleM-fDsmMUatwCLcBGAsYHQ/s1600/Hinh-anh-meo-ngau-nhat%2B%25288%2529.jpg" alt="">
+        
+        <button class="icon-taskbar-chat">
+            <i class="ti-comment-alt "></i>
+        </button>
+            
+        <form class="form-inline my-2 my-lg-0" action="/user/logout">
+            <button class="btn-logout" type="submit"><i class="ti-shift-left"></i></button>
+        </form>
+        <div class="modal-myprofile js-modal-myprofile">
+            <div class="block-profile my-profile js-my-profile">
+                <div class="header-profile">
+                    <h5>Thông tin tài khoản</h5>
+                </div>
+                <div class="profile-avatar">
+                    <div class="avatar-friend-item"></div>
+                </div>
+                <div class="profile-name">
+                    <h5>Nguyễn Tuấn Thành</h5>
+                </div>
+                <h6 class="header-info">Thông tin cá nhân</h6>
+                <div class="profile-infomation">
+                    <div class="name-info">
+                        <span>
+                            Tài khoản
+                        </span>
+                        <span>
+                            Email
+                        </span>
+                        <span>
+                            Giới tính
+                        </span>
+                        <span>
+                            Ngày sinh
+                        </span>
+                    </div>
+                    <div class="infomation">
+                        <span>
+                            nguyentuanthanh
+                        </span>
+                        <span>
+                            nguyentuanthanh@gmail.com
+                        </span>
+                        <span>
+                            Nam
+                        </span>
+                        <span>
+                            01 tháng 07,2002
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="list-user-block">
-        <input class="search-friend" type="text" placeholder="Tìm Kiếm">
-        <button></button>
+        <div class="header-list-user">
+            <input class="search-friend" type="text" placeholder="Tìm Kiếm">
+            <button class="btn-add-form js-btn-add-form"><i class="ti-plus"></i></button>
+            <div class="js-modal-add-friend modal-add-friend">
+                <form class="form-add-friend js-form-add-friend" action = "user/addFriend", method = "post">
+                    
+                    <input type="text" name="userNameFriend" class="input-username-add" value="" placeholder="Tài khoản">
+                    <input type="hidden" name="userName" value="{{userChat.userName}}">
+                    <div>
+                        <div>
+                            <label for="">Họ tên:</label>
+                            <p>Chu Bá Hiếu</p>
+
+                        </div>
+                        <div>
+                            <label for="">Giới tính:</label>
+                            <p>Nam</p>
+
+                        </div>
+                        <div>
+                            <label for="">Ngày sinh:</label>
+                            <p>17/07/2002</p>
+                        </div>
+                        <button type="sumit">
+                            Thêm bạn bè
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
         {{#each allFriend}}
         <form action="/user/inbox/{{this.userNameFriend}}" method="post">
             <input type="hidden" name="userNameF" value="{{this.userName}}">
             <input type="hidden" name="userNameT" value="{{this.userNameFriend}}">
-            <div>
-            <button class="friend-item" type="submit">{{this.userNameFriendFullName}}</button>
-            <p>{{this.latestMessage}}</p>
-            </div>
+            <button type="submit" class="block-user-item friend-item">
+                <div class="avatar-friend-item">
+                </div>
+                
+                <div>
+                    <p>{{this.userNameFriendFullName}}</p>
+                    <p>{{this.latestMessage}}</p>
+                </div>
+            </button>
         </form>
         {{/each}}
+        
 
     </div>
 
     {{#if userNameT}}
-    <div class="full-message-block">
+    <div class="full-message-block js-message-block">
         <div class="username-inbox">
-            <div class="block-username">
-                <h4>{{userNameT_fullName}}</h4>
-                {{#if status}}
-                <label class="active-status" for="">Đang hoạt động</label>
-                {{else}}
-                <label class="active-status" for="">Ngoại tuyến</label>
-                {{/if}}
+            <div class="block-username js-block-username">
+                <div class="avatar-friend-item"></div>
+                <div>
+                    <h4>{{userNameT_fullName}}</h4>
+                    {{#if status}}
+                    <label class="active-status-on" for="">Đang hoạt động</label>
+                    {{else}}
+                    <label class="active-status-off" for="">Ngoại tuyến</label>
+                    {{/if}}
+                </div>
 
             </div>
-            <div class="block-call">
+            <div class="block-call js-block-call">
                 <button>
                     <i class="ti-search"></i>
                 </button>
@@ -157,7 +217,43 @@
     </div>
 
     {{/if}}
+    <div class="block-profile js-block-profile">
+        <div class="header-profile">
+            <h5>Thông tin tài khoản</h5>
+        </div>
+        <div class="profile-avatar">
+            <div class="avatar-friend-item"></div>
+        </div>
+        <div class="profile-name">
+            <h5>Nguyễn Tuấn Thành</h5>
+        </div>
+        <h6 class="header-info">Thông tin cá nhân</h6>
+        <div class="profile-infomation">
+            <div class="name-info">
+                <span>
+                    Tài khoản
+                </span>
+                <span>
+                    Giới tính
+                </span>
+                <span>
+                    Ngày sinh
+                </span>
+            </div>
+            <div class="infomation">
+                <span>
+                    nguyentuanthanh
+                </span>
+                <span>
+                    Nam
+                </span>
+                <span>
+                    01 tháng 07,2002
+                </span>
+            </div>
 
+        </div>
+    </div>
 
 </div>
 
@@ -310,3 +406,56 @@
 
 
 </script>
+<script>
+    const btnadd = document.querySelector('.js-btn-add-form')
+    const modalAddFriend = document.querySelector('.js-modal-add-friend')
+    const formAddFriend = document.querySelector('.js-form-add-friend')
+    function showFormAddFriend(){
+        modalAddFriend.classList.add('open')
+    }
+    function closeModalAddFriend(){
+        modalAddFriend.classList.remove('open')
+    }
+    btnadd.addEventListener('click',showFormAddFriend)
+
+    modalAddFriend.addEventListener('click',closeModalAddFriend)
+
+    formAddFriend.addEventListener('click', function(even){
+        even.stopPropagation()
+    })
+</script>
+
+<script>
+    const btnshow = document.querySelector('.js-my-avatar')
+    const modalpro = document.querySelector('.js-modal-myprofile')
+    const mypro = document.querySelector('.js-my-profile')
+    function showMyProfile(){
+        modalpro.classList.add('open')
+    }
+    function closeMyProfile(){
+        modalpro.classList.remove('open')
+    }
+    btnshow.addEventListener('click',showMyProfile)
+
+    modalpro.addEventListener('click',closeMyProfile)
+
+    mypro.addEventListener('click', function(even){
+        even.stopPropagation()
+    })
+</script>
+
+{{!-- <script>
+    const btn = document.querySelector('js-block-call')
+    btn.addEventListener('click',alert("Chức năng đang phát triển"))
+</script> --}}
+{{!-- <script>
+    const message = document.querySelector('js-message-block')
+    const profile = document.querySelector('js-block-profile')
+    const btnOpen = document.querySelector('js-block-username')
+
+    function closeProfile(){
+        profile.classList.add('close')
+        message.classList.add('extend')
+    }
+    btnOpen.addEventListener('click',closeProfile)
+</script> --}}
