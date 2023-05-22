@@ -1,5 +1,6 @@
 body{
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
 
 }
 .title-chat {
@@ -94,44 +95,207 @@ body{
 .message__row2:hover > .message__date{
   display: block;
 }
-
+.avatar-friend-item{
+  height: 49.4px;
+  width: 49.4px;
+  margin-bottom: -5px;
+  border-radius: 50%;
+  //background-color: #0084ff;
+  background-image: url("https://1.bp.blogspot.com/-tb6Jty3tGvI/XqGjhwS-9RI/AAAAAAAAikQ/MgRq5Ic_TC00ghFtSjAxleM-fDsmMUatwCLcBGAsYHQ/s1600/Hinh-anh-meo-ngau-nhat%2B%25288%2529.jpg");
+  background-size:  100%;
+}
 #block-chat {
   display: flex;
   width: 100%;
-  height: calc(100vh - 55.6px);
+  height: 100vh;
   box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
+  .taskbar{
+    width: 4vw;
+    background-color: #0084ff;
+    position: relative;
+    img{
+      width: 3.9vw;
+      height: 3.9vw;
+      border-radius: 50%;
+      margin-top: 20px;
+    }
+    .icon-taskbar-chat{
+      
+      color: #fff;
+      width: 100%;
+      padding: 16px 0;
+      background: rgba(0,0,0,0.1);
+      border: none;
+      margin-top: 20px;
+      i{
+        font-size: 24px;
+      }
+    }
+    .icon-taskbar-chat:hover{
+      cursor: pointer;
+    }
+    .icon-taskbar-chat:focus{
+      outline: none;
+    }
+    .btn-logout{
+      background-color: #0084ff;
+      color: #fff;
+      width: 100%;
+      padding: 16px 0;
+      position: absolute;
+      bottom: 10px;  
+      border: none;
+      i{
+        font-size: 24px;
+      }
+    }
+    .btn-logout:hover{
+      cursor: pointer;
+      background: rgba(0,0,0,0.1);
+    }
+    .btn-logout:focus{
+      outline: none;
+    }
+    .modal-myprofile{
+      width: 100vw;
+      height: 100vh;
+      display: none;
+      position: absolute;
+      bottom: 0;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(0,0,0,0.4);
+      .my-profile{
+        width: 400px;
+        height: 500px;
+        border-radius: 50px;
+        animation: modalFadeIn ease 0.5s;
+      }
+    }
+    .modal-myprofile.open{
+      display: flex;
+    }
+  }
   #list-user-block {
     width: 20vw;
-    border: 1px solid #b5b0b0;
+    border-right: 1px solid #b5b0b0;
     
     background-color: #f5f5f5;
     background-color: #fff;
     background-image: none;
-    .search-friend{
-      width: calc(100% - 10px);
-      margin: 5px;
+    .header-list-user{
+      margin-bottom: 10px;
+      .search-friend{
+        width: calc(100% - 60px);
+        margin: 5px;
+        padding: 6px 10px;
+        border-radius: 40px;
+        background-color: #F0F2F5;
+        border: none;
+      }
+      .search-friend:focus{
+        outline: none;
+      }
+      .btn-add-form{
+        border: none;
+        border-radius: 20px;
+        padding: 6px 10px;
+      }
+      .btn-add-form:hover{
+        cursor: pointer;
+        background-color: #ddd;
+      }
+      .btn-add-form:focus{
+        outline: none;
+      }
+      .modal-add-friend{
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        top: 0;
+        left: 0;
+        justify-content: center;
+        align-items: center;
+        display: none;
+        background-color: rgba(0,0,0,0.4);
+        .form-add-friend{
+          width: 400px;
+          height: 40vh;
+          background-color: #fff;
+          animation: modalFadeIn ease 0.5s;
+          padding: 16px 24px;
+          border-radius: 40px;
+          .input-username-add{
+            margin-left: 50%;
+            margin-bottom: 30px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            transform: translateX(-50%);
+            background-color: #F0F2F5;
+            border: none;
+            
+          }
+          .input-username-add:focus{
+            outline: .7px solid #0084ff;
+          }
+          label, p{
+            display: inline-block;
+        
+          }
+          label{
+            width: 100px;
+            margin-left: 20px;
+          }
+          button{
+            margin-left: 50%;
+            margin-top: 20px;
+            padding: 6px 10px;
+            border: none;
+            border-radius: 10px;
+            transform: translateX(-50%);
+            background-color: #0084ff;
+            color: #fff;
+          }
+          button:hover{
+            cursor: pointer;
+            opacity: 0.7;
+          }
+          button:focus{
+            outline: none;
+          }
+        }
+      }
+      .modal-add-friend.open{
+        display: flex;
+      }
+
+    }
+    .block-user-item{
+      margin: 0 10px;
+      width: calc(100% - 20px);
       padding: 6px 10px;
-      border-radius: 40px;
-      border: none;
-      background-color: #F0F2F5;
-    }
-    .search-friend:focus{
-      outline: none;
-    }
-    .friend-item{
-      margin: 0 5px;
-      width: calc(100% - 10px);
-      padding: 10px 10px;
       font-size: 18px;
-      font-weight: 450;
-      background-color: #fff;
       border: none;
+      background-color: #fff;
+      text-align: left;
+      
+      div{
+        display: inline-block;
+      }
+      p{
+        font-size: 16px;
+        margin-bottom: 0;
+      }
     }
-    .friend-item:hover{
-      background-color: #dad5d5;
+    .block-user-item:hover{
       cursor: pointer;
       border-radius: 8px;
+      background-color: #dad5d5;
     }
+    .block-user-item:focus{
+      outline: none;
+    }
+
   }
   #message-block {
     height: calc(100% - 72.8px - 48px);
@@ -139,13 +303,13 @@ body{
     overflow: auto;
     flex: 1; 
     padding: 0 20px;
-    border: 1px solid #b5b0b0;
+    border-top: 1px solid #b5b0b0;
+    border-bottom: 1px solid #b5b0b0;
+
     background:  #dcdcdc;
   }
   .full-message-block{
-    width: 80vw;
-    border: 1px solid #b5b0b0;
-    
+    width: 56vw;
     
     .username-inbox{
       background-color: #fff;
@@ -154,14 +318,25 @@ body{
       .block-username{
         display: inline-block;
         padding: 0 10px;
+        div{
+          display: inline-block;
+        }
         h4{
           display: block;   
           margin-bottom: 0;    
         }
-        .active-status{
+        .active-status-on{
           margin-bottom: 0;
           font-size: 13px;
           color: #42B72A;
+        }
+        .active-status-off{
+          margin-bottom: 0;
+          font-size: 13px;
+          color: rgb(214, 52, 52);
+        }
+        label:hover{
+          cursor: pointer;
         }
       }
       .block-username:hover{
@@ -192,18 +367,64 @@ body{
       }
     }
   }
+  .full-message-block.extend{
+    width: 76vw;
+  }
+  .block-profile{
+    width: 20vw;
+    background-color: #fff;
+    border-left: 1px solid #b5b0b0;
+    .header-profile{
+      height: 72.8px;
+      border-bottom: solid 1px #b5b0b0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .profile-avatar{
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      div{
+        width: 80px;
+        height: 80px;
+      }
+    }
+    .profile-name{
+      margin-top: 15px;
+      padding-bottom: 20px;
+      display: flex;
+      justify-content: center;
+      border-bottom: solid 8px #dcdcdc;
+    }
+    .header-info{
+      margin: 20px 0 10px 20px;
+    }
+    .profile-infomation{
+      display: flex;
+      padding: 0 20px;
+      .name-info{
+        width: 35%;
+        display: block;
+      }
+      .infomation{
+        display: block;
+      }
+      span{
+        display: block;
+        margin-bottom: 8px;
+      }
+    }
+  }
+  .block-profile.close{
+    display: none;
+  }
   
 }
 
 
 
-.btn-outline-success{
-  position: absolute;
-  top: 8px;
-  right: 10px;
-  border-radius: 8px;
-  font-size: 20px;
-}
+
 .full-form-login{
   width: 100vw;
   height: 100vh;
@@ -371,3 +592,13 @@ body{
   opacity: 0.6;
 }
 
+@keyframes modalFadeIn{
+  from {
+    opacity: 0;
+    transform: translateY(300px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
