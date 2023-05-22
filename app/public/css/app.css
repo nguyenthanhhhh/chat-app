@@ -52,36 +52,37 @@ body {
     background-color: #fff; }
 
 .message__row1 {
-  display: flex;
-  align-items: flex-end; }
-  .message__row1 p {
-    margin-top: 0; }
-
-.message__row2 {
-  max-width: 50%;
+  max-width: 60%;
   width: fit-content;
   position: relative; }
-  .message__row2 .message__content {
+  .message__row1 .message__content {
     padding: 6px 12px;
     margin: 0 0 15px;
     width: fit-content;
     min-width: 40px;
     display: flex;
     justify-content: center;
-    background-color: #0084ff;
+    background-color: #b5b0b0;
     color: #fff;
     border-radius: 18px;
     overflow-wrap: break-word; }
-  .message__row2 .message__date {
+  .message__row1 .message__date {
     color: #181010;
     font-size: 10px;
     position: absolute;
     top: 100%;
     white-space: nowrap;
     display: none; }
+  .message__row1 .message__date.message__date2 {
+    top: 36px;
+    right: 5px; }
 
-.message__row2:hover > .message__date {
+.message__row1:hover > .message__date {
   display: block; }
+
+.message__row1.message__row2 {
+  float: right;
+  clear: both; }
 
 .avatar-friend-item {
   height: 49.4px;
@@ -134,6 +135,7 @@ body {
     #block-chat .taskbar .btn-logout:focus {
       outline: none; }
     #block-chat .taskbar .modal-myprofile {
+      z-index: 1000;
       width: 100vw;
       height: 100vh;
       display: none;
@@ -143,6 +145,7 @@ body {
       align-items: center;
       background-color: rgba(0, 0, 0, 0.4); }
       #block-chat .taskbar .modal-myprofile .my-profile {
+        display: block;
         width: 400px;
         height: 500px;
         border-radius: 50px;
@@ -176,6 +179,7 @@ body {
       #block-chat #list-user-block .header-list-user .btn-add-form:focus {
         outline: none; }
       #block-chat #list-user-block .header-list-user .modal-add-friend {
+        z-index: 1000;
         width: 100vw;
         height: 100vh;
         position: absolute;
@@ -247,12 +251,28 @@ body {
     width: 100%;
     overflow: auto;
     flex: 1;
+    display: block;
     padding: 0 20px;
     border-top: 1px solid #b5b0b0;
     border-bottom: 1px solid #b5b0b0;
     background: #dcdcdc; }
+    #block-chat #message-block .message-item {
+      display: table;
+      width: 100%; }
+      #block-chat #message-block .message-item .block-message-content {
+        display: flex; }
+        #block-chat #message-block .message-item .block-message-content .avatar-friend-inbox {
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          margin-right: 5px;
+          margin-top: 2px; }
+    #block-chat #message-block .message__content.message__content2 {
+      float: right;
+      clear: both;
+      background-color: #0084ff; }
   #block-chat .full-message-block {
-    width: 56vw; }
+    width: 76vw; }
     #block-chat .full-message-block .username-inbox {
       background-color: #fff;
       width: 100%;
@@ -295,12 +315,13 @@ body {
           border-radius: 10px; }
         #block-chat .full-message-block .username-inbox .block-call button:focus {
           outline: none; }
-  #block-chat .full-message-block.extend {
-    width: 76vw; }
+  #block-chat .full-message-block.narrow {
+    width: 56vw; }
   #block-chat .block-profile {
     width: 20vw;
     background-color: #fff;
-    border-left: 1px solid #b5b0b0; }
+    border-left: 1px solid #b5b0b0;
+    display: none; }
     #block-chat .block-profile .header-profile {
       height: 72.8px;
       border-bottom: solid 1px #b5b0b0;
@@ -333,8 +354,8 @@ body {
       #block-chat .block-profile .profile-infomation span {
         display: block;
         margin-bottom: 8px; }
-  #block-chat .block-profile.close {
-    display: none; }
+  #block-chat .block-profile.open {
+    display: block; }
 
 .full-form-login {
   width: 100vw;
@@ -354,9 +375,13 @@ body {
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   background-color: #fff; }
 
+.label-form-create {
+  margin-bottom: 4px; }
+
 .input-info-room {
   padding: 10px 40px;
   width: 100%;
+  margin-bottom: 16px;
   font-size: 20px;
   border: solid 0.1px #b5b0b0;
   border-radius: 10px; }

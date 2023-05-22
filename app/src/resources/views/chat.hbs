@@ -139,7 +139,7 @@
     {{#if userNameT}}
     <div class="full-message-block js-message-block">
         <div class="username-inbox">
-            <div class="block-username js-block-username">
+            <div class="block-username js-block-username" onclick="closeProfile()">
                 <div class="avatar-friend-item"></div>
                 <div>
                     <h4>{{userNameT_fullName}}</h4>
@@ -152,13 +152,13 @@
 
             </div>
             <div class="block-call js-block-call">
-                <button>
+                <button onclick="notication()">
                     <i class="ti-search"></i>
                 </button>
-                <button>
+                <button onclick="notication()">
                     <i class="ti-headphone-alt"></i>
                 </button>
-                <button>
+                <button onclick="notication()">
                     <i class="ti-video-camera"></i>
                 </button>
 
@@ -172,11 +172,11 @@
             {{#if this.isLocate}}
             <div class="message-item" id="message-item">
             
-                <div class="message__row2">
-                    <a class="message__content2" href="{{this.message}}" target="_blank">
+                <div class="message__row1 message__row2">
+                    <a class="message__content message__content2" href="{{this.message}}" target="_blank">
                         Vị trí của tôi
                     </a>
-                    <p class="message__date">{{this.createdAt}}</p>
+                    <p class="message__date message__date2">{{this.createdAt}}</p>
             
                 </div>
             
@@ -185,11 +185,12 @@
             {{else}}
             <div class="message-item" id="message-item">
 
-                <div class="message__row2">
-                    <p class="message__content2">
+                <div class="message__row1 message__row2">
+                    
+                    <p class="message__content message__content2">
                         {{this.message}}
                     </p>
-                    <p class="message__date">{{this.createdAt}}</p>
+                    <p class="message__date message__date2">{{this.createdAt}}</p>
 
                 </div>
 
@@ -200,26 +201,32 @@
 
             {{#if this.isLocate}}
             <div class="message-item" id="message-item">
-            
-                <div class="message__row2">
-                    <a class="message__content" href="{{this.message}}" target="_blank">
-                        Vị trí của tôi
-                    </a>
-                    <p class="message__date">{{this.createdAt}}</p>
-            
+                <div class="block-message-content">
+                    <img class="avatar-friend-inbox" src="https://1.bp.blogspot.com/-tb6Jty3tGvI/XqGjhwS-9RI/AAAAAAAAikQ/MgRq5Ic_TC00ghFtSjAxleM-fDsmMUatwCLcBGAsYHQ/s1600/Hinh-anh-meo-ngau-nhat%2B%25288%2529.jpg" alt="">
+                    <div class="message__row1">
+                        <a class="message__content" href="{{this.message}}" target="_blank">
+                            Vị trí của tôi
+                        </a>
+                        <p class="message__date">{{this.createdAt}}</p>
+                
+                    </div>
+                    
                 </div>
             
             </div>
             
             {{else}}
             <div class="message-item" id="message-item">
-            
-                <div class="message__row2">
-                    <p class="message__content">
-                        {{this.message}}
-                    </p>
-                    <p class="message__date">{{this.createdAt}}</p>
-            
+                <div class="block-message-content">
+                    <img class="avatar-friend-inbox" src="https://1.bp.blogspot.com/-tb6Jty3tGvI/XqGjhwS-9RI/AAAAAAAAikQ/MgRq5Ic_TC00ghFtSjAxleM-fDsmMUatwCLcBGAsYHQ/s1600/Hinh-anh-meo-ngau-nhat%2B%25288%2529.jpg" alt="">
+                    
+                    <div class="message__row1">
+                        <p class="message__content">
+                            {{this.message}}
+                        </p>
+                        <p class="message__date">{{this.createdAt}}</p>
+                    </div>
+
                 </div>
             
             </div>
@@ -243,7 +250,7 @@
         </div>
     </div>
     {{else}}
-    <div class="full-message-block">
+    <div class="block-chat full-message-block">
     <h3>Kiếm ảnh ở đây đi hiếu bl, làm mấy cái sl trôi trôi ý nhé.
         làm profile với form kết bạn đi, tối thứ 7 xong nhé
     </h3>
@@ -528,18 +535,24 @@
     })
 </script>
 
-{{!-- <script>
-    const btn = document.querySelector('js-block-call')
-    btn.addEventListener('click',alert("Chức năng đang phát triển"))
-</script> --}}
-{{!-- <script>
-    const message = document.querySelector('js-message-block')
-    const profile = document.querySelector('js-block-profile')
-    const btnOpen = document.querySelector('js-block-username')
-
-    function closeProfile(){
-        profile.classList.add('close')
-        message.classList.add('extend')
+<script>
+    function notication(){
+        alert("Chức năng đang phát triển")
     }
-    btnOpen.addEventListener('click',closeProfile)
-</script> --}}
+</script>
+
+
+<script>
+    function closeProfile(){
+        const message = document.querySelector('.js-message-block')
+        const profile = document.querySelector('.js-block-profile')
+        if (profile.classList.contains("open")){
+            profile.classList.remove('open')
+            message.classList.remove('narrow')
+        }
+        else{
+            profile.classList.add('open')
+            message.classList.add('narrow')
+        }
+    }
+</script>
