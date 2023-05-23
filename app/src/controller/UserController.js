@@ -194,7 +194,8 @@ class UserController {
     const { userName } = user
 
     const query = `
-      SELECT userFriends.*, u1.fullName AS userNameFullName, u2.fullName AS userNameFriendFullName
+      SELECT userFriends.*, u1.fullName AS userNameFullName, u2.fullName AS userNameFriendFullName,
+      u1.avatar AS userNameAvt, u2.avatar AS userNameFriendAvt
       FROM userFriends
       JOIN Users AS u1 ON userFriends.userName = u1.userName
       JOIN Users AS u2 ON userFriends.userNameFriend = u2.userName
@@ -207,6 +208,8 @@ class UserController {
       replacements: { userName, userNameT },
       type: sequelize.QueryTypes.SELECT,
     })
+
+    console.log(dataToObj(allFr))
 
     let userNameTInstance = await Users.findOne({
       where: { userName: userNameT },
@@ -255,9 +258,6 @@ class UserController {
     time2 = moment(time2).format('DD/MM/YYYY')
     userNameFInstance.birthday = time2
 
-    console.log(userNameTInstance)
-
-
     res.render('chat', {
       userChat: dataToObj(user),
       allFriend: dataToObj(allFr),
@@ -266,8 +266,8 @@ class UserController {
       userNameT: dataToObj(userNameT),
       userNameF: dataToObj(userNameF),
       status: dataToObj(status),
-      userNameTInstance: dataToObj(userNameTInstance),
-      userNameFInstance: dataToObj(userNameFInstance),
+      userNameTInstance: userNameTInstance,
+      userNameFInstance: userNameFInstance,
     })
   }
 

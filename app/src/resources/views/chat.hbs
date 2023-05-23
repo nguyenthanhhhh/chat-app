@@ -31,7 +31,7 @@
 
 <div id="block-chat">
     <div class="taskbar">
-        <img class="js-my-avatar" src="https://1.bp.blogspot.com/-tb6Jty3tGvI/XqGjhwS-9RI/AAAAAAAAikQ/MgRq5Ic_TC00ghFtSjAxleM-fDsmMUatwCLcBGAsYHQ/s1600/Hinh-anh-meo-ngau-nhat%2B%25288%2529.jpg" alt="">
+        <img class="js-my-avatar" src="{{userNameFInstance.avatar}}" alt="">
         
         <button class="icon-taskbar-chat">
             <i class="ti-comment-alt "></i>
@@ -125,9 +125,9 @@
             <input type="hidden" name="userNameF" value="{{this.userName}}">
             <input type="hidden" name="userNameT" value="{{this.userNameFriend}}">
             <button type="submit" class="block-user-item friend-item">
-                <div class="avatar-friend-item">
-                    <img src="{{userNameTInstance.avatar}}" alt="">
-                </div>
+            <div class="avatar-friend-item">
+                <img src="{{this.userNameFriendAvt}}" alt="">
+            </div>
                 
                 <div>
                     <p>{{this.userNameFriendFullName}}</p>
@@ -136,7 +136,6 @@
             </button>
         </form>
         {{/each}}
-        
 
     </div>
 
@@ -171,6 +170,7 @@
             </div>
         </div>
         <div id="message-block">
+            
 
             {{#each allMessage}}
             {{!-- đây là bên gửi --}}
@@ -209,7 +209,7 @@
             <div class="message-item" id="message-item">
                 <div class="block-message-content">
                     <div class="avatar-friend-inbox">
-                         <img src="{{userNameTInstance.avatar}}" alt="">
+                         <img src="{{../userNameTInstance.avatar}}" alt="">
                     </div>
                     
                     <div class="message__row1">
@@ -225,9 +225,10 @@
             </div>
             
             {{else}}
+
             <div class="message-item" id="message-item">
                 <div class="block-message-content">
-                    <img class="avatar-friend-inbox" src="{{userNameTInstance.avatar}}" alt="">
+                    <img class="avatar-friend-inbox" src="{{../userNameTInstance.avatar}}" alt="">
                     
                     <div class="message__row1">
                         <p class="message__content">
@@ -340,9 +341,6 @@
                 
         </div>
 
-
-
-
     `;
         return html;
     };
@@ -368,11 +366,10 @@
 
     const renderMessageLocationSend = (message) => {
             const html = `
-
         <div class="message-item" id="message-item">
                 
-                <div class="message__row2">
-                    <a class="message__content2" href="${message.message.message}" target = "_blank" >
+                <div class="message__row1 message__row2">
+                    <a class="message__content message__content2" href="${message.message.message}" target = "_blank" >
                         Vị trí của tôi
                     </a>
                     <p class="message__date">${message.message.createdAt}</p>
