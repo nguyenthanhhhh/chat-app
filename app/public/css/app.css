@@ -152,221 +152,227 @@ body {
         height: 500px;
         border-radius: 50px;
         animation: modalFadeIn ease 0.5s; }
-        #block-chat .taskbar .modal-myprofile .my-profile .my-avatar {
-          height: 80px;
+        #block-chat .taskbar .modal-myprofile .my-profile .profile-avatar {
           width: 80px;
-          margin-bottom: -5px; }
-          #block-chat .taskbar .modal-myprofile .my-profile .my-avatar img {
+          height: 80px; }
+          #block-chat .taskbar .modal-myprofile .my-profile .profile-avatar .my-avatar {
             width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            margin-bottom: 33px; }
-    #block-chat .taskbar .modal-myprofile.open {
-      display: flex; }
-  #block-chat #list-user-block {
-    width: 20vw;
-    border-right: 1px solid #b5b0b0;
-    background-color: #f5f5f5;
-    background-color: #fff;
-    background-image: none; }
-    #block-chat #list-user-block .header-list-user {
-      margin-bottom: 10px; }
-      #block-chat #list-user-block .header-list-user .search-friend {
-        width: calc(100% - 60px);
-        margin: 5px;
-        padding: 6px 10px;
-        border-radius: 40px;
-        background-color: #F0F2F5;
-        border: none; }
-      #block-chat #list-user-block .header-list-user .search-friend:focus {
-        outline: none; }
-      #block-chat #list-user-block .header-list-user .btn-add-form {
-        border: none;
-        border-radius: 20px;
-        padding: 6px 10px; }
-      #block-chat #list-user-block .header-list-user .btn-add-form:hover {
-        cursor: pointer;
-        background-color: #ddd; }
-      #block-chat #list-user-block .header-list-user .btn-add-form:focus {
-        outline: none; }
-      #block-chat #list-user-block .header-list-user .modal-add-friend {
-        z-index: 1000;
-        width: 100vw;
-        height: 100vh;
-        position: absolute;
-        top: 0;
-        left: 0;
-        justify-content: center;
-        align-items: center;
-        display: none;
-        background-color: rgba(0, 0, 0, 0.4); }
-        #block-chat #list-user-block .header-list-user .modal-add-friend .form-add-friend {
-          width: 400px;
-          height: 40vh;
-          background-color: #fff;
-          animation: modalFadeIn ease 0.5s;
-          padding: 16px 24px;
-          border-radius: 40px; }
-          #block-chat #list-user-block .header-list-user .modal-add-friend .form-add-friend .input-username-add {
-            margin-left: 50%;
-            margin-bottom: 30px;
-            padding: 4px 10px;
-            border-radius: 20px;
-            transform: translateX(-50%);
-            background-color: #F0F2F5;
-            border: none; }
-          #block-chat #list-user-block .header-list-user .modal-add-friend .form-add-friend .input-username-add:focus {
-            outline: .7px solid #0084ff; }
-          #block-chat #list-user-block .header-list-user .modal-add-friend .form-add-friend label, #block-chat #list-user-block .header-list-user .modal-add-friend .form-add-friend p {
-            display: inline-block; }
-          #block-chat #list-user-block .header-list-user .modal-add-friend .form-add-friend label {
-            width: 100px;
-            margin-left: 20px; }
-          #block-chat #list-user-block .header-list-user .modal-add-friend .form-add-friend button {
-            margin-left: 50%;
-            margin-top: 20px;
-            padding: 6px 10px;
-            border: none;
-            border-radius: 10px;
-            transform: translateX(-50%);
-            background-color: #0084ff;
-            color: #fff; }
-          #block-chat #list-user-block .header-list-user .modal-add-friend .form-add-friend button:hover {
-            cursor: pointer;
-            opacity: 0.7; }
-          #block-chat #list-user-block .header-list-user .modal-add-friend .form-add-friend button:focus {
-            outline: none; }
-      #block-chat #list-user-block .header-list-user .modal-add-friend.open {
-        display: flex; }
-    #block-chat #list-user-block .block-user-item {
-      margin: 0 10px;
-      width: calc(100% - 20px);
+            height: 100%; }
+  #block-chat .modal-myprofile.open {
+    display: flex; }
+
+#list-user-block {
+  width: 20vw;
+  border-right: 1px solid #b5b0b0;
+  background-color: #f5f5f5;
+  background-color: #fff;
+  background-image: none; }
+  #list-user-block .header-list-user {
+    margin-bottom: 10px; }
+    #list-user-block .header-list-user .search-friend {
+      width: calc(100% - 60px);
+      margin: 5px;
       padding: 6px 10px;
-      font-size: 18px;
-      border: none;
-      background-color: #fff;
-      text-align: left; }
-      #block-chat #list-user-block .block-user-item div {
-        display: inline-block; }
-      #block-chat #list-user-block .block-user-item p {
-        font-size: 16px;
-        margin-bottom: 0; }
-    #block-chat #list-user-block .block-user-item:hover {
-      cursor: pointer;
-      border-radius: 8px;
-      background-color: #dad5d5; }
-    #block-chat #list-user-block .block-user-item:focus {
+      border-radius: 40px;
+      background-color: #F0F2F5;
+      border: none; }
+    #list-user-block .header-list-user .search-friend:focus {
       outline: none; }
-  #block-chat #message-block {
-    height: calc(100% - 72.8px - 48px);
-    width: 100%;
-    overflow: auto;
-    flex: 1;
-    display: block;
-    padding: 0 20px;
-    border-top: 1px solid #b5b0b0;
-    border-bottom: 1px solid #b5b0b0;
-    background: #dcdcdc; }
-    #block-chat #message-block .message-item {
-      display: table;
-      width: 100%; }
-      #block-chat #message-block .message-item .block-message-content {
-        display: flex; }
-        #block-chat #message-block .message-item .block-message-content .avatar-friend-inbox {
-          width: 30px;
-          height: 30px;
-          border-radius: 50%;
-          margin-right: 5px;
-          margin-top: 2px; }
-    #block-chat #message-block .message__content.message__content2 {
-      float: right;
-      clear: both;
-      background-color: #0084ff; }
-  #block-chat .full-message-block {
-    width: 76vw; }
-    #block-chat .full-message-block .username-inbox {
-      background-color: #fff;
-      width: 100%;
-      padding: 10px 20px 10px 10px; }
-      #block-chat .full-message-block .username-inbox .block-username {
-        display: inline-block;
-        padding: 0 10px; }
-        #block-chat .full-message-block .username-inbox .block-username div {
+    #list-user-block .header-list-user .btn-add-form {
+      border: none;
+      border-radius: 20px;
+      padding: 6px 10px; }
+    #list-user-block .header-list-user .btn-add-form:hover {
+      cursor: pointer;
+      background-color: #ddd; }
+    #list-user-block .header-list-user .btn-add-form:focus {
+      outline: none; }
+    #list-user-block .header-list-user .modal-add-friend {
+      z-index: 1000;
+      width: 100vw;
+      height: 100vh;
+      position: absolute;
+      top: 0;
+      left: 0;
+      justify-content: center;
+      align-items: center;
+      display: none;
+      background-color: rgba(0, 0, 0, 0.4); }
+      #list-user-block .header-list-user .modal-add-friend .form-add-friend {
+        width: 400px;
+        height: 40vh;
+        background-color: #fff;
+        animation: modalFadeIn ease 0.5s;
+        padding: 16px 24px;
+        border-radius: 40px; }
+        #list-user-block .header-list-user .modal-add-friend .form-add-friend .input-username-add {
+          margin-left: 50%;
+          margin-bottom: 30px;
+          padding: 4px 10px;
+          border-radius: 20px;
+          transform: translateX(-50%);
+          background-color: #F0F2F5;
+          border: none; }
+        #list-user-block .header-list-user .modal-add-friend .form-add-friend .input-username-add:focus {
+          outline: .7px solid #0084ff; }
+        #list-user-block .header-list-user .modal-add-friend .form-add-friend label, #list-user-block .header-list-user .modal-add-friend .form-add-friend p {
           display: inline-block; }
-        #block-chat .full-message-block .username-inbox .block-username h4 {
-          display: block;
-          margin-bottom: 0; }
-        #block-chat .full-message-block .username-inbox .block-username .active-status-on {
-          margin-bottom: 0;
-          font-size: 13px;
-          color: #42B72A; }
-        #block-chat .full-message-block .username-inbox .block-username .active-status-off {
-          margin-bottom: 0;
-          font-size: 13px;
-          color: #d63434; }
-        #block-chat .full-message-block .username-inbox .block-username label:hover {
-          cursor: pointer; }
-      #block-chat .full-message-block .username-inbox .block-username:hover {
+        #list-user-block .header-list-user .modal-add-friend .form-add-friend label {
+          width: 100px;
+          margin-left: 20px; }
+        #list-user-block .header-list-user .modal-add-friend .form-add-friend button {
+          margin-left: 50%;
+          margin-top: 20px;
+          padding: 6px 10px;
+          border: none;
+          border-radius: 10px;
+          transform: translateX(-50%);
+          background-color: #0084ff;
+          color: #fff; }
+        #list-user-block .header-list-user .modal-add-friend .form-add-friend button:hover {
+          cursor: pointer;
+          opacity: 0.7; }
+        #list-user-block .header-list-user .modal-add-friend .form-add-friend button:focus {
+          outline: none; }
+    #list-user-block .header-list-user .modal-add-friend.open {
+      display: flex; }
+  #list-user-block .block-user-item {
+    margin: 0 10px;
+    width: calc(100% - 20px);
+    padding: 6px 10px;
+    font-size: 18px;
+    border: none;
+    background-color: #fff;
+    text-align: left; }
+    #list-user-block .block-user-item div {
+      display: inline-block; }
+    #list-user-block .block-user-item p {
+      font-size: 16px;
+      margin-bottom: 0; }
+  #list-user-block .block-user-item:hover {
+    cursor: pointer;
+    border-radius: 8px;
+    background-color: #dad5d5; }
+  #list-user-block .block-user-item:focus {
+    outline: none; }
+
+#message-block {
+  height: calc(100% - 72.8px - 48px);
+  width: 100%;
+  overflow: auto;
+  flex: 1;
+  display: block;
+  padding: 0 20px;
+  border-top: 1px solid #b5b0b0;
+  border-bottom: 1px solid #b5b0b0;
+  background: #dcdcdc; }
+  #message-block .message-item {
+    display: table;
+    width: 100%; }
+    #message-block .message-item .block-message-content {
+      display: flex; }
+      #message-block .message-item .block-message-content .avatar-friend-inbox {
+        width: 30px;
+        height: 30px;
+        margin-right: 5px;
+        margin-top: 2px; }
+        #message-block .message-item .block-message-content .avatar-friend-inbox img {
+          border-radius: 50%;
+          width: 100%;
+          height: 100%; }
+  #message-block .message__content.message__content2 {
+    float: right;
+    clear: both;
+    background-color: #0084ff; }
+
+.full-message-block {
+  width: 76vw; }
+  .full-message-block .username-inbox {
+    background-color: #fff;
+    width: 100%;
+    padding: 10px 20px 10px 10px; }
+    .full-message-block .username-inbox .block-username {
+      display: inline-block;
+      padding: 0 10px; }
+      .full-message-block .username-inbox .block-username div {
+        display: inline-block; }
+      .full-message-block .username-inbox .block-username h4 {
+        display: block;
+        margin-bottom: 0; }
+      .full-message-block .username-inbox .block-username .active-status-on {
+        margin-bottom: 0;
+        font-size: 13px;
+        color: #42B72A; }
+      .full-message-block .username-inbox .block-username .active-status-off {
+        margin-bottom: 0;
+        font-size: 13px;
+        color: #d63434; }
+      .full-message-block .username-inbox .block-username label:hover {
+        cursor: pointer; }
+    .full-message-block .username-inbox .block-username:hover {
+      cursor: pointer;
+      background-color: #e6e4e4;
+      border-radius: 10px; }
+    .full-message-block .username-inbox .block-call {
+      float: right;
+      margin-top: 5.4px; }
+      .full-message-block .username-inbox .block-call button {
+        padding: 10px 10px 6px 10px;
+        background-color: #fff;
+        border: none; }
+        .full-message-block .username-inbox .block-call button i {
+          color: #0084ff;
+          font-size: 20px; }
+      .full-message-block .username-inbox .block-call button:hover {
         cursor: pointer;
         background-color: #e6e4e4;
         border-radius: 10px; }
-      #block-chat .full-message-block .username-inbox .block-call {
-        float: right;
-        margin-top: 5.4px; }
-        #block-chat .full-message-block .username-inbox .block-call button {
-          padding: 10px 10px 6px 10px;
-          background-color: #fff;
-          border: none; }
-          #block-chat .full-message-block .username-inbox .block-call button i {
-            color: #0084ff;
-            font-size: 20px; }
-        #block-chat .full-message-block .username-inbox .block-call button:hover {
-          cursor: pointer;
-          background-color: #e6e4e4;
-          border-radius: 10px; }
-        #block-chat .full-message-block .username-inbox .block-call button:focus {
-          outline: none; }
-  #block-chat .full-message-block.narrow {
-    width: 56vw; }
-  #block-chat .block-profile {
-    width: 20vw;
-    background-color: #fff;
-    border-left: 1px solid #b5b0b0;
-    display: none; }
-    #block-chat .block-profile .header-profile {
-      height: 72.8px;
-      border-bottom: solid 1px #b5b0b0;
-      display: flex;
-      justify-content: center;
-      align-items: center; }
-    #block-chat .block-profile .profile-avatar {
-      margin-top: 30px;
-      display: flex;
-      justify-content: center; }
-      #block-chat .block-profile .profile-avatar div {
-        width: 80px;
-        height: 80px; }
-    #block-chat .block-profile .profile-name {
-      margin-top: 15px;
-      padding-bottom: 20px;
-      display: flex;
-      justify-content: center;
-      border-bottom: solid 8px #dcdcdc; }
-    #block-chat .block-profile .header-info {
-      margin: 20px 0 10px 20px; }
-    #block-chat .block-profile .profile-infomation {
-      display: flex;
-      padding: 0 20px; }
-      #block-chat .block-profile .profile-infomation .name-info {
-        width: 35%;
-        display: block; }
-      #block-chat .block-profile .profile-infomation .infomation {
-        display: block; }
-      #block-chat .block-profile .profile-infomation span {
-        display: block;
-        margin-bottom: 8px; }
-  #block-chat .block-profile.open {
-    display: block; }
+      .full-message-block .username-inbox .block-call button:focus {
+        outline: none; }
+
+.full-message-block.narrow {
+  width: 56vw; }
+
+.block-profile {
+  width: 20vw;
+  background-color: #fff;
+  border-left: 1px solid #b5b0b0;
+  display: none; }
+  .block-profile .header-profile {
+    height: 72.8px;
+    border-bottom: solid 1px #b5b0b0;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+  .block-profile .profile-avatar {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center; }
+    .block-profile .profile-avatar div {
+      width: 80px;
+      height: 80px; }
+  .block-profile .profile-name {
+    margin-top: 15px;
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    border-bottom: solid 8px #dcdcdc; }
+  .block-profile .header-info {
+    margin: 20px 0 10px 20px; }
+  .block-profile .profile-infomation {
+    display: flex;
+    padding: 0 20px; }
+    .block-profile .profile-infomation .name-info {
+      width: 35%;
+      display: block; }
+    .block-profile .profile-infomation .infomation {
+      display: block; }
+    .block-profile .profile-infomation span {
+      display: block;
+      margin-bottom: 8px; }
+
+.block-profile.open {
+  display: block; }
 
 .full-form-login {
   width: 100vw;
@@ -520,6 +526,9 @@ body {
 
 .btn-login:hover {
   opacity: 0.6; }
+
+#list-user-block .block-user-item.css-select-friend {
+  background-color: #0084ff; }
 
 @keyframes modalFadeIn {
   from {

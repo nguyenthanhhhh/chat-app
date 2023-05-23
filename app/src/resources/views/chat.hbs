@@ -121,10 +121,11 @@
             </div>
         </div>
         {{#each allFriend}}
+        {{#if this.isSelect}}
         <form action="/user/inbox/{{this.userNameFriend}}" method="post">
             <input type="hidden" name="userNameF" value="{{this.userName}}">
             <input type="hidden" name="userNameT" value="{{this.userNameFriend}}">
-            <button type="submit" class="block-user-item friend-item">
+            <button type="submit" class="block-user-item friend-item css-select-friend">
             <div class="avatar-friend-item">
                 <img src="{{this.userNameFriendAvt}}" alt="">
             </div>
@@ -135,6 +136,24 @@
                 </div>
             </button>
         </form>
+        {{else}}
+
+        <form action="/user/inbox/{{this.userNameFriend}}" method="post">
+            <input type="hidden" name="userNameF" value="{{this.userName}}">
+            <input type="hidden" name="userNameT" value="{{this.userNameFriend}}">
+            <button type="submit" class="block-user-item friend-item">
+                <div class="avatar-friend-item">
+                    <img src="{{this.userNameFriendAvt}}" alt="">
+                </div>
+        
+                <div>
+                    <p>{{this.userNameFriendFullName}}</p>
+                    <p>{{this.latestMessage}}</p>
+                </div>
+            </button>
+        </form>
+
+        {{/if}}
         {{/each}}
 
     </div>
@@ -228,7 +247,9 @@
 
             <div class="message-item" id="message-item">
                 <div class="block-message-content">
-                    <img class="avatar-friend-inbox" src="{{../userNameTInstance.avatar}}" alt="">
+                    <div class="avatar-friend-inbox">
+                        <img src="{{../userNameTInstance.avatar}}" alt="">
+                    </div>
                     
                     <div class="message__row1">
                         <p class="message__content">
