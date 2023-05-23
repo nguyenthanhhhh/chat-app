@@ -87,10 +87,12 @@ body {
 .avatar-friend-item {
   height: 49.4px;
   width: 49.4px;
-  margin-bottom: -5px;
-  border-radius: 50%;
-  background-image: url("https://1.bp.blogspot.com/-tb6Jty3tGvI/XqGjhwS-9RI/AAAAAAAAikQ/MgRq5Ic_TC00ghFtSjAxleM-fDsmMUatwCLcBGAsYHQ/s1600/Hinh-anh-meo-ngau-nhat%2B%25288%2529.jpg");
-  background-size: 100%; }
+  margin-bottom: -5px; }
+  .avatar-friend-item img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    margin-bottom: 33px; }
 
 #block-chat {
   display: flex;
@@ -150,6 +152,15 @@ body {
         height: 500px;
         border-radius: 50px;
         animation: modalFadeIn ease 0.5s; }
+        #block-chat .taskbar .modal-myprofile .my-profile .my-avatar {
+          height: 80px;
+          width: 80px;
+          margin-bottom: -5px; }
+          #block-chat .taskbar .modal-myprofile .my-profile .my-avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            margin-bottom: 33px; }
     #block-chat .taskbar .modal-myprofile.open {
       display: flex; }
   #block-chat #list-user-block {

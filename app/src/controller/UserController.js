@@ -254,7 +254,9 @@ class UserController {
     let time2 = userNameFInstance.birthday
     time2 = moment(time2).format('DD/MM/YYYY')
     userNameFInstance.birthday = time2
-    console.log(userNameFInstance)
+
+    console.log(userNameTInstance)
+
 
     res.render('chat', {
       userChat: dataToObj(user),

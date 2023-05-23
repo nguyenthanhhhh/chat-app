@@ -46,13 +46,13 @@
                     <h5>Thông tin tài khoản</h5>
                 </div>
                 <div class="profile-avatar">
-                    <div class="avatar-friend-item">
-                    <img src="{{userNameTInstance.avatar}}" alt="">
-
-                    </div>
+                    
+                    
+                    <img class="my-avatar" src="{{userNameFInstance.avatar}}" alt="">
+                    
                 </div>
                 <div class="profile-name">
-                    <h5>Nguyễn Tuấn Thành</h5>
+                    <h5>{{userNameFInstance.fullName}}</h5>
                 </div>
                 <h6 class="header-info">Thông tin cá nhân</h6>
                 <div class="profile-infomation">
@@ -126,8 +126,7 @@
             <input type="hidden" name="userNameT" value="{{this.userNameFriend}}">
             <button type="submit" class="block-user-item friend-item">
                 <div class="avatar-friend-item">
-                    <img src="{{userNameTInstance.avatar}}" alt="AVT">
-
+                    <img src="{{userNameTInstance.avatar}}" alt="">
                 </div>
                 
                 <div>
@@ -209,7 +208,10 @@
             {{#if this.isLocate}}
             <div class="message-item" id="message-item">
                 <div class="block-message-content">
-                    <img class="avatar-friend-inbox" src="https://1.bp.blogspot.com/-tb6Jty3tGvI/XqGjhwS-9RI/AAAAAAAAikQ/MgRq5Ic_TC00ghFtSjAxleM-fDsmMUatwCLcBGAsYHQ/s1600/Hinh-anh-meo-ngau-nhat%2B%25288%2529.jpg" alt="">
+                    <div class="avatar-friend-inbox">
+                         <img src="{{userNameTInstance.avatar}}" alt="">
+                    </div>
+                    
                     <div class="message__row1">
                         <a class="message__content" href="{{this.message}}" target="_blank">
                             Vị trí của tôi
@@ -328,8 +330,8 @@
 
         <div class="message-item" id="message-item">
                 
-                <div class="message__row2">
-                    <p class="message__content2">
+                <div class="message__row1 message__row2">
+                    <p class="message__content message__content2">
                         ${message.message.message}
                     </p>
                     <p class="message__date">${message.message.createdAt}</p>
@@ -337,6 +339,9 @@
                 </div>
                 
         </div>
+
+
+
 
     `;
         return html;
