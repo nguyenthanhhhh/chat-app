@@ -11,7 +11,8 @@ class UserController {
       const user = req.user
       const { userName } = user
       const query = `
-      SELECT userFriends.*, u1.fullName AS userNameFullName, u2.fullName AS userNameFriendFullName
+      SELECT userFriends.*, u1.fullName AS userNameFullName, u2.fullName AS userNameFriendFullName,
+      u1.avatar AS userNameAvt, u2.avatar AS userNameFriendAvt
       FROM userFriends
       JOIN Users AS u1 ON userFriends.userName = u1.userName
       JOIN Users AS u2 ON userFriends.userNameFriend = u2.userName
@@ -24,12 +25,24 @@ class UserController {
         type: sequelize.QueryTypes.SELECT,
       })
 
+      let userNameFInstance = await Users.findOne({
+        where: {
+          userName,
+        },
+      })
+
+      userNameFInstance = dataToObj(userNameFInstance)
+      let time2 = userNameFInstance.birthday
+      time2 = moment(time2).format('DD/MM/YYYY')
+      userNameFInstance.birthday = time2
+
       // const allMessage = await MessageModel.findAll();
 
       res.render('chat', {
         userChat: dataToObj(user),
         allFriend: dataToObj(allFr),
         // allMessage: dataToObj(allMessage),
+        userNameFInstance: dataToObj(userNameFInstance),
       })
     } catch (error) {
       console.log('[UserController][home] error: ' + error)
@@ -66,7 +79,9 @@ class UserController {
           .then(async () => {
             res
               .status(201)
-              .send('Tạo tài khoản thành công. <a href=/>Quay lại </a>')
+              .send(
+                '<script>alert("Tạo tài khoản thành công."); window.location.href = "/";</script>'
+              )
           })
           .catch((err) => {
             res.send({ message: err.message })
@@ -75,12 +90,16 @@ class UserController {
         let err = error.message
         err = err.replace(/Validation error: /g, '')
         console.log(error)
-        res.status(400).send(err + ' <a href=/>Quay lại </a>')
+        res
+          .status(400)
+          .send(
+            err +
+              '<script>alert("Quay lại."); window.location.href = "/";</script>'
+          )
       }
     } else {
       res.send(
-        'Nhập lại mật khẩu không khớp!. ' +
-          ' <a href=/user/register>Quay lại </a>'
+        '<script>alert("Nhập lại mật khẩu không khớp!. "); window.location.href ="/user/register";</script>'
       )
     }
   }
@@ -93,14 +112,21 @@ class UserController {
         .then(async () => {
           res
             .status(200)
-            .send('Cập nhật tài khoản thành công. <a href=/>Quay lại </a>')
+            .send(
+              '<script>alert("Cập nhật tài khoản thành công. "); window.location.href ="/";</script>'
+            )
         })
         .catch((err) => {
           res.send({ message: err.message })
         })
     } catch (error) {
       console.log(error)
-      res.status(400).send(error + ' <a href=/>Quay lại </a>')
+      res
+        .status(400)
+        .send(
+          error +
+            '<script>alert("Có lỗi,  quay lại"); window.location.href ="/";</script>'
+        )
     }
   }
 
@@ -115,7 +141,7 @@ class UserController {
       res
         .status(401)
         .send(
-          'Bạn đã đăng nhập rồi, không thể đăng nhập. <a href = />Quay lại </a>'
+          '<script>alert("Bạn đã đăng nhập rồi, không thể đăng nhập. "); window.location.href ="/";</script>'
         )
     } else {
       const userLog = await Users.findOne({
@@ -139,7 +165,11 @@ class UserController {
           res.status(200).redirect('/')
           console.log('Dang nhap thanh cong')
         } else {
-          res.status(401).send('mật khẩu không hợp lệ')
+          res
+            .status(401)
+            .send(
+              '<script>alert("Mật khẩu không hợp lệ "); window.location.href ="/user/login";</script>'
+            )
         }
       } else {
         res
@@ -175,17 +205,27 @@ class UserController {
   // }
 
   async addFriend(req, res) {
-    const { userName, userNameFriend } = req.body
-    await userFriend.create({
-      userName: userName,
-      userNameFriend: userNameFriend,
-    })
-    await userFriend.create({
-      userName: userNameFriend,
-      userNameFriend: userName,
-    })
+    try {
+      const { userName, userNameFriend } = req.body
+      await userFriend.create({
+        userName: userName,
+        userNameFriend: userNameFriend,
+      })
+      await userFriend.create({
+        userName: userNameFriend,
+        userNameFriend: userName,
+      })
+    } catch (error) {
+      res.send(
+        '<script>alert("Người dùng không tồn tại hoặc đã kết bạn"); window.location.href ="/user/addFriend";</script>'
+      )
+    }
 
-    res.status(201).send('Tao user friend thanh cong')
+    res
+      .status(201)
+      .send(
+        '<script>alert("Kết bạn thành công"); window.location.href ="/user/chat";</script>'
+      )
   }
 
   async inbox(req, res) {
@@ -193,8 +233,21 @@ class UserController {
     const user = req.user
     const { userName } = user
 
+    await userFriend.update({ isSelect: false }, { where: {} })
+
+    await userFriend.update(
+      { isSelect: true },
+      {
+        where: {
+          userName: userNameF,
+          userNameFriend: userNameT,
+        },
+      }
+    )
+
     const query = `
-      SELECT userFriends.*, u1.fullName AS userNameFullName, u2.fullName AS userNameFriendFullName
+      SELECT userFriends.*, u1.fullName AS userNameFullName, u2.fullName AS userNameFriendFullName,
+      u1.avatar AS userNameAvt, u2.avatar AS userNameFriendAvt
       FROM userFriends
       JOIN Users AS u1 ON userFriends.userName = u1.userName
       JOIN Users AS u2 ON userFriends.userNameFriend = u2.userName
@@ -255,9 +308,6 @@ class UserController {
     time2 = moment(time2).format('DD/MM/YYYY')
     userNameFInstance.birthday = time2
 
-    console.log(userNameTInstance)
-
-
     res.render('chat', {
       userChat: dataToObj(user),
       allFriend: dataToObj(allFr),
@@ -266,8 +316,8 @@ class UserController {
       userNameT: dataToObj(userNameT),
       userNameF: dataToObj(userNameF),
       status: dataToObj(status),
-      userNameTInstance: dataToObj(userNameTInstance),
-      userNameFInstance: dataToObj(userNameFInstance),
+      userNameTInstance: userNameTInstance,
+      userNameFInstance: userNameFInstance,
     })
   }
 

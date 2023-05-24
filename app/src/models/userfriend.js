@@ -18,11 +18,14 @@ module.exports = (sequelize, DataTypes) => {
   }
   userFriend.init(
     {
-      userName: { type: DataTypes.STRING, allowNull: false, unique: false },
+      userName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       userNameFriend: {
         type: DataTypes.STRING,
         allowNull: true,
-        unique: false,
+
         validate: {
           isDifferentToUserName(value) {
             if (value === this.userName) {
@@ -34,10 +37,22 @@ module.exports = (sequelize, DataTypes) => {
       latestMessage: {
         type: DataTypes.STRING,
       },
+      isSelect: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
     },
     {
       sequelize,
       modelName: 'userFriend',
+    },
+    {
+      indexes: [
+        {
+          unique: true,
+          fields: ['userName', 'userNameFriend'],
+        },
+      ],
     }
   )
   return userFriend

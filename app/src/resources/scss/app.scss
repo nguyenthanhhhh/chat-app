@@ -3,6 +3,7 @@ body{
   overflow: hidden;
 
 }
+
 .title-chat {
   margin-bottom: 30px;
   margin-top: 20px;
@@ -88,6 +89,9 @@ body{
     right: 5px;
   }
 }
+.select{
+  background: rgba(0,0,0,0.2) !important;
+}
 .message__row1:hover > .message__date{
   display: block;
 }
@@ -120,25 +124,27 @@ body{
       height: 3.9vw;
       border-radius: 50%;
       margin-top: 20px;
+      margin-bottom: 20px;
     }
-    .icon-taskbar-chat{
-      
+    .icon-taskbar{
       color: #fff;
       width: 100%;
       padding: 16px 0;
-      background: rgba(0,0,0,0.1);
+      background: #0084ff;
       border: none;
-      margin-top: 20px;
+      //margin-top: 20px;
       i{
         font-size: 24px;
       }
     }
-    .icon-taskbar-chat:hover{
+    .icon-taskbar:hover{
+      background: rgba(0,0,0,0.1);
       cursor: pointer;
     }
-    .icon-taskbar-chat:focus{
+    .icon-taskbar:focus{
       outline: none;
     }
+    
     .btn-logout{
       background-color: #0084ff;
       color: #fff;
@@ -198,98 +204,9 @@ body{
   #list-user-block {
     width: 20vw;
     border-right: 1px solid #b5b0b0;
-    
     background-color: #f5f5f5;
     background-color: #fff;
     background-image: none;
-    .header-list-user{
-      margin-bottom: 10px;
-      .search-friend{
-        width: calc(100% - 60px);
-        margin: 5px;
-        padding: 6px 10px;
-        border-radius: 40px;
-        background-color: #F0F2F5;
-        border: none;
-      }
-      .search-friend:focus{
-        outline: none;
-      }
-      .btn-add-form{
-        border: none;
-        border-radius: 20px;
-        padding: 6px 10px;
-      }
-      .btn-add-form:hover{
-        cursor: pointer;
-        background-color: #ddd;
-      }
-      .btn-add-form:focus{
-        outline: none;
-      }
-      .modal-add-friend{
-        z-index: 1000;
-        width: 100vw;
-        height: 100vh;
-        position: absolute;
-        top: 0;
-        left: 0;
-        justify-content: center;
-        align-items: center;
-        display: none;
-        background-color: rgba(0,0,0,0.4);
-        .form-add-friend{
-          width: 400px;
-          height: 40vh;
-          background-color: #fff;
-          animation: modalFadeIn ease 0.5s;
-          padding: 16px 24px;
-          border-radius: 40px;
-          .input-username-add{
-            margin-left: 50%;
-            margin-bottom: 30px;
-            padding: 4px 10px;
-            border-radius: 20px;
-            transform: translateX(-50%);
-            background-color: #F0F2F5;
-            border: none;
-            
-          }
-          .input-username-add:focus{
-            outline: .7px solid #0084ff;
-          }
-          label, p{
-            display: inline-block;
-        
-          }
-          label{
-            width: 100px;
-            margin-left: 20px;
-          }
-          button{
-            margin-left: 50%;
-            margin-top: 20px;
-            padding: 6px 10px;
-            border: none;
-            border-radius: 10px;
-            transform: translateX(-50%);
-            background-color: #0084ff;
-            color: #fff;
-          }
-          button:hover{
-            cursor: pointer;
-            opacity: 0.7;
-          }
-          button:focus{
-            outline: none;
-          }
-        }
-      }
-      .modal-add-friend.open{
-        display: flex;
-      }
-
-    }
     .block-user-item{
       margin: 0 10px;
       width: calc(100% - 20px);
@@ -326,8 +243,8 @@ body{
     padding: 0 20px;
     border-top: 1px solid #b5b0b0;
     border-bottom: 1px solid #b5b0b0;
-
     background:  #dcdcdc;
+    animation: modalFadeInRL ease 0.6s;
     .message-item{
       display: table;
       width: 100%;
@@ -354,11 +271,11 @@ body{
   }
   .full-message-block{
     width: 76vw;
-    
     .username-inbox{
       background-color: #fff;
       width: 100%;
       padding:10px 20px 10px 10px;
+      animation: modalFadeInTD ease 0.6s;
       .block-username{
         display: inline-block;
         padding: 0 10px;
@@ -410,6 +327,210 @@ body{
         }
       }
     }
+    
+  }
+  .header-list-user{
+    margin-bottom: 10px;
+    .search-friend{
+      width: calc(100% - 60px);
+      margin: 5px;
+      padding: 6px 10px;
+      border-radius: 40px;
+      background-color: #F0F2F5;
+      border: none;
+    }
+    .search-friend:focus{
+      outline: none;
+    }
+    .btn-add-form{
+      border: none;
+      border-radius: 20px;
+      padding: 6px 10px;
+    }
+    .btn-add-form:hover{
+      cursor: pointer;
+      background-color: #ddd;
+    }
+    .btn-add-form:focus{
+      outline: none;
+    }
+  }
+  .menu-contact{
+    width: 25vw;
+    border-right:solid 1px #b5b0b0;
+    div{
+      margin: 12px 0;
+      padding: 0 10px;
+    }
+    >button{
+      width: 100%;
+      padding:16px 20px;
+      font-size: 20px;
+      font-weight: 500;
+      background-color: #fff;
+      border: none;
+      i{
+        font-size: 20px;
+      }
+    }
+    >button:hover{
+      background-color: #F0F2F5;
+      cursor: pointer;
+    }
+    >button:focus{
+      outline: none;
+    }
+  }
+  .contact-tab-list-friend{
+    width: 71vw;
+    display: none;
+    .list-friend-item{
+      width: 100%;
+      display: flex;
+      align-items: center;
+      padding: 0 14px;     
+      img{
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        margin-right: 20px;
+      }
+      h5{
+        margin-bottom: 0;
+        padding: 24px 0;
+        border-bottom: 1px solid #b5b0b0;
+        width: calc(100% - 164px);
+      }
+    }
+  }
+  .contact-tab-friend-request{
+    width: 71vw;
+    display: none;
+    background-color: #F0F2F5;
+    h6{
+      margin-left: 20px;
+      margin-bottom: 20px;
+    }
+    .friend-request-receive{
+      width: 100%;
+      padding: 0 20px;
+      display: flex;
+      overflow: auto;
+      .friend-request-receive-item{
+        width: 250px;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        >div{
+          display: flex;
+          align-items: center;
+        }
+        .block-btn-reponse-request{
+          margin-top: 10px;
+          padding-right: 10px;
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          button{
+            margin-left: 10px;
+            padding: 6px 0;
+            width: 115px;
+            border: none;
+            font-weight: 600;
+            border-radius: 10px;
+          }
+          .btn-accept-request{
+            background-color: #0084ff;
+            color: #fff;
+          }
+        }
+        img{
+          width: 48px;
+          height: 48px;
+          border-radius: 50%;
+        }
+        h6{
+          margin-bottom: 0;
+        }
+        p{
+          margin: 0;
+          margin-left: 20px;
+        }
+      }
+    }
+  }
+  .header-contact-tab{
+    width: 100%;
+    padding:20px 20px;
+    font-size: 20px;
+    font-weight: 500;
+    background-color: #fff;
+    border-bottom: solid 1px #b5b0b0;
+    margin-bottom: 20px;
+    i{
+      font-size: 20px;
+    }
+  }
+  .modal-add-friend{
+    z-index: 1000;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    display: none;
+    background-color: rgba(0,0,0,0.4);
+    .form-add-friend{
+      width: 400px;
+      height: 40vh;
+      background-color: #fff;
+      animation: modalFadeIn ease 0.5s;
+      padding: 16px 24px;
+      border-radius: 40px;
+      .input-username-add{
+        margin-left: 50%;
+        margin-bottom: 30px;
+        padding: 4px 10px;
+        border-radius: 20px;
+        transform: translateX(-50%);
+        background-color: #F0F2F5;
+        border: none;
+        
+      }
+      .input-username-add:focus{
+        outline: .7px solid #0084ff;
+      }
+      label, p{
+        display: inline-block;
+    
+      }
+      label{
+        width: 100px;
+        margin-left: 20px;
+      }
+      button{
+        margin-left: 50%;
+        margin-top: 20px;
+        padding: 6px 10px;
+        border: none;
+        border-radius: 10px;
+        transform: translateX(-50%);
+        background-color: #0084ff;
+        color: #fff;
+      }
+      button:hover{
+        cursor: pointer;
+        opacity: 0.7;
+      }
+      button:focus{
+        outline: none;
+      }
+    }
+  }
+  .modal-add-friend.open{
+    display: flex;
   }
   .full-message-block.narrow{
     width: 56vw;
@@ -595,7 +716,7 @@ body{
   border: none;
   background-color: #F0F2F5;
   border-radius: 50px;
-  
+  animation: modalFadeInDT ease 0.6s;
   .btn-send-mess{
     float: right;
     padding: 6px 8px 2px 8px;
@@ -649,12 +770,49 @@ body{
     margin: 0;
   }
 }
+ .block-list-user, .full-message-block, .contact-tab-list-friend, 
+ .contact-tab-friend-request, .menu-contact{
+  display: none;
+}
 
+.open{
+  display: block;
+}
 
 @keyframes modalFadeIn{
   from {
     opacity: 0;
     transform: translateY(300px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes modalFadeInTD{
+  from {
+    opacity: 0;
+    transform: translateY(-300px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes modalFadeInDT{
+  from {
+    opacity: 0;
+    transform: translateY(300px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes modalFadeInRL{
+  from {
+    opacity: 0;
+    transform: translateX(300px);
   }
   to {
     opacity: 1;

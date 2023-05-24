@@ -31,12 +31,14 @@
 
 <div id="block-chat">
     <div class="taskbar">
-        <img class="js-my-avatar" src="https://1.bp.blogspot.com/-tb6Jty3tGvI/XqGjhwS-9RI/AAAAAAAAikQ/MgRq5Ic_TC00ghFtSjAxleM-fDsmMUatwCLcBGAsYHQ/s1600/Hinh-anh-meo-ngau-nhat%2B%25288%2529.jpg" alt="">
+        <img class="js-my-avatar" src="{{userNameFInstance.avatar}}" alt="">
         
-        <button class="icon-taskbar-chat">
+        <button class="js-icon-taskbar-chat icon-taskbar select" onclick="openTaskbarChat()">
             <i class="ti-comment-alt "></i>
         </button>
-            
+         <button class="js-icon-taskbar-list icon-taskbar" onclick="openTaskbarContact()">
+            <i class="ti-user"></i>
+         </button>   
         <form class="form-inline my-2 my-lg-0" action="/user/logout">
             <button class="btn-logout" type="submit"><i class="ti-shift-left"></i></button>
         </form>
@@ -90,45 +92,20 @@
             </div>
         </div>
     </div>
-    <div id="list-user-block">
+    <div id="list-user-block" class="js-list-user-block block-list-user open">
         <div class="header-list-user">
             <input class="search-friend" type="text" placeholder="Tìm Kiếm">
             <button class="btn-add-form js-btn-add-form"><i class="ti-plus"></i></button>
-            <div class="js-modal-add-friend modal-add-friend">
-                <form class="form-add-friend js-form-add-friend" action = "user/addFriend", method = "post">
-                    
-                    <input type="text" name="userNameFriend" class="input-username-add" value="" placeholder="Tài khoản">
-                    <input type="hidden" name="userName" value="{{userChat.userName}}">
-                    <div>
-                        <div>
-                            <label for="">Họ tên:</label>
-                            <p>Chu Bá Hiếu</p>
-
-                        </div>
-                        <div>
-                            <label for="">Giới tính:</label>
-                            <p>Nam</p>
-
-                        </div>
-                        <div>
-                            <label for="">Ngày sinh:</label>
-                            <p>17/07/2002</p>
-                        </div>
-                        <button type="sumit">
-                            Thêm bạn bè
-                        </button>
-                    </div>
-                </form>
-            </div>
         </div>
         {{#each allFriend}}
+        {{#if this.isSelect}}
         <form action="/user/inbox/{{this.userNameFriend}}" method="post">
             <input type="hidden" name="userNameF" value="{{this.userName}}">
             <input type="hidden" name="userNameT" value="{{this.userNameFriend}}">
-            <button type="submit" class="block-user-item friend-item">
-                <div class="avatar-friend-item">
-                    <img src="{{userNameTInstance.avatar}}" alt="">
-                </div>
+            <button type="submit" class="block-user-item friend-item css-select-friend">
+            <div class="avatar-friend-item">
+                <img src="{{this.userNameFriendAvt}}" alt="">
+            </div>
                 
                 <div>
                     <p>{{this.userNameFriendFullName}}</p>
@@ -136,13 +113,30 @@
                 </div>
             </button>
         </form>
-        {{/each}}
+        {{else}}
+
+        <form action="/user/inbox/{{this.userNameFriend}}" method="post">
+            <input type="hidden" name="userNameF" value="{{this.userName}}">
+            <input type="hidden" name="userNameT" value="{{this.userNameFriend}}">
+            <button type="submit" class="block-user-item friend-item">
+                <div class="avatar-friend-item">
+                    <img src="{{this.userNameFriendAvt}}" alt="">
+                </div>
         
+                <div>
+                    <p>{{this.userNameFriendFullName}}</p>
+                    <p>{{this.latestMessage}}</p>
+                </div>
+            </button>
+        </form>
+
+        {{/if}}
+        {{/each}}
 
     </div>
 
     {{#if userNameT}}
-    <div class="full-message-block js-message-block">
+    <div class="full-message-block js-message-block open">
         <div class="username-inbox">
             <div class="block-username js-block-username" onclick="closeProfile()">
                 <div class="avatar-friend-item">
@@ -172,6 +166,7 @@
             </div>
         </div>
         <div id="message-block">
+            
 
             {{#each allMessage}}
             {{!-- đây là bên gửi --}}
@@ -211,7 +206,6 @@
                 <div class="block-message-content">
                     <div class="avatar-friend-inbox">
                          <img src="{{userNameTInstance.avatar}}" alt="">
-                         {{!-- <img class="avt-friend" src="https://1.bp.blogspot.com/-tb6Jty3tGvI/XqGjhwS-9RI/AAAAAAAAikQ/MgRq5Ic_TC00ghFtSjAxleM-fDsmMUatwCLcBGAsYHQ/s1600/Hinh-anh-meo-ngau-nhat%2B%25288%2529.jpg" alt=""> --}}
                     </div>
                     
                     <div class="message__row1">
@@ -227,9 +221,11 @@
             </div>
             
             {{else}}
+
             <div class="message-item" id="message-item">
                 <div class="block-message-content">
                     <img class="avatar-friend-inbox" src="{{userNameTInstance.avatar}}" alt="">
+                    
                     <div class="message__row1">
                         <p class="message__content">
                             {{this.message}}
@@ -260,7 +256,7 @@
         </div>
     </div>
     {{else}}
-    <div class="block-chat full-message-block">
+    <div class="block-chat full-message-block open">
         <div class="message-block-default">
             <h4>
                 Hãy chọn một đoạn chat hoặc bắt đầu cuộc trò chuyện mới
@@ -311,6 +307,92 @@
 
         </div>
     </div>
+    <div class="js-menu-contact menu-contact">
+        <div class="header-list-user">
+            <input class="search-friend" type="text" placeholder="Tìm Kiếm">
+            <button class="btn-add-form js-btn-add-form"><i class="ti-plus"></i></button>
+            
+        </div>
+        <button class="js-tab-list select" onclick="openTabList()">
+            <i class="ti-layout-media-overlay"></i>
+            Danh sách bạn bè
+        </button>
+        <button class="js-tab-friend-request" onclick="openTabFriendRequest()">
+            <i class="ti-email"></i>
+            Lời mời kết bạn
+        </button>
+    </div>
+    {{!-- tab danh sách bạn bè --}}
+    <div class="js-list-friend contact-tab-list-friend">
+            <header class="header-contact-tab">
+                <i class="ti-layout-media-overlay"></i>
+                Danh sách bạn bè
+            </header>
+            {{#each allFriend}}
+                <div class="list-friend-item">
+                    <img src="{{this.userNameFriendAvt}}" alt="">
+                    <h5>{{this.userNameFriendFullName}}</h5>          
+                </div>
+            {{/each}}
+    </div>
+    {{!-- tab lời mời kết bạn --}}
+    <div class="js-friend-request contact-tab-friend-request js-">
+        <header class="header-contact-tab">
+            <i class="ti-email"></i>
+            Lời mời kết bạn
+        </header>
+            <h6>Lời mời đã nhận</h6>
+        <div class="friend-request-receive">
+            <div class="friend-request-receive-item">
+                {{!-- truyền data vào img, h6, p --}}
+                <div>
+                    <img src="{{userNameFInstance.avatar}}" alt="">
+                    <div>
+                        <h6>Chu Bá Hiếu</h6>   
+                        <p>hieublue</p> 
+                        
+                    </div>
+                </div>
+
+                <div class="block-btn-reponse-request">
+                    <button class="btn-accept-request">
+                        Xác nhận
+                    </button>
+                    <button class="btn-refuse-request">
+                        Từ chối
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+<div class="js-modal-add-friend modal-add-friend">
+    <form class="form-add-friend js-form-add-friend" action = "user/addFriend" method = "post">
+                    
+        <input type="text" name="userNameFriend" class="input-username-add" value="" placeholder="Tài khoản">
+        <input type="hidden" name="userName" value="{{userChat.userName}}">
+        <div>
+            <div>
+                <label for="">Họ tên:</label>
+                <p>Chu Bá Hiếu</p>
+
+            </div>
+            <div>
+                <label for="">Giới tính:</label>
+                <p>Nam</p>
+            </div>
+            <div>
+                <label for="">Ngày sinh:</label>
+                    <p>17/07/2002</p>
+            </div>
+                <button type="sumit">
+                     Thêm bạn bè
+                </button>
+        </div>
+    </form>
+</div>
 
 </div>
 
@@ -343,9 +425,6 @@
                 
         </div>
 
-
-
-
     `;
         return html;
     };
@@ -371,11 +450,10 @@
 
     const renderMessageLocationSend = (message) => {
             const html = `
-
         <div class="message-item" id="message-item">
                 
-                <div class="message__row2">
-                    <a class="message__content2" href="${message.message.message}" target = "_blank" >
+                <div class="message__row1 message__row2">
+                    <a class="message__content message__content2" href="${message.message.message}" target = "_blank" >
                         Vị trí của tôi
                     </a>
                     <p class="message__date">${message.message.createdAt}</p>
@@ -517,7 +595,7 @@
 
 </script>
 <script>
-    const btnadd = document.querySelector('.js-btn-add-form')
+    const btnadd = document.querySelectorAll('.js-btn-add-form')
     const modalAddFriend = document.querySelector('.js-modal-add-friend')
     const formAddFriend = document.querySelector('.js-form-add-friend')
     function showFormAddFriend(){
@@ -526,8 +604,11 @@
     function closeModalAddFriend(){
         modalAddFriend.classList.remove('open')
     }
-    btnadd.addEventListener('click',showFormAddFriend)
-
+    
+    for(const btn of btnadd){
+        btn.addEventListener('click',showFormAddFriend)
+    }
+    
     modalAddFriend.addEventListener('click',closeModalAddFriend)
 
     formAddFriend.addEventListener('click', function(even){
@@ -562,9 +643,9 @@
 
 
 <script>
+    const message = document.querySelector('.js-message-block')
+    const profile = document.querySelector('.js-block-profile')
     function closeProfile(){
-        const message = document.querySelector('.js-message-block')
-        const profile = document.querySelector('.js-block-profile')
         if (profile.classList.contains("open")){
             profile.classList.remove('open')
             message.classList.remove('narrow')
@@ -574,4 +655,70 @@
             message.classList.add('narrow')
         }
     }
+</script>
+
+<script>
+    const btnfr = document.querySelector('.js-tab-friend-request')
+    const btnct = document.querySelector('.js-tab-list')
+    const blockfr = document.querySelector('.js-friend-request')
+    const blockct = document.querySelector('.js-list-friend')
+    function openTabFriendRequest(){
+        if(btnct.classList.contains("select")){
+            btnct.classList.remove("select")
+            btnfr.classList.add("select")
+            blockfr.classList.add("open")
+            blockct.classList.remove("open")
+        }
+    }
+    function openTabList(){
+          if(btnfr.classList.contains("select")){
+            btnfr.classList.remove("select")
+            btnct.classList.add("select")
+            blockct.classList.add("open")
+            blockfr.classList.remove("open")
+        }
+    }
+</script>
+<script>
+        const blockLu = document.querySelector('.js-list-user-block')
+        const blockMess = document.querySelector('.js-message-block')
+        const blocklf = document.querySelector('.js-list-friend')
+        const blockmc = document.querySelector('.js-menu-contact')
+        const btnchat = document.querySelector('.js-icon-taskbar-chat')
+        const btnlist = document.querySelector('.js-icon-taskbar-list')
+    function openTaskbarContact(){
+        if(blockLu.classList.contains("open")){
+            blockLu.classList.remove("open")
+            blockMess.classList.remove("open")
+            btnchat.classList.remove("select")
+            blocklf.classList.add("open")
+            blockmc.classList.add("open")
+            btnlist.classList.add("select")
+            if(profile.classList.contains("open")){
+                profile.classList.remove('open')
+                message.classList.remove('narrow')
+            }
+        }
+    }
+    function openTaskbarChat(){
+        if(blocklf.classList.contains("open")){
+            blockLu.classList.add("open")
+            blockMess.classList.add("open")
+            btnchat.classList.add("select")
+            blocklf.classList.remove("open")
+            blockmc.classList.remove("open")
+            btnlist.classList.remove("select")
+        }
+        else if(blockfr.classList.contains("open")){
+            blockLu.classList.add("open")
+            blockMess.classList.add("open")
+            btnchat.classList.add("select")
+            blockfr.classList.remove("open")
+            blockmc.classList.remove("open")
+            btnlist.classList.remove("select")
+            btnfr.classList.remove("select")
+            btnct.classList.add("select")
+        }
+    }
+
 </script>
