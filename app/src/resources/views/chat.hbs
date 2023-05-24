@@ -45,11 +45,12 @@
                 <div class="header-profile">
                     <h5>Thông tin tài khoản</h5>
                 </div>
+                <div class="block-my-pro">
+
                 <div class="profile-avatar">
-                    
-                    
                     <img class="my-avatar" src="{{userNameFInstance.avatar}}" alt="">
                     
+                </div>
                 </div>
                 <div class="profile-name">
                     <h5>{{userNameFInstance.fullName}}</h5>
@@ -210,6 +211,7 @@
                 <div class="block-message-content">
                     <div class="avatar-friend-inbox">
                          <img src="{{userNameTInstance.avatar}}" alt="">
+                         {{!-- <img class="avt-friend" src="https://1.bp.blogspot.com/-tb6Jty3tGvI/XqGjhwS-9RI/AAAAAAAAikQ/MgRq5Ic_TC00ghFtSjAxleM-fDsmMUatwCLcBGAsYHQ/s1600/Hinh-anh-meo-ngau-nhat%2B%25288%2529.jpg" alt=""> --}}
                     </div>
                     
                     <div class="message__row1">
@@ -228,7 +230,6 @@
             <div class="message-item" id="message-item">
                 <div class="block-message-content">
                     <img class="avatar-friend-inbox" src="{{userNameTInstance.avatar}}" alt="">
-                    
                     <div class="message__row1">
                         <p class="message__content">
                             {{this.message}}
@@ -260,9 +261,11 @@
     </div>
     {{else}}
     <div class="block-chat full-message-block">
-    <h3>Kiếm ảnh ở đây đi hiếu bl, làm mấy cái sl trôi trôi ý nhé.
-        làm profile với form kết bạn đi, tối thứ 7 xong nhé
-    </h3>
+        <div class="message-block-default">
+            <h4>
+                Hãy chọn một đoạn chat hoặc bắt đầu cuộc trò chuyện mới
+            </h4>
+        </div>
 
     </div>
 
