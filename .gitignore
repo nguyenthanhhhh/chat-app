@@ -1,3 +1,5 @@
 node_modules/
 .env
-app/config/config.json
+app/config/
+app/public/css/
+app/src/resources/scss/
