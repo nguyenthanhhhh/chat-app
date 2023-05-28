@@ -36,11 +36,16 @@
         <button class="js-icon-taskbar-chat icon-taskbar select" onclick="openTaskbarChat()">
             <i class="ti-comment-alt "></i>
         </button>
+        {{!-- Btn friend --}}
+        {{!-- <form action="/friend/home" method="get"> --}}
          <button class="js-icon-taskbar-list icon-taskbar" onclick="openTaskbarContact()">
-            <i class="ti-user"></i>
-         </button>   
+            <i class="ti-user">alo</i>
+         </button>
+
+        {{!-- </form> --}}
+        {{!--Btn loggout  --}}
         <form class="form-inline my-2 my-lg-0" action="/user/logout">
-            <button class="btn-logout" type="submit"><i class="ti-shift-left"></i></button>
+            <button class="btn-logout" type="submit"><i class="ti-shift-left"> </i></button>
         </form>
         <div class="modal-myprofile js-modal-myprofile">
             <div class="block-profile my-profile js-my-profile">
@@ -205,7 +210,7 @@
             <div class="message-item" id="message-item">
                 <div class="block-message-content">
                     <div class="avatar-friend-inbox">
-                         <img src="{{userNameTInstance.avatar}}" alt="">
+                         <img src="{{../userNameTInstance.avatar}}" alt="1">
                     </div>
                     
                     <div class="message__row1">
@@ -224,7 +229,7 @@
 
             <div class="message-item" id="message-item">
                 <div class="block-message-content">
-                    <img class="avatar-friend-inbox" src="{{userNameTInstance.avatar}}" alt="">
+                    <img class="avatar-friend-inbox" src="{{../userNameTInstance.avatar}}" alt="2">
                     
                     <div class="message__row1">
                         <p class="message__content">
@@ -313,10 +318,13 @@
             <button class="btn-add-form js-btn-add-form"><i class="ti-plus"></i></button>
             
         </div>
-        <button class="js-tab-list select" onclick="openTabList()">
-            <i class="ti-layout-media-overlay"></i>
-            Danh sách bạn bè
-        </button>
+        <form action="">
+            <button class="js-tab-list select" onclick="openTabList()">
+                <i class="ti-layout-media-overlay"></i>
+                Danh sách bạn bè
+            </button>
+
+        </form>
         <button class="js-tab-friend-request" onclick="openTabFriendRequest()">
             <i class="ti-email"></i>
             Lời mời kết bạn
@@ -523,7 +531,6 @@
                     { userNameF: name, userNameT: userNameT, message: inputMessage.value },
 
                 );
-            console.log("gui tin nhan len server")
             }
 
             axios({
@@ -545,6 +552,10 @@
 
         //Xử lý tin nhắn chat
         socket.on("server-send-message-to-client", (data) => {
+            const allMessage = data.message
+            
+            
+            /*
             if(userNameFNhan === userNameF){
             let html = renderMessageSend(data);
             document.getElementById("message-block").insertAdjacentHTML('beforeend', html);
@@ -552,6 +563,7 @@
             let html = renderMessageSendReceive(data);
             document.getElementById("message-block").insertAdjacentHTML('beforeend', html);
             }
+            */
         });
 
         //Gửi vĩ độ, kink độ lên server
@@ -594,6 +606,9 @@
 
 
 </script>
+
+
+{{!-- hieu bl --}}
 <script>
     const btnadd = document.querySelectorAll('.js-btn-add-form')
     const modalAddFriend = document.querySelector('.js-modal-add-friend')

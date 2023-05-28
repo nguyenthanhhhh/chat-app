@@ -15,6 +15,7 @@ userRouter.post('/createMessage', authenticate, UserController.createMessage)
 userRouter.post('/updateStatus', UserController.updateStatus)
 userRouter.patch('/updateProfile', authenticate, UserController.updateProfile)
 userRouter.patch('/changePassword', authenticate, UserController.changePassword)
+userRouter.post('/getAllMessage', authenticate, UserController.getAllMessage)
 
 // userRouter.post("/chat", authenticate, UserController.joinChat);
 // userRouter.get("/chat", authenticate, UserController.joinChat);

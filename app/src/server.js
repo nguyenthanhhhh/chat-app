@@ -77,13 +77,33 @@ io.on('connection', (socket) => {
     socket.join(room)
     //xử lý tin nhắn (chat)
     socket.on('send-message-to-server', async (data, callback) => {
-      let message = data.message
-      message = createMessage(message)
-      io.to(room).emit('server-send-message-to-client', {
+      const dataMess = {
         userNameF: data.userNameF,
         userNameT: data.userNameT,
-        message,
-      })
+      }
+
+      try {
+        const allMessage = await axios.post(
+          'http://localhost:3002/user/getAllMessage',
+          dataMess
+        )
+
+        io.to(room).emit('server-send-message-to-client', {
+          userNameF: data.userNameF,
+          userNameT: data.userNameT,
+          message: allMessage,
+        })
+      } catch (error) {
+        console.log('Error Server in [Send message to server]')
+      }
+
+      // let message = data.message
+      // message = createMessage(message)
+      // io.to(room).emit('server-send-message-to-client', {
+      //   userNameF: data.userNameF,
+      //   userNameT: data.userNameT,
+      //   message,
+      // })
     })
 
     //xử lý share location

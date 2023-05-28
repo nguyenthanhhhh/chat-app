@@ -16,7 +16,16 @@ body {
   width: 100%;
   max-width: 100%;
   height: 100%;
-  padding: 0; }
+  padding: 0;
+  margin-left: 10px; }
+
+.left-header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100px;
+  height: 100%;
+  background-color: #f2f2f2; }
 
 #input-name {
   margin: 10px 0px; }
@@ -299,15 +308,17 @@ body {
   .menu-contact div {
     margin: 12px 0;
     padding: 0 10px; }
-  .menu-contact > button {
-    width: 100%;
-    padding: 16px 20px;
-    font-size: 20px;
-    font-weight: 500;
-    background-color: #fff;
-    border: none; }
-    .menu-contact > button i {
-      font-size: 20px; }
+  .menu-contact form {
+    width: 100%; }
+    .menu-contact form button {
+      width: 100%;
+      padding: 16px 20px;
+      font-size: 20px;
+      font-weight: 500;
+      background-color: #fff;
+      border: none; }
+      .menu-contact form button i {
+        font-size: 20px; }
   .menu-contact > button:hover {
     background-color: #F0F2F5;
     cursor: pointer; }

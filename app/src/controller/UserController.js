@@ -392,6 +392,32 @@ class UserController {
       profile: dataToObj(profile),
     })
   }
+
+  async getAllMessage(req, res) {
+    const { userChat } = req
+    const { userNameF, userNameT } = req.body
+    let allMessage = await MessageModel.findAll({
+      where: {
+        userNameF,
+        userNameT,
+      },
+    })
+    const allMessageFormat = allMessage.map((message) => {
+      let newData = dataToObj(message)
+      let time = newData.createdAt
+      time = moment(time).format('DD/MM/YYYY - HH:mm:ss')
+      newData.createdAt = time
+      const messLocate = newData.message
+      if (messLocate.indexOf('https://www.google.com') != -1) {
+        newData.isLocate = true
+      }
+
+      if (message.userNameF === userChat.userName) newData.isSend = true
+      return newData
+    })
+
+    res.send({ allMessage: allMessageFormat })
+  }
 }
 
 module.exports = new UserController()
