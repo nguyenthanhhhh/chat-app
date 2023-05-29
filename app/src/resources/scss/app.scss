@@ -20,16 +20,8 @@ body{
   max-width: 100%;
   height: 100%;
   padding: 0;
-  margin-left: 10px;
 }
-.left-header {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100px;
-  height: 100%;
-  background-color: #f2f2f2;
-}
+
 #input-name {
   margin: 10px 0px;
 }
@@ -876,3 +868,6 @@ body{
     transform: translateX(0);
   }
 }
+
+
+

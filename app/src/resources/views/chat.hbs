@@ -418,16 +418,16 @@
     const userNameT = '{{userNameT}}'
     const userNameT_FullName = '{{userNameT_fullName}}'
 
-    const renderMessageSend = (message) => {
+    const renderMessageSend = (data) => {
         const html = `
 
         <div class="message-item" id="message-item">
                 
                 <div class="message__row1 message__row2">
                     <p class="message__content message__content2">
-                        ${message.message.message}
+                        ${data.message}
                     </p>
-                    <p class="message__date">${message.message.createdAt}</p>
+                    <p class="message__date">${data.createdAt}</p>
 
                 </div>
                 
@@ -437,16 +437,16 @@
         return html;
     };
 
-    const renderMessageSendReceive = (message) => {
+    const renderMessageReceive = (data) => {
             const html = `
 
         <div class="message-item" id="message-item">
                 
-                <div class="message__row2">
+                <div class="message__row1 message__row2">
                     <p class="message__content">
-                        ${message.message.message}
+                        ${data.message}
                     </p>
-                    <p class="message__date">${message.message.createdAt}</p>
+                    <p class="message__date">${data.createdAt}</p>
 
                 </div>
                 
@@ -456,15 +456,15 @@
             return html;
         };
 
-    const renderMessageLocationSend = (message) => {
+    const renderMessageLocationSend = (data) => {
             const html = `
         <div class="message-item" id="message-item">
                 
                 <div class="message__row1 message__row2">
-                    <a class="message__content message__content2" href="${message.message.message}" target = "_blank" >
+                    <a class="message__content message__content2" href="${data.message}" target = "_blank" >
                         Vị trí của tôi
                     </a>
-                    <p class="message__date">${message.message.createdAt}</p>
+                    <p class="message__date">${data.createdAt}</p>
 
                 </div>
                 
@@ -474,16 +474,16 @@
             return html;
         };
 
-    const renderMessageLocationReceive = (message) => {
+    const renderMessageLocationReceive = (data) => {
                 const html = `
 
         <div class="message-item" id="message-item">
                 
-                <div class="message__row2">
-                    <a class="message__content" href="${message.message.message}" target = "_blank" >
+                <div class="message__row1 message__row2">
+                    <a class="message__content" href="${data.message}" target = "_blank" >
                         Vị trí của tôi
                     </a>
-                    <p class="message__date">${message.message.createdAt}</p>
+                    <p class="message__date">${data.createdAt}</p>
 
                 </div>
                 
@@ -520,7 +520,6 @@
 
             //kiểm tra trạng thái tin nhắn
             const acknowledgements = () => {
-                // console.log("Gửi tin nhắn thành công");s
             };
 
             //gửi dữ tin nhắn lên server
@@ -528,22 +527,13 @@
             if (message.trim().length !== 0) {
                 socket.emit(
                     "send-message-to-server",
-                    { userNameF: name, userNameT: userNameT, message: inputMessage.value },
+                    { userNameF: userNameFNhan, userNameT: userNameT, message: inputMessage.value, fullName, userNameT_FullName, userChat: userNameF },
 
                 );
             }
 
-            axios({
-                method: 'post',
-                url: '/user/createMessage',
-                data: {
-                    userNameF,
-                    userNameT,
-                    fullName,
-                    userNameT_FullName,
-                    message: inputMessage.value
-                }
-            });
+            //xử lý theo 2 luồng, render tin nhắn ng gửi tại đây, và ng nhận render bên dưới
+
 
             inputMessage.value = "";
         });
@@ -551,19 +541,30 @@
         const messages = document.getElementById("messages");
 
         //Xử lý tin nhắn chat
-        socket.on("server-send-message-to-client", (data) => {
-            const allMessage = data.message
-            
-            
-            /*
-            if(userNameFNhan === userNameF){
-            let html = renderMessageSend(data);
-            document.getElementById("message-block").insertAdjacentHTML('beforeend', html);
+        socket.on("server-send-message-to-client", (data) => { 
+            if (data.message.userNameF === userNameF) {
+                let html = renderMessageSend(data.message);
+                document.getElementById("message-block").insertAdjacentHTML('beforeend', html);
+
+                /*
+                var messageDiv = document.createElement('div');
+                messageDiv.textContent = data.message.message;
+                messageDiv.classList.add('senderMessage');
+                var messageContainer = document.getElementById('message-block');
+                messageContainer.appendChild(messageDiv);
+                */
             } else {
-            let html = renderMessageSendReceive(data);
-            document.getElementById("message-block").insertAdjacentHTML('beforeend', html);
+                let html = renderMessageReceive(data.message);
+                document.getElementById("message-block").insertAdjacentHTML('beforeend', html);
+                /*
+                var messageDiv = document.createElement('div');
+                messageDiv.textContent = data.message.message;
+                messageDiv.classList.add('receiverMessage');
+                var messageContainer = document.getElementById('message-block');
+                messageContainer.appendChild(messageDiv);
+                */
             }
-            */
+              
         });
 
         //Gửi vĩ độ, kink độ lên server
@@ -574,32 +575,24 @@
                 console.log(position);
                 const { latitude, longitude } = position.coords;
                 console.log(latitude, longitude);
-                socket.emit("share-location", { userNameF: name, userNameT: userNameT, latitude, longitude });
+                socket.emit("share-location", { userNameF: userNameFNhan, userNameT: userNameT, latitude, longitude, fullName, userNameT_FullName, userChat: userNameF });
+
+
             });
         });
 
         //xử lý share location:
         socket.on("server-send-location-to-client", (data) => {
             // const chatItem2 = document.createElement("li");
-            
-            axios({
-                method: 'post',
-                url: '/user/createMessage',
-                data: {
-                    userNameF,
-                    userNameT,
-                    fullName,
-                    userNameT_FullName, 
-                    message: data.message.message
-                }
-            });
-            if (userNameFNhan === userNameF) {
-                let html = renderMessageLocationSend(data)
-                document.getElementById("message-block").insertAdjacentHTML('beforeend', html);
-            } else {
-                let html = renderMessageLocationReceive(data)
+            if (data.message.userNameF === userNameF) {
+                let html = renderMessageLocationSend(data.message);
                 document.getElementById("message-block").insertAdjacentHTML('beforeend', html);
             }
+            else {
+                let html = renderMessageLocationReceive(data.message);
+                document.getElementById("message-block").insertAdjacentHTML('beforeend', html);
+            }
+           
         });
 
     }

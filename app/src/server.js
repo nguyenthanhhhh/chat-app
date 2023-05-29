@@ -80,43 +80,58 @@ io.on('connection', (socket) => {
       const dataMess = {
         userNameF: data.userNameF,
         userNameT: data.userNameT,
+        fullName: data.fullName,
+        userNameT_FullName: data.userNameT_FullName,
+        message: data.message,
       }
 
       try {
-        const allMessage = await axios.post(
-          'http://localhost:3002/user/getAllMessage',
+        const newMessage = await axios.post(
+          'http://localhost:3002/user/createMessage',
           dataMess
         )
 
         io.to(room).emit('server-send-message-to-client', {
           userNameF: data.userNameF,
           userNameT: data.userNameT,
-          message: allMessage,
+          message: newMessage.data.newMessage,
         })
       } catch (error) {
         console.log('Error Server in [Send message to server]')
+        console.log(error)
       }
-
-      // let message = data.message
-      // message = createMessage(message)
-      // io.to(room).emit('server-send-message-to-client', {
-      //   userNameF: data.userNameF,
-      //   userNameT: data.userNameT,
-      //   message,
-      // })
     })
 
     //xử lý share location
-    socket.on('share-location', (data) => {
+    socket.on('share-location', async (data) => {
       const { latitude, longitude } = data
       const linkLocation = createMessage(
         `https://www.google.com/maps?q=${latitude},${longitude}`
       )
-      io.to(room).emit('server-send-location-to-client', {
+
+      const dataMess = {
         userNameF: data.userNameF,
         userNameT: data.userNameT,
-        message: linkLocation,
-      })
+        fullName: data.fullName,
+        userNameT_FullName: data.userNameT_FullName,
+        message: linkLocation.message,
+      }
+
+      try {
+        const newMessage = await axios.post(
+          'http://localhost:3002/user/createMessage',
+          dataMess
+        )
+
+        io.to(room).emit('server-send-location-to-client', {
+          userNameF: data.userNameF,
+          userNameT: data.userNameT,
+          message: newMessage.data.newMessage,
+        })
+      } catch (error) {
+        console.log('Error Server in [Err locate server]')
+        console.log(error)
+      }
     })
   })
 

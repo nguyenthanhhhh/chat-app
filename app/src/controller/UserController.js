@@ -322,9 +322,13 @@ class UserController {
   }
 
   async createMessage(req, res) {
+    const { userNameF, userNameT, message } = req.body
     try {
-      const { userNameF, userNameT, message } = req.body
-      await MessageModel.create({ userNameF, userNameT, message })
+      const newMessage = await MessageModel.create({
+        userNameF,
+        userNameT,
+        message,
+      })
       await userFriend.update(
         { latestMessage: message },
         {
@@ -334,6 +338,9 @@ class UserController {
           },
         }
       )
+
+
+      res.send({ newMessage: dataToObj(newMessage) })
     } catch (error) {
       console.log('[UserController][createMEssage] error: ' + error)
     }
