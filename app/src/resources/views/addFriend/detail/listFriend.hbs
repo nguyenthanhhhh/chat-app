@@ -6,9 +6,12 @@
         <div class="taskbar">
             <img class="js-my-avatar" src="{{userNameFInstance.avatar}}" alt="">
 
+            <form action="/user/inbox" method="post">
             <button class="js-icon-taskbar-chat icon-taskbar">
                 <i class="ti-comment-alt "></i>
             </button>
+            </form>
+
             <button class="js-icon-taskbar-list icon-taskbar select">
                 <i class="ti-user"></i>
             </button>
@@ -77,7 +80,7 @@
                     Danh sách bạn bè
                 </button>
             </form>
-            <form action="">
+            <form action="/friend/request" method="get">
                 <button class="js-tab-friend-request">
                     <i class="ti-email"></i>
                     Lời mời kết bạn

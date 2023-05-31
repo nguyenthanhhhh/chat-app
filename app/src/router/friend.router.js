@@ -6,5 +6,6 @@ const FriendController = require('../controller/FriendController')
 const friendRouter = express.Router()
 
 friendRouter.get('/home', FriendController.home)
+friendRouter.get('/request', FriendController.friendRequest)
 
 module.exports = friendRouter
