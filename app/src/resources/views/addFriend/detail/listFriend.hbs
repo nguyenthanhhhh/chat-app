@@ -1,93 +1,100 @@
 <!DOCTYPE>
 <head></head>
 <body>
-    <div class="taskbar">
-        <img class="js-my-avatar" src="{{userNameFInstance.avatar}}" alt="">
+    <div class="main-content-page">
 
-        <button class="js-icon-taskbar-chat icon-taskbar select" onclick="openTaskbarChat()">
-            <i class="ti-comment-alt "></i>
-        </button>
-        <button class="js-icon-taskbar-list icon-taskbar" onclick="openTaskbarContact()">
-            <i class="ti-user"></i>
-        </button>
-        <form class="form-inline my-2 my-lg-0" action="/user/logout">
-            <button class="btn-logout" type="submit"><i class="ti-shift-left"></i></button>
-        </form>
-        <div class="modal-myprofile js-modal-myprofile">
-            <div class="block-profile my-profile js-my-profile">
-                <div class="header-profile">
-                    <h5>Thông tin tài khoản</h5>
-                </div>
-                <div class="block-my-pro">
+        <div class="taskbar">
+            <img class="js-my-avatar" src="{{userNameFInstance.avatar}}" alt="">
 
-                    <div class="profile-avatar">
-                        <img class="my-avatar" src="{{userNameFInstance.avatar}}" alt="">
+            <button class="js-icon-taskbar-chat icon-taskbar">
+                <i class="ti-comment-alt "></i>
+            </button>
+            <button class="js-icon-taskbar-list icon-taskbar select">
+                <i class="ti-user"></i>
+            </button>
+            <form class="form-inline my-2 my-lg-0" action="/user/logout">
+                <button class="btn-logout" type="submit"><i class="ti-shift-left"></i></button>
+            </form>
+            <div class="modal-myprofile js-modal-myprofile">
+                <div class="block-profile my-profile js-my-profile">
+                    <div class="header-profile">
+                        <h5>Thông tin tài khoản</h5>
+                    </div>
+                    <div class="block-my-pro">
+
+                        <div class="profile-avatar">
+                            <img class="my-avatar" src="{{userNameFInstance.avatar}}" alt="">
+
+                        </div>
+                    </div>
+                    <div class="profile-name">
+                        <h5>{{userNameFInstance.fullName}}</h5>
+                    </div>
+                    <h6 class="header-info">Thông tin cá nhân</h6>
+                    <div class="profile-infomation">
+                        <div class="name-info">
+                            <span>
+                                Tài khoản
+                            </span>
+                            <span>
+                                Email
+                            </span>
+                            <span>
+                                Giới tính
+                            </span>
+                            <span>
+                                Ngày sinh
+                            </span>
+                        </div>
+                        <div class="infomation">
+                            <span>
+                                {{userNameFInstance.userName}}
+                            </span>
+                            <span>
+                                {{userNameFInstance.email}}
+                            </span>
+                            <span>
+                                {{userNameFInstance.sex}}
+                            </span>
+                            <span>
+                                {{userNameFInstance.birthday}}
+                            </span>
+                        </div>
 
                     </div>
-                </div>
-                <div class="profile-name">
-                    <h5>{{userNameFInstance.fullName}}</h5>
-                </div>
-                <h6 class="header-info">Thông tin cá nhân</h6>
-                <div class="profile-infomation">
-                    <div class="name-info">
-                        <span>
-                            Tài khoản
-                        </span>
-                        <span>
-                            Email
-                        </span>
-                        <span>
-                            Giới tính
-                        </span>
-                        <span>
-                            Ngày sinh
-                        </span>
-                    </div>
-                    <div class="infomation">
-                        <span>
-                            {{userNameFInstance.userName}}
-                        </span>
-                        <span>
-                            {{userNameFInstance.email}}
-                        </span>
-                        <span>
-                            {{userNameFInstance.sex}}
-                        </span>
-                        <span>
-                            {{userNameFInstance.birthday}}
-                        </span>
-                    </div>
-
                 </div>
             </div>
         </div>
-    </div>
-    <div class="js-menu-contact menu-contact">
-        <div class="header-list-user">
-            <input class="search-friend" type="text" placeholder="Tìm Kiếm">
-            <button class="btn-add-form js-btn-add-form"><i class="ti-plus"></i></button>
-    
+        <div class="js-menu-contact menu-contact">
+            <div class="header-list-user">
+                <input class="search-friend" type="text" placeholder="Tìm Kiếm">
+                <button class="btn-add-form js-btn-add-form"><i class="ti-plus"></i></button>
+        
+            </div>
+            <form action="">
+                <button class="js-tab-list select">
+                    <i class="ti-layout-media-overlay"></i>
+                    Danh sách bạn bè
+                </button>
+            </form>
+            <form action="">
+                <button class="js-tab-friend-request">
+                    <i class="ti-email"></i>
+                    Lời mời kết bạn
+                </button>
+            </form>
         </div>
-        <button class="js-tab-list select" onclick="openTabList()">
-            <i class="ti-layout-media-overlay"></i>
-            Danh sách bạn bè
-        </button>
-        <button class="js-tab-friend-request" onclick="openTabFriendRequest()">
-            <i class="ti-email"></i>
-            Lời mời kết bạn
-        </button>
-    </div>
-    <div class="js-list-friend contact-tab-list-friend">
-        <header class="header-contact-tab">
-            <i class="ti-layout-media-overlay"></i>
-            Danh sách bạn bè
-        </header>
-        {{#each allFriend}}
-        <div class="list-friend-item">
-            <img src="{{this.userNameFriendAvt}}" alt="">
-            <h5>{{this.userNameFriendFullName}}</h5>
+        <div class="js-list-friend contact-tab-list-friend">
+            <header class="header-contact-tab">
+                <i class="ti-layout-media-overlay"></i>
+                Danh sách bạn bè
+            </header>
+            {{#each allFriend}}
+            <div class="list-friend-item">
+                <img src="{{this.userNameFriendAvt}}" alt="">
+                <h5>{{this.userNameFriendFullName}}</h5>
+            </div>
+            {{/each}}
         </div>
-        {{/each}}
     </div>
 </body>

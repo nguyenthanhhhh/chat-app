@@ -3,13 +3,13 @@
 
 </head>
 <body>
-    div class="taskbar">
+    <div class="taskbar">
     <img class="js-my-avatar" src="{{userNameFInstance.avatar}}" alt="">
     
-    <button class="js-icon-taskbar-chat icon-taskbar select" onclick="openTaskbarChat()">
+    <button class="js-icon-taskbar-chat icon-taskbar">
         <i class="ti-comment-alt "></i>
     </button>
-    <button class="js-icon-taskbar-list icon-taskbar" onclick="openTaskbarContact()">
+    <button class="js-icon-taskbar-list icon-taskbar select">
         <i class="ti-user"></i>
     </button>
     <form class="form-inline my-2 my-lg-0" action="/user/logout">
@@ -71,11 +71,11 @@
             <button class="btn-add-form js-btn-add-form"><i class="ti-plus"></i></button>
     
         </div>
-        <button class="js-tab-list select" onclick="openTabList()">
+        <button class="js-tab-list" onclick="openTabList()">
             <i class="ti-layout-media-overlay"></i>
             Danh sách bạn bè
         </button>
-        <button class="js-tab-friend-request" onclick="openTabFriendRequest()">
+        <button class="js-tab-friend-request select" onclick="openTabFriendRequest()">
             <i class="ti-email"></i>
             Lời mời kết bạn
         </button>

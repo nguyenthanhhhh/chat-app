@@ -29,7 +29,7 @@
 
 
 
-<div id="block-chat">
+<div id="block-chat" class="main-content-page">
     <div class="taskbar">
         <img class="js-my-avatar" src="{{userNameFInstance.avatar}}" alt="">
         
@@ -37,12 +37,12 @@
             <i class="ti-comment-alt "></i>
         </button>
         {{!-- Btn friend --}}
-        {{!-- <form action="/friend/home" method="get"> --}}
+        <form action="/friend/home" method="get">
          <button class="js-icon-taskbar-list icon-taskbar" onclick="openTaskbarContact()">
-            <i class="ti-user">alo</i>
+            <i class="ti-user"></i>
          </button>
 
-        {{!-- </form> --}}
+        </form>
         {{!--Btn loggout  --}}
         <form class="form-inline my-2 my-lg-0" action="/user/logout">
             <button class="btn-logout" type="submit"><i class="ti-shift-left"> </i></button>
@@ -210,7 +210,7 @@
             <div class="message-item" id="message-item">
                 <div class="block-message-content">
                     <div class="avatar-friend-inbox">
-                         <img src="{{../userNameTInstance.avatar}}" alt="1">
+                         <img class="avt-friend" src="{{../userNameTInstance.avatar}}" alt="1">
                     </div>
                     
                     <div class="message__row1">
@@ -312,68 +312,7 @@
 
         </div>
     </div>
-    <div class="js-menu-contact menu-contact">
-        <div class="header-list-user">
-            <input class="search-friend" type="text" placeholder="Tìm Kiếm">
-            <button class="btn-add-form js-btn-add-form"><i class="ti-plus"></i></button>
-            
-        </div>
-        <form action="">
-            <button class="js-tab-list select" onclick="openTabList()">
-                <i class="ti-layout-media-overlay"></i>
-                Danh sách bạn bè
-            </button>
-
-        </form>
-        <button class="js-tab-friend-request" onclick="openTabFriendRequest()">
-            <i class="ti-email"></i>
-            Lời mời kết bạn
-        </button>
-    </div>
-    {{!-- tab danh sách bạn bè --}}
-    <div class="js-list-friend contact-tab-list-friend">
-            <header class="header-contact-tab">
-                <i class="ti-layout-media-overlay"></i>
-                Danh sách bạn bè
-            </header>
-            {{#each allFriend}}
-                <div class="list-friend-item">
-                    <img src="{{this.userNameFriendAvt}}" alt="">
-                    <h5>{{this.userNameFriendFullName}}</h5>          
-                </div>
-            {{/each}}
-    </div>
-    {{!-- tab lời mời kết bạn --}}
-    <div class="js-friend-request contact-tab-friend-request js-">
-        <header class="header-contact-tab">
-            <i class="ti-email"></i>
-            Lời mời kết bạn
-        </header>
-            <h6>Lời mời đã nhận</h6>
-        <div class="friend-request-receive">
-            <div class="friend-request-receive-item">
-                {{!-- truyền data vào img, h6, p --}}
-                <div>
-                    <img src="{{userNameFInstance.avatar}}" alt="">
-                    <div>
-                        <h6>Chu Bá Hiếu</h6>   
-                        <p>hieublue</p> 
-                        
-                    </div>
-                </div>
-
-                <div class="block-btn-reponse-request">
-                    <button class="btn-accept-request">
-                        Xác nhận
-                    </button>
-                    <button class="btn-refuse-request">
-                        Từ chối
-                    </button>
-                </div>
-
-            </div>
-        </div>
-    </div>
+    
 
 
 <div class="js-modal-add-friend modal-add-friend">

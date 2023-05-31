@@ -97,228 +97,316 @@ body {
     border-radius: 50%;
     margin-bottom: 33px; }
 
-#block-chat {
+.main-content-page {
   display: flex;
   width: 100%;
   height: 100vh;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); }
-  #block-chat .taskbar {
-    width: 4vw;
-    background-color: #0084ff;
-    position: relative; }
-    #block-chat .taskbar img {
-      width: 3.9vw;
-      height: 3.9vw;
-      border-radius: 50%;
-      margin-top: 20px;
-      margin-bottom: 20px; }
-    #block-chat .taskbar .icon-taskbar {
-      color: #fff;
-      width: 100%;
-      padding: 16px 0;
-      background: #0084ff;
-      border: none; }
-      #block-chat .taskbar .icon-taskbar i {
-        font-size: 24px; }
-    #block-chat .taskbar .icon-taskbar:hover {
-      background: rgba(0, 0, 0, 0.1);
-      cursor: pointer; }
-    #block-chat .taskbar .icon-taskbar:focus {
-      outline: none; }
-    #block-chat .taskbar .btn-logout {
-      background-color: #0084ff;
-      color: #fff;
-      width: 100%;
-      padding: 16px 0;
-      position: absolute;
-      bottom: 10px;
-      border: none; }
-      #block-chat .taskbar .btn-logout i {
-        font-size: 24px; }
-    #block-chat .taskbar .btn-logout:hover {
-      cursor: pointer;
-      background: rgba(0, 0, 0, 0.1); }
-    #block-chat .taskbar .btn-logout:focus {
-      outline: none; }
-    #block-chat .taskbar .modal-myprofile {
-      z-index: 1000;
-      width: 100vw;
-      height: 100vh;
-      display: none;
-      position: absolute;
-      bottom: 0;
-      justify-content: center;
-      align-items: center;
-      background-color: rgba(0, 0, 0, 0.4); }
-      #block-chat .taskbar .modal-myprofile .my-profile {
-        display: block;
-        width: 400px;
-        height: 500px;
-        border-radius: 50px;
-        animation: modalFadeIn ease 0.5s; }
-        #block-chat .taskbar .modal-myprofile .my-profile .block-my-pro {
-          width: 100%;
-          display: flex;
-          justify-content: center; }
-          #block-chat .taskbar .modal-myprofile .my-profile .block-my-pro .profile-avatar {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 16px; }
-            #block-chat .taskbar .modal-myprofile .my-profile .block-my-pro .profile-avatar .my-avatar {
-              width: 100%;
-              height: 100%; }
-  #block-chat .modal-myprofile.open {
-    display: flex; }
-
-#list-user-block {
-  width: 20vw;
-  border-right: 1px solid #b5b0b0;
-  background-color: #f5f5f5;
-  background-color: #fff;
-  background-image: none; }
-  #list-user-block .block-user-item {
-    margin: 0 10px;
-    width: calc(100% - 20px);
-    padding: 6px 10px;
-    font-size: 18px;
-    border: none;
+  .main-content-page #list-user-block {
+    width: 20vw;
+    border-right: 1px solid #b5b0b0;
+    background-color: #f5f5f5;
     background-color: #fff;
-    text-align: left; }
-    #list-user-block .block-user-item div {
-      display: inline-block; }
-    #list-user-block .block-user-item p {
-      font-size: 16px;
-      margin-bottom: 0; }
-  #list-user-block .block-user-item:hover {
-    cursor: pointer;
-    border-radius: 8px;
-    background-color: #dad5d5; }
-  #list-user-block .block-user-item:focus {
-    outline: none; }
-
-#message-block {
-  height: calc(100% - 72.8px - 48px);
-  width: 100%;
-  overflow: auto;
-  flex: 1;
-  display: block;
-  padding: 0 20px;
-  border-top: 1px solid #b5b0b0;
-  border-bottom: 1px solid #b5b0b0;
-  background: #dcdcdc;
-  animation: modalFadeInRL ease 0.6s; }
-  #message-block .message-item {
-    display: table;
-    width: 100%; }
-    #message-block .message-item .block-message-content {
-      display: flex; }
-      #message-block .message-item .block-message-content .avatar-friend-inbox {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        margin-right: 5px;
-        margin-top: 2px; }
-        #message-block .message-item .block-message-content .avatar-friend-inbox .avt-friend {
-          width: 100%;
-          height: 100%; }
-  #message-block .message__content.message__content2 {
-    float: right;
-    clear: both;
-    background-color: #0084ff; }
-
-.full-message-block {
-  width: 76vw; }
-  .full-message-block .username-inbox {
-    background-color: #fff;
-    width: 100%;
-    padding: 10px 20px 10px 10px;
-    animation: modalFadeInTD ease 0.6s; }
-    .full-message-block .username-inbox .block-username {
-      display: inline-block;
-      padding: 0 10px; }
-      .full-message-block .username-inbox .block-username div {
+    background-image: none; }
+    .main-content-page #list-user-block .block-user-item {
+      margin: 0 10px;
+      width: calc(100% - 20px);
+      padding: 6px 10px;
+      font-size: 18px;
+      border: none;
+      background-color: #fff;
+      text-align: left; }
+      .main-content-page #list-user-block .block-user-item div {
         display: inline-block; }
-      .full-message-block .username-inbox .block-username h4 {
-        display: block;
+      .main-content-page #list-user-block .block-user-item p {
+        font-size: 16px;
         margin-bottom: 0; }
-      .full-message-block .username-inbox .block-username .active-status-on {
-        margin-bottom: 0;
-        font-size: 13px;
-        color: #42B72A; }
-      .full-message-block .username-inbox .block-username .active-status-off {
-        margin-bottom: 0;
-        font-size: 13px;
-        color: #d63434; }
-      .full-message-block .username-inbox .block-username label:hover {
-        cursor: pointer; }
-    .full-message-block .username-inbox .block-username:hover {
+    .main-content-page #list-user-block .block-user-item:hover {
       cursor: pointer;
-      background-color: #e6e4e4;
-      border-radius: 10px; }
-    .full-message-block .username-inbox .block-call {
+      border-radius: 8px;
+      background-color: #dad5d5; }
+    .main-content-page #list-user-block .block-user-item:focus {
+      outline: none; }
+  .main-content-page #message-block {
+    height: calc(100% - 72.8px - 48px);
+    width: 100%;
+    overflow: auto;
+    flex: 1;
+    display: block;
+    padding: 0 20px;
+    border-top: 1px solid #b5b0b0;
+    border-bottom: 1px solid #b5b0b0;
+    background: #dcdcdc;
+    animation: modalFadeInRL ease 0.6s; }
+    .main-content-page #message-block .message-item {
+      display: table;
+      width: 100%; }
+      .main-content-page #message-block .message-item .block-message-content {
+        display: flex; }
+        .main-content-page #message-block .message-item .block-message-content .avatar-friend-inbox {
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          margin-right: 5px;
+          margin-top: 2px; }
+          .main-content-page #message-block .message-item .block-message-content .avatar-friend-inbox .avt-friend {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%; }
+    .main-content-page #message-block .message__content.message__content2 {
       float: right;
-      margin-top: 5.4px; }
-      .full-message-block .username-inbox .block-call button {
-        padding: 10px 10px 6px 10px;
-        background-color: #fff;
-        border: none; }
-        .full-message-block .username-inbox .block-call button i {
-          color: #0084ff;
-          font-size: 20px; }
-      .full-message-block .username-inbox .block-call button:hover {
+      clear: both;
+      background-color: #0084ff; }
+  .main-content-page .full-message-block {
+    width: 76vw; }
+    .main-content-page .full-message-block .username-inbox {
+      background-color: #fff;
+      width: 100%;
+      padding: 10px 20px 10px 10px;
+      animation: modalFadeInTD ease 0.6s; }
+      .main-content-page .full-message-block .username-inbox .block-username {
+        display: inline-block;
+        padding: 0 10px; }
+        .main-content-page .full-message-block .username-inbox .block-username div {
+          display: inline-block; }
+        .main-content-page .full-message-block .username-inbox .block-username h4 {
+          display: block;
+          margin-bottom: 0; }
+        .main-content-page .full-message-block .username-inbox .block-username .active-status-on {
+          margin-bottom: 0;
+          font-size: 13px;
+          color: #42B72A; }
+        .main-content-page .full-message-block .username-inbox .block-username .active-status-off {
+          margin-bottom: 0;
+          font-size: 13px;
+          color: #d63434; }
+        .main-content-page .full-message-block .username-inbox .block-username label:hover {
+          cursor: pointer; }
+      .main-content-page .full-message-block .username-inbox .block-username:hover {
         cursor: pointer;
         background-color: #e6e4e4;
         border-radius: 10px; }
-      .full-message-block .username-inbox .block-call button:focus {
-        outline: none; }
-
-.header-list-user {
-  margin-bottom: 10px; }
-  .header-list-user .search-friend {
-    width: calc(100% - 60px);
-    margin: 5px;
-    padding: 6px 10px;
-    border-radius: 40px;
-    background-color: #F0F2F5;
-    border: none; }
-  .header-list-user .search-friend:focus {
-    outline: none; }
-  .header-list-user .btn-add-form {
-    border: none;
-    border-radius: 20px;
-    padding: 6px 10px; }
-  .header-list-user .btn-add-form:hover {
-    cursor: pointer;
-    background-color: #ddd; }
-  .header-list-user .btn-add-form:focus {
-    outline: none; }
-
-.menu-contact {
-  width: 25vw;
-  border-right: solid 1px #b5b0b0; }
-  .menu-contact div {
-    margin: 12px 0;
-    padding: 0 10px; }
-  .menu-contact form {
-    width: 100%; }
-    .menu-contact form button {
-      width: 100%;
-      padding: 16px 20px;
-      font-size: 20px;
-      font-weight: 500;
-      background-color: #fff;
+      .main-content-page .full-message-block .username-inbox .block-call {
+        float: right;
+        margin-top: 5.4px; }
+        .main-content-page .full-message-block .username-inbox .block-call button {
+          padding: 10px 10px 6px 10px;
+          background-color: #fff;
+          border: none; }
+          .main-content-page .full-message-block .username-inbox .block-call button i {
+            color: #0084ff;
+            font-size: 20px; }
+        .main-content-page .full-message-block .username-inbox .block-call button:hover {
+          cursor: pointer;
+          background-color: #e6e4e4;
+          border-radius: 10px; }
+        .main-content-page .full-message-block .username-inbox .block-call button:focus {
+          outline: none; }
+  .main-content-page .header-list-user {
+    margin-bottom: 10px; }
+    .main-content-page .header-list-user .search-friend {
+      width: calc(100% - 60px);
+      margin: 5px;
+      padding: 6px 10px;
+      border-radius: 40px;
+      background-color: #F0F2F5;
       border: none; }
-      .menu-contact form button i {
-        font-size: 20px; }
-  .menu-contact > button:hover {
-    background-color: #F0F2F5;
+    .main-content-page .header-list-user .search-friend:focus {
+      outline: none; }
+    .main-content-page .header-list-user .btn-add-form {
+      border: none;
+      border-radius: 20px;
+      padding: 6px 10px; }
+    .main-content-page .header-list-user .btn-add-form:hover {
+      cursor: pointer;
+      background-color: #ddd; }
+    .main-content-page .header-list-user .btn-add-form:focus {
+      outline: none; }
+  .main-content-page .menu-contact {
+    width: 25vw;
+    border-right: solid 1px #b5b0b0; }
+    .main-content-page .menu-contact div {
+      margin: 12px 0;
+      padding: 0 10px; }
+    .main-content-page .menu-contact form {
+      width: 100%; }
+      .main-content-page .menu-contact form button {
+        width: 100%;
+        padding: 16px 20px;
+        font-size: 20px;
+        font-weight: 500;
+        background-color: #fff;
+        border: none; }
+        .main-content-page .menu-contact form button i {
+          font-size: 20px; }
+      .main-content-page .menu-contact form > button:hover {
+        background-color: #F0F2F5;
+        cursor: pointer; }
+      .main-content-page .menu-contact form > button:focus {
+        outline: none; }
+  .main-content-page .modal-add-friend {
+    z-index: 1000;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.4); }
+    .main-content-page .modal-add-friend .form-add-friend {
+      width: 400px;
+      height: 40vh;
+      background-color: #fff;
+      animation: modalFadeIn ease 0.5s;
+      padding: 16px 24px;
+      border-radius: 40px; }
+      .main-content-page .modal-add-friend .form-add-friend .input-username-add {
+        margin-left: 50%;
+        margin-bottom: 30px;
+        padding: 4px 10px;
+        border-radius: 20px;
+        transform: translateX(-50%);
+        background-color: #F0F2F5;
+        border: none; }
+      .main-content-page .modal-add-friend .form-add-friend .input-username-add:focus {
+        outline: .7px solid #0084ff; }
+      .main-content-page .modal-add-friend .form-add-friend label, .main-content-page .modal-add-friend .form-add-friend p {
+        display: inline-block; }
+      .main-content-page .modal-add-friend .form-add-friend label {
+        width: 100px;
+        margin-left: 20px; }
+      .main-content-page .modal-add-friend .form-add-friend button {
+        margin-left: 50%;
+        margin-top: 20px;
+        padding: 6px 10px;
+        border: none;
+        border-radius: 10px;
+        transform: translateX(-50%);
+        background-color: #0084ff;
+        color: #fff; }
+      .main-content-page .modal-add-friend .form-add-friend button:hover {
+        cursor: pointer;
+        opacity: 0.7; }
+      .main-content-page .modal-add-friend .form-add-friend button:focus {
+        outline: none; }
+  .main-content-page .modal-add-friend.open {
+    display: flex; }
+  .main-content-page .full-message-block.narrow {
+    width: 56vw; }
+  .main-content-page .block-profile {
+    width: 20vw;
+    background-color: #fff;
+    border-left: 1px solid #b5b0b0;
+    display: none;
+    animation: modalFadeIn2 ease 1.4s; }
+    .main-content-page .block-profile .header-profile {
+      height: 72.8px;
+      border-bottom: solid 1px #b5b0b0;
+      display: flex;
+      justify-content: center;
+      align-items: center; }
+    .main-content-page .block-profile .profile-avatar {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center; }
+      .main-content-page .block-profile .profile-avatar div {
+        width: 80px;
+        height: 80px; }
+    .main-content-page .block-profile .profile-name {
+      margin-top: 15px;
+      padding-bottom: 20px;
+      display: flex;
+      justify-content: center;
+      border-bottom: solid 8px #dcdcdc; }
+    .main-content-page .block-profile .header-info {
+      margin: 20px 0 10px 20px; }
+    .main-content-page .block-profile .profile-infomation {
+      display: flex;
+      padding: 0 20px; }
+      .main-content-page .block-profile .profile-infomation .name-info {
+        width: 35%;
+        display: block; }
+      .main-content-page .block-profile .profile-infomation .infomation {
+        display: block; }
+      .main-content-page .block-profile .profile-infomation span {
+        display: block;
+        margin-bottom: 8px; }
+  .main-content-page .block-profile.open {
+    display: block; }
+
+.taskbar {
+  width: 4vw;
+  height: 100vh;
+  background-color: #0084ff;
+  position: relative; }
+  .taskbar img {
+    width: 3.9vw;
+    height: 3.9vw;
+    border-radius: 50%;
+    margin-top: 20px;
+    margin-bottom: 20px; }
+  .taskbar .icon-taskbar {
+    color: #fff;
+    width: 100%;
+    padding: 16px 0;
+    background: #0084ff;
+    border: none; }
+    .taskbar .icon-taskbar i {
+      font-size: 24px; }
+  .taskbar .icon-taskbar:hover {
+    background: rgba(0, 0, 0, 0.1);
     cursor: pointer; }
-  .menu-contact > button:focus {
+  .taskbar .icon-taskbar:focus {
     outline: none; }
+  .taskbar .btn-logout {
+    background-color: #0084ff;
+    color: #fff;
+    width: 100%;
+    padding: 16px 0;
+    position: absolute;
+    bottom: 10px;
+    border: none; }
+    .taskbar .btn-logout i {
+      font-size: 24px; }
+  .taskbar .btn-logout:hover {
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.1); }
+  .taskbar .btn-logout:focus {
+    outline: none; }
+  .taskbar .modal-myprofile {
+    z-index: 1000;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    position: absolute;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.4); }
+    .taskbar .modal-myprofile .my-profile {
+      display: block;
+      width: 400px;
+      height: 500px;
+      border-radius: 50px;
+      animation: modalFadeIn ease 0.5s; }
+      .taskbar .modal-myprofile .my-profile .block-my-pro {
+        width: 100%;
+        display: flex;
+        justify-content: center; }
+        .taskbar .modal-myprofile .my-profile .block-my-pro .profile-avatar {
+          width: 80px;
+          height: 80px;
+          margin-bottom: 16px; }
+          .taskbar .modal-myprofile .my-profile .block-my-pro .profile-avatar .my-avatar {
+            width: 100%;
+            height: 100%; }
+  .taskbar .modal-myprofile.open {
+    display: flex; }
 
 .contact-tab-list-friend {
-  width: 71vw;
-  display: none; }
+  width: 71vw; }
   .contact-tab-list-friend .list-friend-item {
     width: 100%;
     display: flex;
@@ -337,7 +425,6 @@ body {
 
 .contact-tab-friend-request {
   width: 71vw;
-  display: none;
   background-color: #F0F2F5; }
   .contact-tab-friend-request h6 {
     margin-left: 20px;
@@ -391,102 +478,6 @@ body {
   margin-bottom: 20px; }
   .header-contact-tab i {
     font-size: 20px; }
-
-.modal-add-friend {
-  z-index: 1000;
-  width: 100vw;
-  height: 100vh;
-  position: absolute;
-  top: 0;
-  left: 0;
-  justify-content: center;
-  align-items: center;
-  display: none;
-  background-color: rgba(0, 0, 0, 0.4); }
-  .modal-add-friend .form-add-friend {
-    width: 400px;
-    height: 40vh;
-    background-color: #fff;
-    animation: modalFadeIn ease 0.5s;
-    padding: 16px 24px;
-    border-radius: 40px; }
-    .modal-add-friend .form-add-friend .input-username-add {
-      margin-left: 50%;
-      margin-bottom: 30px;
-      padding: 4px 10px;
-      border-radius: 20px;
-      transform: translateX(-50%);
-      background-color: #F0F2F5;
-      border: none; }
-    .modal-add-friend .form-add-friend .input-username-add:focus {
-      outline: .7px solid #0084ff; }
-    .modal-add-friend .form-add-friend label, .modal-add-friend .form-add-friend p {
-      display: inline-block; }
-    .modal-add-friend .form-add-friend label {
-      width: 100px;
-      margin-left: 20px; }
-    .modal-add-friend .form-add-friend button {
-      margin-left: 50%;
-      margin-top: 20px;
-      padding: 6px 10px;
-      border: none;
-      border-radius: 10px;
-      transform: translateX(-50%);
-      background-color: #0084ff;
-      color: #fff; }
-    .modal-add-friend .form-add-friend button:hover {
-      cursor: pointer;
-      opacity: 0.7; }
-    .modal-add-friend .form-add-friend button:focus {
-      outline: none; }
-
-.modal-add-friend.open {
-  display: flex; }
-
-.full-message-block.narrow {
-  width: 56vw; }
-
-.block-profile {
-  width: 20vw;
-  background-color: #fff;
-  border-left: 1px solid #b5b0b0;
-  display: none;
-  animation: modalFadeIn2 ease 1.4s; }
-  .block-profile .header-profile {
-    height: 72.8px;
-    border-bottom: solid 1px #b5b0b0;
-    display: flex;
-    justify-content: center;
-    align-items: center; }
-  .block-profile .profile-avatar {
-    margin-top: 30px;
-    display: flex;
-    justify-content: center; }
-    .block-profile .profile-avatar div {
-      width: 80px;
-      height: 80px; }
-  .block-profile .profile-name {
-    margin-top: 15px;
-    padding-bottom: 20px;
-    display: flex;
-    justify-content: center;
-    border-bottom: solid 8px #dcdcdc; }
-  .block-profile .header-info {
-    margin: 20px 0 10px 20px; }
-  .block-profile .profile-infomation {
-    display: flex;
-    padding: 0 20px; }
-    .block-profile .profile-infomation .name-info {
-      width: 35%;
-      display: block; }
-    .block-profile .profile-infomation .infomation {
-      display: block; }
-    .block-profile .profile-infomation span {
-      display: block;
-      margin-bottom: 8px; }
-
-.block-profile.open {
-  display: block; }
 
 .full-form-login {
   width: 100vw;
@@ -649,13 +640,6 @@ body {
   align-items: center; }
   .message-block-default h4 {
     margin: 0; }
-
-.block-list-user, .full-message-block, .contact-tab-list-friend,
-.contact-tab-friend-request, .menu-contact {
-  display: none; }
-
-.open {
-  display: block; }
 
 @keyframes modalFadeIn {
   from {
