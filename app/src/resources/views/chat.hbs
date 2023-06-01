@@ -273,7 +273,7 @@
     {{/if}}
 
 
-    <div class="block-profile js-block-profile">
+    <div class="block-profile block-profile-chat js-block-profile">
         <div class="header-profile">
             <h5>Thông tin tài khoản</h5>
         </div>
@@ -282,7 +282,7 @@
                 <img src="{{userNameTInstance.avatar}}" alt="">
             </div>
         </div>
-        <div class="profile-name">
+        <div class="profile-name solid8px">
             <h5>{{userNameTInstance.fullName}}</h5>
         </div>
         <h6 class="header-info">Thông tin cá nhân</h6>
@@ -478,30 +478,103 @@
         });
 
         const messages = document.getElementById("messages");
-
         //Xử lý tin nhắn chat
         socket.on("server-send-message-to-client", (data) => { 
             if (data.message.userNameF === userNameF) {
+                /*
                 let html = renderMessageSend(data.message);
                 document.getElementById("message-block").insertAdjacentHTML('beforeend', html);
-
-                /*
-                var messageDiv = document.createElement('div');
-                messageDiv.textContent = data.message.message;
-                messageDiv.classList.add('senderMessage');
-                var messageContainer = document.getElementById('message-block');
-                messageContainer.appendChild(messageDiv);
                 */
+                // Tạo phần tử cha (div.message-item)
+                var messageItem = document.createElement('div');
+                messageItem.classList.add('message-item');
+                messageItem.id = 'message-item';
+
+                
+
+                // Tạo phần tử con (div.message__row1)
+                var messageRow1 = document.createElement('div');
+                messageRow1.classList.add('message__row1');
+                messageRow1.classList.add('message__row2');
+
+                // Tạo phần tử con (a.message__content)
+                var messageContent = document.createElement('p');
+                messageContent.classList.add('message__content');
+                messageContent.classList.add('message__content2');
+
+                // Tạo phần tử con (p.message__date)
+                var messageDate = document.createElement('p');
+                messageDate.classList.add('message__date');
+                messageDate.textContent = '{{this.createdAt}}';
+
+                // Thêm a.message__content và p.message__date vào div.message__row1
+                messageRow1.appendChild(messageContent);
+                messageRow1.appendChild(messageDate);
+
+                // Thêm div.avatar-friend-inbox và div.message__row1 vào div.block-message-content
+             
+                messageItem.appendChild(messageRow1);                        
+                
+                
+                messageContent.textContent = data.message.message;
+                var messageContainer = document.getElementById('message-block');
+                messageContainer.appendChild(messageItem);
+                
             } else {
+                /*
                 let html = renderMessageReceive(data.message);
                 document.getElementById("message-block").insertAdjacentHTML('beforeend', html);
-                /*
-                var messageDiv = document.createElement('div');
-                messageDiv.textContent = data.message.message;
-                messageDiv.classList.add('receiverMessage');
-                var messageContainer = document.getElementById('message-block');
-                messageContainer.appendChild(messageDiv);
                 */
+
+                // Tạo phần tử cha (div.message-item)
+                var messageItem = document.createElement('div');
+                messageItem.classList.add('message-item');
+                messageItem.id = 'message-item';
+
+                // Tạo phần tử con (div.block-message-content)
+                var blockMessageContent = document.createElement('div');
+                blockMessageContent.classList.add('block-message-content');
+
+                // Tạo phần tử con (div.avatar-friend-inbox)
+                var avatarFriendInbox = document.createElement('div');
+                avatarFriendInbox.classList.add('avatar-friend-inbox');
+
+                // Tạo phần tử con (img.avt-friend)
+                var avatarFriend = document.createElement('img');
+                avatarFriend.classList.add('avt-friend');
+                avatarFriend.src = '{{../userNameTInstance.avatar}}';
+                avatarFriend.alt = '1';
+
+                // Thêm img.avt-friend vào div.avatar-friend-inbox
+                avatarFriendInbox.appendChild(avatarFriend);
+
+                // Tạo phần tử con (div.message__row1)
+                var messageRow1 = document.createElement('div');
+                messageRow1.classList.add('message__row1');
+
+                // Tạo phần tử con (a.message__content)
+                var messageContent = document.createElement('p');
+                messageContent.classList.add('message__content');
+
+                // Tạo phần tử con (p.message__date)
+                var messageDate = document.createElement('p');
+                messageDate.classList.add('message__date');
+                messageDate.textContent = '{{this.createdAt}}';
+
+                // Thêm a.message__content và p.message__date vào div.message__row1
+                messageRow1.appendChild(messageContent);
+                messageRow1.appendChild(messageDate);
+
+                // Thêm div.avatar-friend-inbox và div.message__row1 vào div.block-message-content
+             
+                blockMessageContent.appendChild(avatarFriendInbox);
+                blockMessageContent.appendChild(messageRow1);   
+                messageItem.appendChild(blockMessageContent);                  
+                
+                messageContent.textContent = data.message.message;
+                var messageContainer = document.getElementById('message-block');
+                messageContainer.appendChild(messageItem);
+                
             }
               
         });
@@ -604,68 +677,3 @@
     }
 </script>
 
-<script>
-    const btnfr = document.querySelector('.js-tab-friend-request')
-    const btnct = document.querySelector('.js-tab-list')
-    const blockfr = document.querySelector('.js-friend-request')
-    const blockct = document.querySelector('.js-list-friend')
-    function openTabFriendRequest(){
-        if(btnct.classList.contains("select")){
-            btnct.classList.remove("select")
-            btnfr.classList.add("select")
-            blockfr.classList.add("open")
-            blockct.classList.remove("open")
-        }
-    }
-    function openTabList(){
-          if(btnfr.classList.contains("select")){
-            btnfr.classList.remove("select")
-            btnct.classList.add("select")
-            blockct.classList.add("open")
-            blockfr.classList.remove("open")
-        }
-    }
-</script>
-<script>
-        const blockLu = document.querySelector('.js-list-user-block')
-        const blockMess = document.querySelector('.js-message-block')
-        const blocklf = document.querySelector('.js-list-friend')
-        const blockmc = document.querySelector('.js-menu-contact')
-        const btnchat = document.querySelector('.js-icon-taskbar-chat')
-        const btnlist = document.querySelector('.js-icon-taskbar-list')
-    function openTaskbarContact(){
-        if(blockLu.classList.contains("open")){
-            blockLu.classList.remove("open")
-            blockMess.classList.remove("open")
-            btnchat.classList.remove("select")
-            blocklf.classList.add("open")
-            blockmc.classList.add("open")
-            btnlist.classList.add("select")
-            if(profile.classList.contains("open")){
-                profile.classList.remove('open')
-                message.classList.remove('narrow')
-            }
-        }
-    }
-    function openTaskbarChat(){
-        if(blocklf.classList.contains("open")){
-            blockLu.classList.add("open")
-            blockMess.classList.add("open")
-            btnchat.classList.add("select")
-            blocklf.classList.remove("open")
-            blockmc.classList.remove("open")
-            btnlist.classList.remove("select")
-        }
-        else if(blockfr.classList.contains("open")){
-            blockLu.classList.add("open")
-            blockMess.classList.add("open")
-            btnchat.classList.add("select")
-            blockfr.classList.remove("open")
-            blockmc.classList.remove("open")
-            btnlist.classList.remove("select")
-            btnfr.classList.remove("select")
-            btnct.classList.add("select")
-        }
-    }
-
-</script>

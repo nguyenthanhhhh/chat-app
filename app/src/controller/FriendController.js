@@ -9,6 +9,10 @@ class FriendController {
   async home(req, res) {
     res.render('addFriend/detail/listFriend')
   }
+
+  async friendRequest(req, res) {
+    res.render('addFriend/detail/friendRequest')
+  }
 }
 
 module.exports = new FriendController()

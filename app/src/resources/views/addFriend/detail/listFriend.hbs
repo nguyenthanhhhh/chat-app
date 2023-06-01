@@ -5,10 +5,11 @@
 
         <div class="taskbar">
             <img class="js-my-avatar" src="{{userNameFInstance.avatar}}" alt="">
-
-            <button class="js-icon-taskbar-chat icon-taskbar">
-                <i class="ti-comment-alt "></i>
-            </button>
+            <form action="/user/inbox" method="post">
+                <button class="js-icon-taskbar-chat icon-taskbar">
+                    <i class="ti-comment-alt "></i>
+                </button>
+            </form>
             <button class="js-icon-taskbar-list icon-taskbar select">
                 <i class="ti-user"></i>
             </button>
@@ -77,7 +78,7 @@
                     Danh sách bạn bè
                 </button>
             </form>
-            <form action="">
+            <form action="/friend/request" method="get">
                 <button class="js-tab-friend-request">
                     <i class="ti-email"></i>
                     Lời mời kết bạn
@@ -86,15 +87,87 @@
         </div>
         <div class="js-list-friend contact-tab-list-friend">
             <header class="header-contact-tab">
-                <i class="ti-layout-media-overlay"></i>
-                Danh sách bạn bè
+                    <p>Danh sách bạn bè</p>               
             </header>
-            {{#each allFriend}}
+            
             <div class="list-friend-item">
-                <img src="{{this.userNameFriendAvt}}" alt="">
-                <h5>{{this.userNameFriendFullName}}</h5>
+                <img src="https://1.bp.blogspot.com/-tb6Jty3tGvI/XqGjhwS-9RI/AAAAAAAAikQ/MgRq5Ic_TC00ghFtSjAxleM-fDsmMUatwCLcBGAsYHQ/s1600/Hinh-anh-meo-ngau-nhat%2B%25288%2529.jpg" alt="">
+                <h5>Chu Bá Hiếu</h5>
             </div>
-            {{/each}}
+
         </div>
+
+        <div class="block-addFriend">
+            <header class="header-contact-tab">
+                    <p>Tìm bạn mới</p>               
+            </header>
+            <div class="search-friend">
+                <input type="text" name="userNameFriend" class="input-username-add" value="" placeholder="Tài khoản">
+                <button><i class="ti-search"></i></button>
+            </div>
+
+            <div class="block-profile block-profile-search">
+                <div class="profile-avatar">
+                    <div class="avatar-friend-item">
+                        <img src="https://1.bp.blogspot.com/-tb6Jty3tGvI/XqGjhwS-9RI/AAAAAAAAikQ/MgRq5Ic_TC00ghFtSjAxleM-fDsmMUatwCLcBGAsYHQ/s1600/Hinh-anh-meo-ngau-nhat%2B%25288%2529.jpg" alt="">
+                    </div>
+                </div>
+                <div class="profile-name ">
+                    <h5>Chu Bá Hiếu</h5>
+                </div>
+                <div class="solid8px">
+                    <button class="btn-addfriend">
+                        Kết bạn
+                    </button>
+                </div>
+                <h6 class="header-info">Thông tin cá nhân</h6>
+                <div class="profile-infomation">
+                    <div class="name-info">
+                        <span>
+                            Tài khoản
+                        </span>
+                        <span>
+                            Giới tính
+                        </span>
+                        <span>
+                            Ngày sinh
+                        </span>
+                    </div>
+                    <div class="infomation">
+                        <span>
+                            chubahieu
+                        </span>
+                        <span>
+                            Nam
+                        </span>
+                        <span>
+                            17/07/2002
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        
     </div>
+
 </body>
+
+<script>
+    const btnshow = document.querySelector('.js-my-avatar')
+    const modalpro = document.querySelector('.js-modal-myprofile')
+    const mypro = document.querySelector('.js-my-profile')
+    function showMyProfile(){
+        modalpro.classList.add('open')
+    }
+    function closeMyProfile(){
+        modalpro.classList.remove('open')
+    }
+    btnshow.addEventListener('click',showMyProfile)
+
+    modalpro.addEventListener('click',closeMyProfile)
+
+    mypro.addEventListener('click', function(even){
+        even.stopPropagation()
+    })
+</script>

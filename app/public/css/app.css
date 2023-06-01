@@ -244,95 +244,65 @@ body {
         cursor: pointer; }
       .main-content-page .menu-contact form > button:focus {
         outline: none; }
-  .main-content-page .modal-add-friend {
-    z-index: 1000;
-    width: 100vw;
-    height: 100vh;
-    position: absolute;
-    top: 0;
-    left: 0;
-    justify-content: center;
-    align-items: center;
-    display: none;
-    background-color: rgba(0, 0, 0, 0.4); }
-    .main-content-page .modal-add-friend .form-add-friend {
-      width: 400px;
-      height: 40vh;
-      background-color: #fff;
-      animation: modalFadeIn ease 0.5s;
-      padding: 16px 24px;
-      border-radius: 40px; }
-      .main-content-page .modal-add-friend .form-add-friend .input-username-add {
-        margin-left: 50%;
-        margin-bottom: 30px;
-        padding: 4px 10px;
-        border-radius: 20px;
-        transform: translateX(-50%);
-        background-color: #F0F2F5;
-        border: none; }
-      .main-content-page .modal-add-friend .form-add-friend .input-username-add:focus {
-        outline: .7px solid #0084ff; }
-      .main-content-page .modal-add-friend .form-add-friend label, .main-content-page .modal-add-friend .form-add-friend p {
-        display: inline-block; }
-      .main-content-page .modal-add-friend .form-add-friend label {
-        width: 100px;
-        margin-left: 20px; }
-      .main-content-page .modal-add-friend .form-add-friend button {
-        margin-left: 50%;
-        margin-top: 20px;
-        padding: 6px 10px;
-        border: none;
-        border-radius: 10px;
-        transform: translateX(-50%);
-        background-color: #0084ff;
-        color: #fff; }
-      .main-content-page .modal-add-friend .form-add-friend button:hover {
-        cursor: pointer;
-        opacity: 0.7; }
-      .main-content-page .modal-add-friend .form-add-friend button:focus {
-        outline: none; }
-  .main-content-page .modal-add-friend.open {
-    display: flex; }
   .main-content-page .full-message-block.narrow {
     width: 56vw; }
-  .main-content-page .block-profile {
+  .main-content-page .block-profile-chat {
     width: 20vw;
     background-color: #fff;
     border-left: 1px solid #b5b0b0;
     display: none;
     animation: modalFadeIn2 ease 1.4s; }
-    .main-content-page .block-profile .header-profile {
-      height: 72.8px;
-      border-bottom: solid 1px #b5b0b0;
-      display: flex;
-      justify-content: center;
-      align-items: center; }
-    .main-content-page .block-profile .profile-avatar {
-      margin-top: 30px;
-      display: flex;
-      justify-content: center; }
-      .main-content-page .block-profile .profile-avatar div {
-        width: 80px;
-        height: 80px; }
-    .main-content-page .block-profile .profile-name {
-      margin-top: 15px;
-      padding-bottom: 20px;
-      display: flex;
-      justify-content: center;
-      border-bottom: solid 8px #dcdcdc; }
-    .main-content-page .block-profile .header-info {
-      margin: 20px 0 10px 20px; }
-    .main-content-page .block-profile .profile-infomation {
-      display: flex;
-      padding: 0 20px; }
-      .main-content-page .block-profile .profile-infomation .name-info {
-        width: 35%;
-        display: block; }
-      .main-content-page .block-profile .profile-infomation .infomation {
-        display: block; }
-      .main-content-page .block-profile .profile-infomation span {
-        display: block;
-        margin-bottom: 8px; }
+  .main-content-page .block-profile-search {
+    width: 350px;
+    background-color: #fff;
+    display: none; }
+  .main-content-page .block-profile .header-profile {
+    height: 72.8px;
+    border-bottom: solid 1px #b5b0b0;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+  .main-content-page .block-profile .profile-avatar {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center; }
+    .main-content-page .block-profile .profile-avatar div {
+      width: 80px;
+      height: 80px; }
+  .main-content-page .block-profile .profile-name {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center; }
+  .main-content-page .block-profile .solid8px {
+    border-bottom: solid 8px #dcdcdc;
+    padding-bottom: 20px; }
+  .main-content-page .block-profile .btn-addfriend {
+    background-color: #0084ff;
+    color: #fff;
+    padding: 6px 20px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    border: none;
+    border-radius: 18px;
+    margin-top: 10px; }
+  .main-content-page .block-profile .btn-addfriend:hover {
+    cursor: pointer;
+    opacity: 0.7; }
+  .main-content-page .block-profile .btn-addfriend:focus {
+    outline: none; }
+  .main-content-page .block-profile .header-info {
+    margin: 20px 0 10px 20px; }
+  .main-content-page .block-profile .profile-infomation {
+    display: flex;
+    padding: 0 20px; }
+    .main-content-page .block-profile .profile-infomation .name-info {
+      width: 35%;
+      display: block; }
+    .main-content-page .block-profile .profile-infomation .infomation {
+      display: block; }
+    .main-content-page .block-profile .profile-infomation span {
+      display: block;
+      margin-bottom: 8px; }
   .main-content-page .block-profile.open {
     display: block; }
 
@@ -347,6 +317,8 @@ body {
     border-radius: 50%;
     margin-top: 20px;
     margin-bottom: 20px; }
+  .taskbar img:hover {
+    cursor: pointer; }
   .taskbar .icon-taskbar {
     color: #fff;
     width: 100%;
@@ -390,6 +362,7 @@ body {
       width: 400px;
       height: 500px;
       border-radius: 50px;
+      background-color: #fff;
       animation: modalFadeIn ease 0.5s; }
       .taskbar .modal-myprofile .my-profile .block-my-pro {
         width: 100%;
@@ -406,7 +379,7 @@ body {
     display: flex; }
 
 .contact-tab-list-friend {
-  width: 71vw; }
+  width: calc(71vw - 350px); }
   .contact-tab-list-friend .list-friend-item {
     width: 100%;
     display: flex;
@@ -422,6 +395,88 @@ body {
       padding: 24px 0;
       border-bottom: 1px solid #b5b0b0;
       width: calc(100% - 164px); }
+
+.block-addFriend {
+  width: 350px;
+  border-left: 1px solid #b5b0b0; }
+  .block-addFriend .search-friend {
+    width: 100%;
+    border-bottom: 1px solid #b5b0b0;
+    padding: 5px 0; }
+    .block-addFriend .search-friend .input-username-add {
+      margin-left: 20px;
+      width: calc(100% - 100px);
+      margin-bottom: 30px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background-color: #F0F2F5;
+      border: none; }
+    .block-addFriend .search-friend .input-username-add:focus {
+      outline: .7px solid #0084ff; }
+    .block-addFriend .search-friend button {
+      width: 36px;
+      height: 32px;
+      padding: 1px;
+      border-radius: 50%;
+      margin-left: 10px;
+      border: none;
+      background-color: #fff; }
+    .block-addFriend .search-friend button:hover {
+      background-color: #F0F2F5;
+      cursor: pointer; }
+    .block-addFriend .search-friend button:focus {
+      outline: none; }
+
+.modal-add-friend {
+  z-index: 1000;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  display: none;
+  background-color: rgba(0, 0, 0, 0.4); }
+  .modal-add-friend .form-add-friend {
+    width: 400px;
+    height: 40vh;
+    background-color: #fff;
+    animation: modalFadeIn ease 0.5s;
+    padding: 16px 24px;
+    border-radius: 40px; }
+    .modal-add-friend .form-add-friend .input-username-add {
+      margin-left: 50%;
+      margin-bottom: 30px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      transform: translateX(-50%);
+      background-color: #F0F2F5;
+      border: none; }
+    .modal-add-friend .form-add-friend .input-username-add:focus {
+      outline: .7px solid #0084ff; }
+    .modal-add-friend .form-add-friend label, .modal-add-friend .form-add-friend p {
+      display: inline-block; }
+    .modal-add-friend .form-add-friend label {
+      width: 100px;
+      margin-left: 20px; }
+    .modal-add-friend .form-add-friend button {
+      margin-left: 50%;
+      margin-top: 20px;
+      padding: 6px 10px;
+      border: none;
+      border-radius: 10px;
+      transform: translateX(-50%);
+      background-color: #0084ff;
+      color: #fff; }
+    .modal-add-friend .form-add-friend button:hover {
+      cursor: pointer;
+      opacity: 0.7; }
+    .modal-add-friend .form-add-friend button:focus {
+      outline: none; }
+
+.modal-add-friend.open {
+  display: flex; }
 
 .contact-tab-friend-request {
   width: 71vw;
@@ -470,14 +525,16 @@ body {
 
 .header-contact-tab {
   width: 100%;
+  display: flex;
   padding: 20px 20px;
   font-size: 20px;
   font-weight: 500;
   background-color: #fff;
   border-bottom: solid 1px #b5b0b0;
   margin-bottom: 20px; }
-  .header-contact-tab i {
-    font-size: 20px; }
+  .header-contact-tab p {
+    font-size: 20px;
+    margin-bottom: 0; }
 
 .full-form-login {
   width: 100vw;
@@ -705,3 +762,9 @@ body {
   100% {
     opacity: 1;
     transform: translateX(0); } }
+
+.senderMessage {
+  color: blue; }
+
+.receiverMessage {
+  color: red; }
