@@ -36,12 +36,9 @@ class UserController {
       time2 = moment(time2).format('DD/MM/YYYY')
       userNameFInstance.birthday = time2
 
-      // const allMessage = await MessageModel.findAll();
-
       res.render('chat', {
         userChat: dataToObj(user),
         allFriend: dataToObj(allFr),
-        // allMessage: dataToObj(allMessage),
         userNameFInstance: dataToObj(userNameFInstance),
       })
     } catch (error) {
@@ -187,23 +184,6 @@ class UserController {
     console.log('Logout')
   }
 
-  // async joinChat(req, res) {
-  //   const user = req.user;
-  //   const name = user.name;
-  //   try {
-  //     const auth = await bcrypt.compare(password, roomJoin.password);
-  //     if (auth) {
-  //       res.render("chat.hbs", {
-  //         userName: dataToObj(name),
-  //       });
-  //     } else {
-  //       res.status(401).send("Đăng nhập thất bại.  <a href=/>Quay lại </>");
-  //     }
-  //   } catch (error) {
-  //     res.send({ message: error.message });
-  //   }
-  // }
-
   async addFriend(req, res) {
     try {
       const { userName, userNameFriend } = req.body
@@ -339,8 +319,9 @@ class UserController {
         }
       )
 
+      const userT = await Users.findOne({ where: { userName: userNameT } })
 
-      res.send({ newMessage: dataToObj(newMessage) })
+      res.send({ newMessage: dataToObj(newMessage), userT: dataToObj(userT) })
     } catch (error) {
       console.log('[UserController][createMEssage] error: ' + error)
     }

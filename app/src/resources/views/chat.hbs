@@ -14,7 +14,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
 
-    
+
 </head>
 
 <body>
@@ -32,18 +32,18 @@
 <div id="block-chat" class="main-content-page">
     <div class="taskbar">
         <img class="js-my-avatar" src="{{userNameFInstance.avatar}}" alt="">
-        
+
         <button class="js-icon-taskbar-chat icon-taskbar select" onclick="openTaskbarChat()">
             <i class="ti-comment-alt "></i>
         </button>
         {{!-- Btn friend --}}
         <form action="/friend/home" method="get">
-         <button class="js-icon-taskbar-list icon-taskbar" onclick="openTaskbarContact()">
-            <i class="ti-user"></i>
-         </button>
+            <button class="js-icon-taskbar-list icon-taskbar" onclick="openTaskbarContact()">
+                <i class="ti-user"></i>
+            </button>
 
         </form>
-        {{!--Btn loggout  --}}
+        {{!--Btn loggout --}}
         <form class="form-inline my-2 my-lg-0" action="/user/logout">
             <button class="btn-logout" type="submit"><i class="ti-shift-left"> </i></button>
         </form>
@@ -54,10 +54,10 @@
                 </div>
                 <div class="block-my-pro">
 
-                <div class="profile-avatar">
-                    <img class="my-avatar" src="{{userNameFInstance.avatar}}" alt="">
-                    
-                </div>
+                    <div class="profile-avatar">
+                        <img class="my-avatar" src="{{userNameFInstance.avatar}}" alt="">
+
+                    </div>
                 </div>
                 <div class="profile-name">
                     <h5>{{userNameFInstance.fullName}}</h5>
@@ -108,10 +108,10 @@
             <input type="hidden" name="userNameF" value="{{this.userName}}">
             <input type="hidden" name="userNameT" value="{{this.userNameFriend}}">
             <button type="submit" class="block-user-item friend-item css-select-friend">
-            <div class="avatar-friend-item">
-                <img src="{{this.userNameFriendAvt}}" alt="">
-            </div>
-                
+                <div class="avatar-friend-item">
+                    <img src="{{this.userNameFriendAvt}}" alt="">
+                </div>
+
                 <div>
                     <p>{{this.userNameFriendFullName}}</p>
                     <p>{{this.latestMessage}}</p>
@@ -127,7 +127,7 @@
                 <div class="avatar-friend-item">
                     <img src="{{this.userNameFriendAvt}}" alt="">
                 </div>
-        
+
                 <div>
                     <p>{{this.userNameFriendFullName}}</p>
                     <p>{{this.latestMessage}}</p>
@@ -171,29 +171,29 @@
             </div>
         </div>
         <div id="message-block">
-            
+
 
             {{#each allMessage}}
             {{!-- đây là bên gửi --}}
             {{#if this.isSend}}
             {{#if this.isLocate}}
             <div class="message-item" id="message-item">
-            
+
                 <div class="message__row1 message__row2">
                     <a class="message__content message__content2" href="{{this.message}}" target="_blank">
                         Vị trí của tôi
                     </a>
                     <p class="message__date message__date2">{{this.createdAt}}</p>
-            
+
                 </div>
-            
+
             </div>
 
             {{else}}
             <div class="message-item" id="message-item">
 
                 <div class="message__row1 message__row2">
-                    
+
                     <p class="message__content message__content2">
                         {{this.message}}
                     </p>
@@ -210,27 +210,27 @@
             <div class="message-item" id="message-item">
                 <div class="block-message-content">
                     <div class="avatar-friend-inbox">
-                         <img class="avt-friend" src="{{../userNameTInstance.avatar}}" alt="1">
+                        <img class="avt-friend" src="{{../userNameTInstance.avatar}}" alt="1">
                     </div>
-                    
+
                     <div class="message__row1">
                         <a class="message__content" href="{{this.message}}" target="_blank">
                             Vị trí của tôi
                         </a>
                         <p class="message__date">{{this.createdAt}}</p>
-                
+
                     </div>
-                    
+
                 </div>
-            
+
             </div>
-            
+
             {{else}}
 
             <div class="message-item" id="message-item">
                 <div class="block-message-content">
                     <img class="avatar-friend-inbox" src="{{../userNameTInstance.avatar}}" alt="2">
-                    
+
                     <div class="message__row1">
                         <p class="message__content">
                             {{this.message}}
@@ -239,7 +239,7 @@
                     </div>
 
                 </div>
-            
+
             </div>
             {{/if}}
 
@@ -312,34 +312,34 @@
 
         </div>
     </div>
-    
 
 
-<div class="js-modal-add-friend modal-add-friend">
-    <form class="form-add-friend js-form-add-friend" action = "user/addFriend" method = "post">
-                    
-        <input type="text" name="userNameFriend" class="input-username-add" value="" placeholder="Tài khoản">
-        <input type="hidden" name="userName" value="{{userChat.userName}}">
-        <div>
-            <div>
-                <label for="">Họ tên:</label>
-                <p>Chu Bá Hiếu</p>
 
-            </div>
+    <div class="js-modal-add-friend modal-add-friend">
+        <form class="form-add-friend js-form-add-friend" action="user/addFriend" method="post">
+
+            <input type="text" name="userNameFriend" class="input-username-add" value="" placeholder="Tài khoản">
+            <input type="hidden" name="userName" value="{{userChat.userName}}">
             <div>
-                <label for="">Giới tính:</label>
-                <p>Nam</p>
-            </div>
-            <div>
-                <label for="">Ngày sinh:</label>
+                <div>
+                    <label for="">Họ tên:</label>
+                    <p>Chu Bá Hiếu</p>
+
+                </div>
+                <div>
+                    <label for="">Giới tính:</label>
+                    <p>Nam</p>
+                </div>
+                <div>
+                    <label for="">Ngày sinh:</label>
                     <p>17/07/2002</p>
-            </div>
+                </div>
                 <button type="sumit">
-                     Thêm bạn bè
+                    Thêm bạn bè
                 </button>
-        </div>
-    </form>
-</div>
+            </div>
+        </form>
+    </div>
 
 </div>
 
@@ -377,7 +377,7 @@
     };
 
     const renderMessageReceive = (data) => {
-            const html = `
+        const html = `
 
         <div class="message-item" id="message-item">
                 
@@ -392,11 +392,11 @@
         </div>
 
     `;
-            return html;
-        };
+        return html;
+    };
 
     const renderMessageLocationSend = (data) => {
-            const html = `
+        const html = `
         <div class="message-item" id="message-item">
                 
                 <div class="message__row1 message__row2">
@@ -410,11 +410,11 @@
         </div>
 
     `;
-            return html;
-        };
+        return html;
+    };
 
     const renderMessageLocationReceive = (data) => {
-                const html = `
+        const html = `
 
         <div class="message-item" id="message-item">
                 
@@ -429,8 +429,8 @@
         </div>
 
     `;
-                return html;
-            };
+        return html;
+    };
 
     const socket = io();
     const token = document.cookie;
@@ -454,7 +454,7 @@
         //gửi tin nhắn lên server
         formMessage.addEventListener("submit", (e) => {
             e.preventDefault();
-            
+
             const inputMessage = document.getElementById("input-message");
 
             //kiểm tra trạng thái tin nhắn
@@ -479,18 +479,14 @@
 
         const messages = document.getElementById("messages");
         //Xử lý tin nhắn chat
-        socket.on("server-send-message-to-client", (data) => { 
+        socket.on("server-send-message-to-client", (data) => {
             if (data.message.userNameF === userNameF) {
-                /*
-                let html = renderMessageSend(data.message);
-                document.getElementById("message-block").insertAdjacentHTML('beforeend', html);
-                */
                 // Tạo phần tử cha (div.message-item)
                 var messageItem = document.createElement('div');
                 messageItem.classList.add('message-item');
                 messageItem.id = 'message-item';
 
-                
+
 
                 // Tạo phần tử con (div.message__row1)
                 var messageRow1 = document.createElement('div');
@@ -505,21 +501,21 @@
                 // Tạo phần tử con (p.message__date)
                 var messageDate = document.createElement('p');
                 messageDate.classList.add('message__date');
-                messageDate.textContent = '{{this.createdAt}}';
+                messageDate.textContent = data.createdAt;
 
                 // Thêm a.message__content và p.message__date vào div.message__row1
                 messageRow1.appendChild(messageContent);
                 messageRow1.appendChild(messageDate);
 
                 // Thêm div.avatar-friend-inbox và div.message__row1 vào div.block-message-content
-             
-                messageItem.appendChild(messageRow1);                        
-                
-                
+
+                messageItem.appendChild(messageRow1);
+
+
                 messageContent.textContent = data.message.message;
                 var messageContainer = document.getElementById('message-block');
                 messageContainer.appendChild(messageItem);
-                
+
             } else {
                 /*
                 let html = renderMessageReceive(data.message);
@@ -542,7 +538,7 @@
                 // Tạo phần tử con (img.avt-friend)
                 var avatarFriend = document.createElement('img');
                 avatarFriend.classList.add('avt-friend');
-                avatarFriend.src = '{{../userNameTInstance.avatar}}';
+                avatarFriend.src = data.userT.avatar;
                 avatarFriend.alt = '1';
 
                 // Thêm img.avt-friend vào div.avatar-friend-inbox
@@ -559,24 +555,24 @@
                 // Tạo phần tử con (p.message__date)
                 var messageDate = document.createElement('p');
                 messageDate.classList.add('message__date');
-                messageDate.textContent = '{{this.createdAt}}';
+                messageDate.textContent = data.createdAt;
 
                 // Thêm a.message__content và p.message__date vào div.message__row1
                 messageRow1.appendChild(messageContent);
                 messageRow1.appendChild(messageDate);
 
                 // Thêm div.avatar-friend-inbox và div.message__row1 vào div.block-message-content
-             
+
                 blockMessageContent.appendChild(avatarFriendInbox);
-                blockMessageContent.appendChild(messageRow1);   
-                messageItem.appendChild(blockMessageContent);                  
-                
+                blockMessageContent.appendChild(messageRow1);
+                messageItem.appendChild(blockMessageContent);
+
                 messageContent.textContent = data.message.message;
                 var messageContainer = document.getElementById('message-block');
                 messageContainer.appendChild(messageItem);
-                
+
             }
-              
+
         });
 
         //Gửi vĩ độ, kink độ lên server
@@ -604,7 +600,7 @@
                 let html = renderMessageLocationReceive(data.message);
                 document.getElementById("message-block").insertAdjacentHTML('beforeend', html);
             }
-           
+
         });
 
     }
@@ -618,20 +614,20 @@
     const btnadd = document.querySelectorAll('.js-btn-add-form')
     const modalAddFriend = document.querySelector('.js-modal-add-friend')
     const formAddFriend = document.querySelector('.js-form-add-friend')
-    function showFormAddFriend(){
+    function showFormAddFriend() {
         modalAddFriend.classList.add('open')
     }
-    function closeModalAddFriend(){
+    function closeModalAddFriend() {
         modalAddFriend.classList.remove('open')
     }
-    
-    for(const btn of btnadd){
-        btn.addEventListener('click',showFormAddFriend)
-    }
-    
-    modalAddFriend.addEventListener('click',closeModalAddFriend)
 
-    formAddFriend.addEventListener('click', function(even){
+    for (const btn of btnadd) {
+        btn.addEventListener('click', showFormAddFriend)
+    }
+
+    modalAddFriend.addEventListener('click', closeModalAddFriend)
+
+    formAddFriend.addEventListener('click', function (even) {
         even.stopPropagation()
     })
 </script>
@@ -640,23 +636,23 @@
     const btnshow = document.querySelector('.js-my-avatar')
     const modalpro = document.querySelector('.js-modal-myprofile')
     const mypro = document.querySelector('.js-my-profile')
-    function showMyProfile(){
+    function showMyProfile() {
         modalpro.classList.add('open')
     }
-    function closeMyProfile(){
+    function closeMyProfile() {
         modalpro.classList.remove('open')
     }
-    btnshow.addEventListener('click',showMyProfile)
+    btnshow.addEventListener('click', showMyProfile)
 
-    modalpro.addEventListener('click',closeMyProfile)
+    modalpro.addEventListener('click', closeMyProfile)
 
-    mypro.addEventListener('click', function(even){
+    mypro.addEventListener('click', function (even) {
         even.stopPropagation()
     })
 </script>
 
 <script>
-    function notication(){
+    function notication() {
         alert("Chức năng đang phát triển")
     }
 </script>
@@ -665,15 +661,14 @@
 <script>
     const message = document.querySelector('.js-message-block')
     const profile = document.querySelector('.js-block-profile')
-    function closeProfile(){
-        if (profile.classList.contains("open")){
+    function closeProfile() {
+        if (profile.classList.contains("open")) {
             profile.classList.remove('open')
             message.classList.remove('narrow')
         }
-        else{
+        else {
             profile.classList.add('open')
             message.classList.add('narrow')
         }
     }
 </script>
-

@@ -5,8 +5,18 @@ const FriendController = require('../controller/FriendController')
 
 const friendRouter = express.Router()
 
-friendRouter.get('/home', FriendController.home)
-friendRouter.get('/request', FriendController.friendRequest)
-
+friendRouter.get('/home', authenticate, FriendController.home)
+friendRouter.post(
+  '/showRequest',
+  authenticate,
+  FriendController.showRequestAddFriend
+)
+friendRouter.get('/request', authenticate, FriendController.friendRequest)
+friendRouter.post('/sendReq', authenticate, FriendController.sendRequest)
+friendRouter.post(
+  '/updateStatusRequest',
+  authenticate,
+  FriendController.updateStatusRequest
+)
 
 module.exports = friendRouter

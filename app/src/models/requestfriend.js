@@ -1,31 +1,30 @@
 'use strict'
 const { Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
-  class userFriend extends Model {
+  class requestFriend extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate({ Users }) {
-      // define association here
-      this.belongsTo(Users, { foreignKey: 'userName', as: 'userNameInf' })
       this.belongsTo(Users, {
-        foreignKey: 'userNameFriend',
-        as: 'userNameFriendInf',
+        foreignKey: 'userNameF',
+        targetKey: 'userName',
+        as: 'reqName',
       })
     }
   }
-  userFriend.init(
+  requestFriend.init(
     {
-      userName: {
+      userNameF: {
         type: DataTypes.STRING,
         allowNull: false,
+        references: { model: 'Users', key: 'userName' },
       },
-      userNameFriend: {
+      userNameT: {
         type: DataTypes.STRING,
         allowNull: false,
-
         validate: {
           isDifferentToUserName(value) {
             if (value === this.userName) {
@@ -34,26 +33,13 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
-      latestMessage: {
-        type: DataTypes.STRING,
-      },
-      isSelect: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
-      },
+      request: DataTypes.BOOLEAN,
+      status: DataTypes.STRING,
     },
     {
       sequelize,
-      modelName: 'userFriend',
-    },
-    {
-      indexes: [
-        {
-          unique: true,
-          fields: ['userName', 'userNameFriend'],
-        },
-      ],
+      modelName: 'requestFriend',
     }
   )
-  return userFriend
+  return requestFriend
 }

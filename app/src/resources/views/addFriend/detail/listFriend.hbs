@@ -1,21 +1,29 @@
 <!DOCTYPE>
-<head></head>
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+</head>
+
 <body>
     <div class="main-content-page">
 
         <div class="taskbar">
             <img class="js-my-avatar" src="{{userNameFInstance.avatar}}" alt="">
-            <form action="/user/inbox" method="post">
+            {{!-- icon message --}}
+            <form action="/" method="get">
                 <button class="js-icon-taskbar-chat icon-taskbar">
                     <i class="ti-comment-alt "></i>
                 </button>
             </form>
+            {{!-- icon bạn bè --}}
             <button class="js-icon-taskbar-list icon-taskbar select">
                 <i class="ti-user"></i>
             </button>
+            {{!-- icon logout --}}
             <form class="form-inline my-2 my-lg-0" action="/user/logout">
                 <button class="btn-logout" type="submit"><i class="ti-shift-left"></i></button>
             </form>
+            {{!-- icon show profile --}}
             <div class="modal-myprofile js-modal-myprofile">
                 <div class="block-profile my-profile js-my-profile">
                     <div class="header-profile">
@@ -70,7 +78,7 @@
             <div class="header-list-user">
                 <input class="search-friend" type="text" placeholder="Tìm Kiếm">
                 <button class="btn-add-form js-btn-add-form"><i class="ti-plus"></i></button>
-        
+
             </div>
             <form action="">
                 <button class="js-tab-list select">
@@ -87,87 +95,162 @@
         </div>
         <div class="js-list-friend contact-tab-list-friend">
             <header class="header-contact-tab">
-                    <p>Danh sách bạn bè</p>               
+                <p>Danh sách bạn bè</p>
             </header>
-            
+            {{#each allFriend}}
             <div class="list-friend-item">
-                <img src="https://1.bp.blogspot.com/-tb6Jty3tGvI/XqGjhwS-9RI/AAAAAAAAikQ/MgRq5Ic_TC00ghFtSjAxleM-fDsmMUatwCLcBGAsYHQ/s1600/Hinh-anh-meo-ngau-nhat%2B%25288%2529.jpg" alt="">
-                <h5>Chu Bá Hiếu</h5>
+                <img src="{{this.userNameFriendAvt}}" alt="">
+                <h5>{{this.userNameFriendFullName}}</h5>
             </div>
+            {{/each}}
 
         </div>
 
         <div class="block-addFriend">
             <header class="header-contact-tab">
-                    <p>Tìm bạn mới</p>               
+                <p>Tìm bạn mới</p>
             </header>
             <div class="search-friend">
-                <input type="text" name="userNameFriend" class="input-username-add" value="" placeholder="Tài khoản">
-                <button><i class="ti-search"></i></button>
+                <form action="/friend/showRequest" method="post">
+                    <input type="text" name="userNameFriend" class="input-username-add" value=""
+                        placeholder="Tài khoản">
+                    <button type="submit"><i class="ti-search"></i></button>
+                </form>
             </div>
 
-            <div class="block-profile block-profile-search">
-                <div class="profile-avatar">
-                    <div class="avatar-friend-item">
-                        <img src="https://1.bp.blogspot.com/-tb6Jty3tGvI/XqGjhwS-9RI/AAAAAAAAikQ/MgRq5Ic_TC00ghFtSjAxleM-fDsmMUatwCLcBGAsYHQ/s1600/Hinh-anh-meo-ngau-nhat%2B%25288%2529.jpg" alt="">
+            <form action="/friend/sendReq" method="post">
+                <div class="block-profile block-profile-search open">
+                    <div class="profile-avatar">
+                        <div class="avatar-friend-item">
+                            <img src="https://1.bp.blogspot.com/-tb6Jty3tGvI/XqGjhwS-9RI/AAAAAAAAikQ/MgRq5Ic_TC00ghFtSjAxleM-fDsmMUatwCLcBGAsYHQ/s1600/Hinh-anh-meo-ngau-nhat%2B%25288%2529.jpg"
+                                alt="">
+                        </div>
                     </div>
-                </div>
-                <div class="profile-name ">
-                    <h5>Chu Bá Hiếu</h5>
-                </div>
-                <div class="solid8px">
-                    <button class="btn-addfriend">
-                        Kết bạn
-                    </button>
-                </div>
-                <h6 class="header-info">Thông tin cá nhân</h6>
-                <div class="profile-infomation">
-                    <div class="name-info">
-                        <span>
-                            Tài khoản
-                        </span>
-                        <span>
-                            Giới tính
-                        </span>
-                        <span>
-                            Ngày sinh
-                        </span>
+                    <div class="profile-name ">
+                        <h5>Chu Bá Hiếu</h5>
                     </div>
-                    <div class="infomation">
-                        <span>
-                            chubahieu
-                        </span>
-                        <span>
-                            Nam
-                        </span>
-                        <span>
-                            17/07/2002
-                        </span>
+                    <div class="solid8px">
+                        <button type="submit" class="btn-addfriend">
+                            <input type="hidden" name="userNameF" value="{{userChat.userName}}">
+                            <input type="hidden" name="userNameT">
+                            Kết bạn
+                        </button>
                     </div>
+                    <h6 class="header-info">Thông tin cá nhân</h6>
+                    <div class="profile-infomation">
+                        <div class="name-info">
+                            <span>
+                                Tài khoản
+                            </span>
+                            <span>
+                                Giới tính
+                            </span>
+                            <span>
+                                Ngày sinh
+                            </span>
+                        </div>
+                        <div class="infomation">
+                            <span>
+                                chubahieu
+                            </span>
+                            <span>
+                                Nam
+                            </span>
+                            <span>
+                                17/07/2002
+                            </span>
+                        </div>
 
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
-        
+
     </div>
 
 </body>
+
+{{!-- call api để hiển thị lúc tìm bạn bè --}}
+<script>
+    const form = document.querySelector('.search-friend form');
+
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const userNameFriend = document.querySelector('.input-username-add').value;
+        const blockAddFriend = document.querySelector('.block-addFriend');
+        const blockProfile = document.querySelector('.block-profile');
+
+        try {
+            const response = await axios.post('/friend/showRequest', {
+                userNameFriend: userNameFriend
+            });
+
+            // Xử lý dữ liệu từ response và hiển thị vào div.search-friend
+            const data = response.data;
+            console.log(data)
+
+            // Tạo phần tử div mới
+            const newDiv = document.createElement('div');
+            newDiv.classList.add('block-profile', 'block-profile-search', 'open');
+
+            // Tạo nội dung HTML cho div
+
+            /*
+            newDiv.innerHTML = `
+              <div class="profile-avatar">
+                  <div class="avatar-friend-item">
+                      <img src="${data.avatar}" alt="">
+                  </div>
+              </div>
+              <div class="profile-name">
+                  <h5>${data.fullName}</h5>
+              </div>
+              <div class="solid8px">
+                  <button class="btn-addfriend">
+                      Kết bạn
+                  </button>
+              </div>
+              <h6 class="header-info">Thông tin cá nhân</h6>
+              <div class="profile-infomation">
+                  <div class="name-info">
+                      <span>Tài khoản</span>
+                      <span>Giới tính</span>
+                      <span>Ngày sinh</span>
+                  </div>
+                  <div class="infomation">
+                      <span>${data.userName}</span>
+                      <span>${data.sex}</span>
+                      <span>${data.birthday}</span>
+                  </div>
+              </div>`;
+            */
+            // Thêm div mới vào div.search-friend
+            blockAddFriend.appendChild(newDiv);
+
+
+        } catch (error) {
+            console.log("Loi axios");
+            console.error(error);
+        }
+    });
+</script>
 
 <script>
     const btnshow = document.querySelector('.js-my-avatar')
     const modalpro = document.querySelector('.js-modal-myprofile')
     const mypro = document.querySelector('.js-my-profile')
-    function showMyProfile(){
+    function showMyProfile() {
         modalpro.classList.add('open')
     }
-    function closeMyProfile(){
+    function closeMyProfile() {
         modalpro.classList.remove('open')
     }
-    btnshow.addEventListener('click',showMyProfile)
+    btnshow.addEventListener('click', showMyProfile)
 
-    modalpro.addEventListener('click',closeMyProfile)
+    modalpro.addEventListener('click', closeMyProfile)
 
-    mypro.addEventListener('click', function(even){
+    mypro.addEventListener('click', function (even) {
         even.stopPropagation()
     })
 </script>

@@ -38,6 +38,11 @@ app.engine(
   '.hbs',
   engine({
     extname: '.hbs',
+    helpers: {
+      ifEquals: (arg1, arg2, options) => {
+        return arg1 == arg2 ? options.fn(this) : options.inverse(this)
+      },
+    },
   })
 )
 
@@ -91,10 +96,14 @@ io.on('connection', (socket) => {
           dataMess
         )
 
+        console.log(newMessage.data.newMessage)
+        console.log(newMessage.data.userT)
+
         io.to(room).emit('server-send-message-to-client', {
           userNameF: data.userNameF,
           userNameT: data.userNameT,
           message: newMessage.data.newMessage,
+          userT: newMessage.data.userT,
         })
       } catch (error) {
         console.log('Error Server in [Send message to server]')
