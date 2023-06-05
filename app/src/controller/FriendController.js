@@ -150,9 +150,9 @@ class FriendController {
         const request = {
           userNameF,
           userNameT,
+          request: true,
           status: 'request',
         }
-
         await requestFriend.create(request)
         res.send(
           '<script>alert("Gửi yêu cầu kết bạn thành công."); window.location.href = "/friend/request";</script>'
@@ -163,7 +163,7 @@ class FriendController {
       res
         .status(500)
         .send(
-          '<script>alert("Error"); window.location.href = "/friend/home";</script>'
+          '<script>alert("Bạn đã kết bạn với người này rồi!"); window.location.href = "/friend/home";</script>'
         )
     }
   }

@@ -136,6 +136,7 @@ io.on('connection', (socket) => {
           userNameF: data.userNameF,
           userNameT: data.userNameT,
           message: newMessage.data.newMessage,
+          userT: newMessage.data.userT,
         })
       } catch (error) {
         console.log('Error Server in [Err locate server]')

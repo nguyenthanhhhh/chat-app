@@ -114,12 +114,12 @@
                 <form action="/friend/showRequest" method="post">
                     <input type="text" name="userNameFriend" class="input-username-add" value=""
                         placeholder="Tài khoản">
-                    <button class="js-btn-search" onclick="openProfileSearch()" type="submit"><i class="ti-search"></i></button>
+                    <button class="js-btn-search" type="submit"><i class="ti-search"></i></button>
                 </form>
             </div>
 
             <form action="/friend/sendReq" method="post">
-                <div class="block-profile block-profile-search open">
+                <div class="block-profile block-profile-search">
                     <div class="profile-avatar">
                         <div class="avatar-friend-item">
                             <img src="https://1.bp.blogspot.com/-tb6Jty3tGvI/XqGjhwS-9RI/AAAAAAAAikQ/MgRq5Ic_TC00ghFtSjAxleM-fDsmMUatwCLcBGAsYHQ/s1600/Hinh-anh-meo-ngau-nhat%2B%25288%2529.jpg"
@@ -127,12 +127,12 @@
                         </div>
                     </div>
                     <div class="profile-name ">
-                        <h5>Chu Bá Hiếu</h5>
+                        <h5 class="js-fullName">Chu Bá Hiếu</h5>
                     </div>
                     <div class="solid8px">
                         <button type="submit" class="btn-addfriend">
                             <input type="hidden" name="userNameF" value="{{userChat.userName}}">
-                            <input type="hidden" name="userNameT">
+                            <input type="hidden" name="userNameT" class="userNameT">
                             Kết bạn
                         </button>
                     </div>
@@ -142,7 +142,7 @@
                             <span>
                                 Tài khoản
                             </span>
-                            <span >
+                            <span>
                                 Giới tính
                             </span>
                             <span>
@@ -226,8 +226,24 @@
               </div>`;
             */
             // Thêm div mới vào div.search-friend
-            blockAddFriend.appendChild(newDiv);
+            // blockAddFriend.appendChild(newDiv);
 
+            const btnadd = document.querySelector('.js-btn-search')
+            const block = document.querySelector('.block-profile-search')
+            const usern = document.querySelector('.js-userName')
+            const sex = document.querySelector('.js-sex')
+            const date = document.querySelector('.js-date')
+            const fullName = document.querySelector('.js-fullName')
+            const userNameT = document.querySelector('.userNameT')
+
+            if (!block.classList.contains('open')) {
+                block.classList.add('open')
+            }
+            usern.textContent = data.userName;
+            sex.textContent = data.sex;
+            date.textContent = data.birthday;
+            fullName.textContent = data.fullName
+            userNameT.value = data.userName
 
         } catch (error) {
             console.log("Loi axios");
@@ -256,20 +272,6 @@
 </script>
 
 <script>
-    const btnadd = document.querySelector('.js-btn-search')
-    const block = document.querySelector('.block-profile-search')
-    const usern = document.querySelector('.js-userName')
-    const sex = document.querySelector('.js-sex')
-    const date = document.querySelector('.js-date')
 
-    function openProfileSearch() {
-        alert ("ok")
-        if(!block.classList.contains('open')){
-            block.classList.add('open')
-        }
-        usern.textContent = ${data.userName}
-        sex.textContent = ${data.sex}
-        date.textContent = $(data.birthday)
-    }
     //btnadd.addEventListener('click', openProfileSearch)
 </script>

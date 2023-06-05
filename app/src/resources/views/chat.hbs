@@ -591,11 +591,7 @@
 
         //xử lý share location:
         socket.on("server-send-location-to-client", (data) => {
-            // const chatItem2 = document.createElement("li");
             if (data.message.userNameF === userNameF) {
-                /* let html = renderMessageLocationSend(data.message);
-                document.getElementById("message-block").insertAdjacentHTML('beforeend', html); */
-                // Tạo phần tử cha (div.message-item)
                 var messageItem = document.createElement('div');
                 messageItem.classList.add('message-item');
                 messageItem.id = 'message-item';
@@ -623,14 +619,11 @@
                 messageItem.appendChild(messageRow);
 
                 // Thêm phần tử messageItem vào một phần tử đã tồn tại trong DOM
-                
+
                 var messageContainer = document.getElementById('message-block');
                 messageContainer.appendChild(messageItem);
             }
             else {
-               // let html = renderMessageLocationReceive(data.message);
-               // document.getElementById("message-block").insertAdjacentHTML('beforeend', html);
-                // Tạo phần tử cha (div.message-item)
                 var messageItem = document.createElement('div');
                 messageItem.classList.add('message-item');
                 messageItem.id = 'message-item';
@@ -647,9 +640,10 @@
                 var avatarFriend = document.createElement('img');
                 avatarFriend.classList.add('avt-friend');
                 //avatarFriend.src = data.userT.avatar;
-                avatarFriend.src = '{{../userNameTInstance.avatar}}';
+                console.log(data.userT.avatar)
+                avatarFriend.src = data.userT.avatar;
                 avatarFriend.alt = '1';
-                
+
                 // Thêm img.avt-friend vào div.avatar-friend-inbox
                 avatarFriendInbox.appendChild(avatarFriend);
 
