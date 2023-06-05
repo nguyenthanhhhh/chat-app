@@ -15,6 +15,7 @@ const axios = require('axios')
 require('dotenv').config()
 const createMessage = require('./utils/CreateMessage')
 const { CLIENT_RENEG_LIMIT } = require('tls')
+const { encode, decode } = require('./utils/encodeAndDecode')
 
 const port = process.env.PORT
 
@@ -82,7 +83,7 @@ io.on('connection', (socket) => {
     socket.join(room)
     //xử lý tin nhắn (chat)
     socket.on('send-message-to-server', async (data, callback) => {
-      const dataMess = {
+      let dataMess = {
         userNameF: data.userNameF,
         userNameT: data.userNameT,
         fullName: data.fullName,
@@ -90,15 +91,16 @@ io.on('connection', (socket) => {
         message: data.message,
       }
 
+      const messDecode = decode(dataMess.message)
+      dataMess.message = messDecode
       try {
-        const newMessage = await axios.post(
+        let newMessage = await axios.post(
           'http://localhost:3002/user/createMessage',
           dataMess
         )
 
-        console.log(newMessage.data.newMessage)
-        console.log(newMessage.data.userT)
-
+        const messEncode = encode(newMessage.data.newMessage.message)
+        newMessage.data.newMessage.message = messEncode
         io.to(room).emit('server-send-message-to-client', {
           userNameF: data.userNameF,
           userNameT: data.userNameT,
@@ -113,8 +115,11 @@ io.on('connection', (socket) => {
 
     //xử lý share location
     socket.on('share-location', async (data) => {
-      const { latitude, longitude } = data
-      const linkLocation = createMessage(
+      let { latitude, longitude } = data
+      latitude = decode(latitude)
+      longitude = decode(longitude)
+
+      let linkLocation = createMessage(
         `https://www.google.com/maps?q=${latitude},${longitude}`
       )
 
@@ -131,6 +136,8 @@ io.on('connection', (socket) => {
           'http://localhost:3002/user/createMessage',
           dataMess
         )
+
+        linkLocation.message = encode(linkLocation.message)
 
         io.to(room).emit('server-send-location-to-client', {
           userNameF: data.userNameF,

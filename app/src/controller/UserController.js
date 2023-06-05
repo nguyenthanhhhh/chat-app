@@ -313,8 +313,8 @@ class UserController {
         { latestMessage: message },
         {
           where: {
-            userName: userNameF,
-            userNameFriend: userNameT,
+            userName: [userNameF, userNameT],
+            userNameFriend: [userNameT, userNameF],
           },
         }
       )

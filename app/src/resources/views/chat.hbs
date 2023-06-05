@@ -357,6 +357,35 @@
     const userNameT = '{{userNameT}}'
     const userNameT_FullName = '{{userNameT_fullName}}'
 
+    const encode = (text) => {
+        var a = 3
+        var b = 7
+        var result = ''
+
+        for (var i = 0; i < text.length; i++) {
+            var char = text.charAt(i)
+            var charIndex = char.charCodeAt(0)
+            var encryptedChar = a * charIndex + b
+            result += String.fromCharCode(encryptedChar)
+        }
+        return result
+    }
+
+    const decode = (text) => {
+        var a = 3
+        var b = 7
+        var result = ''
+
+        for (var j = 0; j < text.length; j++) {
+            //var char = text.charAt(i)
+            var charIndex = text.charCodeAt(j)
+            var decryptedChar = (charIndex - b) / a
+            result += String.fromCharCode(decryptedChar)
+        }
+
+        return result
+    }
+
     const renderMessageSend = (data) => {
         const html = `
 
@@ -462,11 +491,13 @@
             };
 
             //gửi dữ tin nhắn lên server
-            const message = inputMessage.value;
+            let message = inputMessage.value;
+            //mã hóa
+            message = encode(message);
             if (message.trim().length !== 0) {
                 socket.emit(
                     "send-message-to-server",
-                    { userNameF: userNameFNhan, userNameT: userNameT, message: inputMessage.value, fullName, userNameT_FullName, userChat: userNameF },
+                    { userNameF: userNameFNhan, userNameT: userNameT, message, fullName, userNameT_FullName, userChat: userNameF },
 
                 );
             }
@@ -511,8 +542,8 @@
 
                 messageItem.appendChild(messageRow1);
 
-
-                messageContent.textContent = data.message.message;
+                var messDecode = decode(data.message.message)
+                messageContent.textContent = messDecode;
                 var messageContainer = document.getElementById('message-block');
                 messageContainer.appendChild(messageItem);
 
@@ -567,7 +598,8 @@
                 blockMessageContent.appendChild(messageRow1);
                 messageItem.appendChild(blockMessageContent);
 
-                messageContent.textContent = data.message.message;
+                var messDecode = decode(data.message.message)
+                messageContent.textContent = messDecode;
                 var messageContainer = document.getElementById('message-block');
                 messageContainer.appendChild(messageItem);
 
@@ -580,10 +612,11 @@
         btnShareLocation.addEventListener("click", (e) => {
             if (!navigator.geolocation) return alert("Trình duyệt của bạn không hỗ trợ");
             navigator.geolocation.getCurrentPosition((position) => {
-                console.log(position);
                 const { latitude, longitude } = position.coords;
-                console.log(latitude, longitude);
-                socket.emit("share-location", { userNameF: userNameFNhan, userNameT: userNameT, latitude, longitude, fullName, userNameT_FullName, userChat: userNameF });
+                const latitudeEncode = encode(latitude.toString())
+                const longitudeEncode = encode(longitude.toString())
+                console.log(latitudeEncode)
+                socket.emit("share-location", { userNameF: userNameFNhan, userNameT: userNameT, latitude: latitudeEncode, longitude: longitudeEncode, fullName, userNameT_FullName, userChat: userNameF });
 
 
             });
@@ -592,6 +625,7 @@
         //xử lý share location:
         socket.on("server-send-location-to-client", (data) => {
             if (data.message.userNameF === userNameF) {
+
                 var messageItem = document.createElement('div');
                 messageItem.classList.add('message-item');
                 messageItem.id = 'message-item';
@@ -600,17 +634,19 @@
                 var messageRow = document.createElement('div');
                 messageRow.classList.add('message__row1', 'message__row2');
 
+                //giải mã
+                var messDecode = decode(data.message.message)
                 // Tạo phần tử con (a.message__content.message__content2)
                 var messageContent = document.createElement('a');
                 messageContent.classList.add('message__content', 'message__content2');
-                messageContent.href = '{{this.message}}';
+                messageContent.href = messDecode;
                 messageContent.target = '_blank';
                 messageContent.textContent = 'Vị trí của tôi';
 
                 // Tạo phần tử con (p.message__date.message__date2)
                 var messageDate = document.createElement('p');
                 messageDate.classList.add('message__date', 'message__date2');
-                messageDate.textContent = '{{this.createdAt}}';
+                messageDate.textContent = data.message.createdAt;
 
                 // Thêm phần tử con vào phần tử cha
                 messageRow.appendChild(messageContent);
@@ -651,17 +687,19 @@
                 var messageRow1 = document.createElement('div');
                 messageRow1.classList.add('message__row1');
 
+                //giải mã
+                var messDecode = decode(data.message.message)
                 // Tạo phần tử con (a.message__content)
                 var messageContent = document.createElement('a');
                 messageContent.classList.add('message__content');
-                messageContent.href = '{{this.message}}';
+                messageContent.href = messDecode;
                 messageContent.target = '_blank';
                 messageContent.textContent = 'Vị trí của tôi';
 
                 // Tạo phần tử con (p.message__date)
                 var messageDate = document.createElement('p');
                 messageDate.classList.add('message__date');
-                messageDate.textContent = '{{this.createdAt}}';
+                messageDate.textContent = data.message.createdAt;
 
                 // Thêm a.message__content và p.message__date vào div.message__row1
                 messageRow1.appendChild(messageContent);
