@@ -93,6 +93,11 @@ body{
 .select{
   background: rgba(0,0,0,0.2) !important;
 }
+.css-select-friend{
+  background: rgba(0,0,0,0.2) !important;
+  cursor: pointer;
+  border-radius: 8px;
+}
 .message__row1:hover > .message__date{
   display: block;
 }
@@ -390,7 +395,7 @@ body{
 }
 
 .taskbar{
-  width: 4vw;
+  width:  4vw;
   height: 100vh;
   background-color: #0084ff;
   position: relative;

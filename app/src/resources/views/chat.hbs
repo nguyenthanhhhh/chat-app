@@ -593,12 +593,95 @@
         socket.on("server-send-location-to-client", (data) => {
             // const chatItem2 = document.createElement("li");
             if (data.message.userNameF === userNameF) {
-                let html = renderMessageLocationSend(data.message);
-                document.getElementById("message-block").insertAdjacentHTML('beforeend', html);
+                /* let html = renderMessageLocationSend(data.message);
+                document.getElementById("message-block").insertAdjacentHTML('beforeend', html); */
+                // Tạo phần tử cha (div.message-item)
+                var messageItem = document.createElement('div');
+                messageItem.classList.add('message-item');
+                messageItem.id = 'message-item';
+
+                // Tạo phần tử con (div.message__row1.message__row2)
+                var messageRow = document.createElement('div');
+                messageRow.classList.add('message__row1', 'message__row2');
+
+                // Tạo phần tử con (a.message__content.message__content2)
+                var messageContent = document.createElement('a');
+                messageContent.classList.add('message__content', 'message__content2');
+                messageContent.href = '{{this.message}}';
+                messageContent.target = '_blank';
+                messageContent.textContent = 'Vị trí của tôi';
+
+                // Tạo phần tử con (p.message__date.message__date2)
+                var messageDate = document.createElement('p');
+                messageDate.classList.add('message__date', 'message__date2');
+                messageDate.textContent = '{{this.createdAt}}';
+
+                // Thêm phần tử con vào phần tử cha
+                messageRow.appendChild(messageContent);
+                messageRow.appendChild(messageDate);
+
+                messageItem.appendChild(messageRow);
+
+                // Thêm phần tử messageItem vào một phần tử đã tồn tại trong DOM
+                
+                var messageContainer = document.getElementById('message-block');
+                messageContainer.appendChild(messageItem);
             }
             else {
-                let html = renderMessageLocationReceive(data.message);
-                document.getElementById("message-block").insertAdjacentHTML('beforeend', html);
+               // let html = renderMessageLocationReceive(data.message);
+               // document.getElementById("message-block").insertAdjacentHTML('beforeend', html);
+                // Tạo phần tử cha (div.message-item)
+                var messageItem = document.createElement('div');
+                messageItem.classList.add('message-item');
+                messageItem.id = 'message-item';
+
+                // Tạo phần tử con (div.block-message-content)
+                var blockMessageContent = document.createElement('div');
+                blockMessageContent.classList.add('block-message-content');
+
+                // Tạo phần tử con (div.avatar-friend-inbox)
+                var avatarFriendInbox = document.createElement('div');
+                avatarFriendInbox.classList.add('avatar-friend-inbox');
+
+                // Tạo phần tử con (img.avt-friend)
+                var avatarFriend = document.createElement('img');
+                avatarFriend.classList.add('avt-friend');
+                //avatarFriend.src = data.userT.avatar;
+                avatarFriend.src = '{{../userNameTInstance.avatar}}';
+                avatarFriend.alt = '1';
+                
+                // Thêm img.avt-friend vào div.avatar-friend-inbox
+                avatarFriendInbox.appendChild(avatarFriend);
+
+                // Tạo phần tử con (div.message__row1)
+                var messageRow1 = document.createElement('div');
+                messageRow1.classList.add('message__row1');
+
+                // Tạo phần tử con (a.message__content)
+                var messageContent = document.createElement('a');
+                messageContent.classList.add('message__content');
+                messageContent.href = '{{this.message}}';
+                messageContent.target = '_blank';
+                messageContent.textContent = 'Vị trí của tôi';
+
+                // Tạo phần tử con (p.message__date)
+                var messageDate = document.createElement('p');
+                messageDate.classList.add('message__date');
+                messageDate.textContent = '{{this.createdAt}}';
+
+                // Thêm a.message__content và p.message__date vào div.message__row1
+                messageRow1.appendChild(messageContent);
+                messageRow1.appendChild(messageDate);
+
+                // Thêm div.avatar-friend-inbox và div.message__row1 vào div.block-message-content
+                blockMessageContent.appendChild(avatarFriendInbox);
+                blockMessageContent.appendChild(messageRow1);
+
+                // Thêm div.block-message-content vào div.message-item
+                messageItem.appendChild(blockMessageContent);
+
+                var messageContainer = document.getElementById('message-block');
+                messageContainer.appendChild(messageItem);
             }
 
         });

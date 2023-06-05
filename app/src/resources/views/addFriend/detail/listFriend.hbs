@@ -114,7 +114,7 @@
                 <form action="/friend/showRequest" method="post">
                     <input type="text" name="userNameFriend" class="input-username-add" value=""
                         placeholder="Tài khoản">
-                    <button type="submit"><i class="ti-search"></i></button>
+                    <button class="js-btn-search" onclick="openProfileSearch()" type="submit"><i class="ti-search"></i></button>
                 </form>
             </div>
 
@@ -142,7 +142,7 @@
                             <span>
                                 Tài khoản
                             </span>
-                            <span>
+                            <span >
                                 Giới tính
                             </span>
                             <span>
@@ -150,13 +150,13 @@
                             </span>
                         </div>
                         <div class="infomation">
-                            <span>
+                            <span class="js-userName">
                                 chubahieu
                             </span>
-                            <span>
+                            <span class="js-sex">
                                 Nam
                             </span>
-                            <span>
+                            <span class="js-date">
                                 17/07/2002
                             </span>
                         </div>
@@ -253,4 +253,23 @@
     mypro.addEventListener('click', function (even) {
         even.stopPropagation()
     })
+</script>
+
+<script>
+    const btnadd = document.querySelector('.js-btn-search')
+    const block = document.querySelector('.block-profile-search')
+    const usern = document.querySelector('.js-userName')
+    const sex = document.querySelector('.js-sex')
+    const date = document.querySelector('.js-date')
+
+    function openProfileSearch() {
+        alert ("ok")
+        if(!block.classList.contains('open')){
+            block.classList.add('open')
+        }
+        usern.textContent = ${data.userName}
+        sex.textContent = ${data.sex}
+        date.textContent = $(data.birthday)
+    }
+    //btnadd.addEventListener('click', openProfileSearch)
 </script>
