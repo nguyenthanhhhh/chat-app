@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "hieu12345",
+    "password": "172002",
     "database": "chatapp",
     "host": "127.0.0.1",
     "dialect": "mysql",
