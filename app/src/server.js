@@ -136,14 +136,13 @@ io.on('connection', (socket) => {
           'http://localhost:3002/user/createMessage',
           dataMess
         )
-
         linkLocation.message = encode(linkLocation.message)
-
         io.to(room).emit('server-send-location-to-client', {
           userNameF: data.userNameF,
           userNameT: data.userNameT,
           message: newMessage.data.newMessage,
           userT: newMessage.data.userT,
+          messEncode: linkLocation.message,
         })
       } catch (error) {
         console.log('Error Server in [Err locate server]')

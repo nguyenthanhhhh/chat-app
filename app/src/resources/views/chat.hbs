@@ -618,7 +618,6 @@
                 const { latitude, longitude } = position.coords;
                 const latitudeEncode = encode(latitude.toString())
                 const longitudeEncode = encode(longitude.toString())
-                console.log(latitudeEncode)
                 socket.emit("share-location", { userNameF: userNameFNhan, userNameT: userNameT, latitude: latitudeEncode, longitude: longitudeEncode, fullName, userNameT_FullName, userChat: userNameF });
 
 
@@ -638,7 +637,7 @@
                 messageRow.classList.add('message__row1', 'message__row2');
 
                 //giải mã
-                var messDecode = decode(data.message.message)
+                var messDecode = decode(data.messEncode)
                 // Tạo phần tử con (a.message__content.message__content2)
                 var messageContent = document.createElement('a');
                 messageContent.classList.add('message__content', 'message__content2');
@@ -679,7 +678,6 @@
                 var avatarFriend = document.createElement('img');
                 avatarFriend.classList.add('avt-friend');
                 //avatarFriend.src = data.userT.avatar;
-                console.log(data.userT.avatar)
                 avatarFriend.src = data.userT.avatar;
                 avatarFriend.alt = '1';
 
@@ -691,7 +689,8 @@
                 messageRow1.classList.add('message__row1');
 
                 //giải mã
-                var messDecode = decode(data.message.message)
+                var messDecode = decode(data.messEncode)
+
                 // Tạo phần tử con (a.message__content)
                 var messageContent = document.createElement('a');
                 messageContent.classList.add('message__content');
