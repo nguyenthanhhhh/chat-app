@@ -59,16 +59,17 @@ class UserController {
       fullName,
       sex,
       birthday,
+      phone,
     } = req.body
     if (password === retypepassword) {
-      const user = { userName, password, email, fullName, sex, birthday }
+      const user = { userName, password, email, fullName, sex, birthday, phone }
       try {
         const newUser = await Users.build(user) // Tạo một đối tượng mô hình mới
         await newUser.validate()
         const salt = bcrypt.genSaltSync(10)
         const hash = bcrypt.hashSync(password, salt)
         Users.create(
-          { userName, password: hash, email, fullName, sex, birthday },
+          { userName, password: hash, email, fullName, sex, birthday, phone },
           {
             validate: false,
           }
@@ -101,11 +102,14 @@ class UserController {
     }
   }
 
-  async updateProfile(req, res) {
-    const { fullName, sex, birthday, avatar } = req.body
-    console.log(fullName, sex, birthday, avatar)
+  async updateProfilePost(req, res) {
+    const { user } = req
+    const { fullName, sex, birthday, avatar, email } = req.body
     try {
-      Users.update({ fullName, sex, birthday, avatar })
+      Users.update(
+        { fullName, sex, birthday, avatar, email },
+        { where: { userName: user.userName } }
+      )
         .then(async () => {
           res
             .status(200)
@@ -405,6 +409,12 @@ class UserController {
     })
 
     res.send({ allMessage: allMessageFormat })
+  }
+
+  async updateProfileGet(req, res) {
+    const { user } = req
+    const userLog = await Users.findOne({ where: { userName: user.userName } })
+    res.render('user/editProfile', { user: dataToObj(userLog) })
   }
 }
 

@@ -58,15 +58,19 @@ class FriendController {
 
   async showRequestAddFriend(req, res) {
     try {
-      const { userNameFriend } = req.body
+      const { search } = req.body
       const userFind = await Users.findOne({
         where: {
-          username: userNameFriend,
+          [Op.or]: [{ userName: search }, { phone: search }],
         },
       })
 
       if (userFind) {
-        res.status(200).send(userFind)
+        let newData = dataToObj(userFind)
+        let time = newData.birthday
+        time = moment(time).format('DD/MM/YYYY')
+        newData.birthday = time
+        res.status(200).send(newData)
       } else {
         res
           .status(404)
