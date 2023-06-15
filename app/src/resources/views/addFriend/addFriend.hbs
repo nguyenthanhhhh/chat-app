@@ -1,9 +1,11 @@
 <!DOCTYPE html>
+
 <head></head>
+
 <body>
     <div class="taskbar">
         <img class="js-my-avatar" src="{{userNameFInstance.avatar}}" alt="">
-    
+
         <button class="js-icon-taskbar-chat icon-taskbar select" onclick="openTaskbarChat()">
             <i class="ti-comment-alt "></i>
         </button>
@@ -19,10 +21,10 @@
                     <h5>Thông tin tài khoản</h5>
                 </div>
                 <div class="block-my-pro">
-    
+
                     <div class="profile-avatar">
                         <img class="my-avatar" src="{{userNameFInstance.avatar}}" alt="">
-    
+
                     </div>
                 </div>
                 <div class="profile-name">
@@ -58,7 +60,7 @@
                             {{userNameFInstance.birthday}}
                         </span>
                     </div>
-    
+                    <a href="/user/profile">Chỉnh sửa</a>
                 </div>
             </div>
         </div>
@@ -67,7 +69,7 @@
         <div class="header-list-user">
             <input class="search-friend" type="text" placeholder="Tìm Kiếm">
             <button class="btn-add-form js-btn-add-form"><i class="ti-plus"></i></button>
-    
+
         </div>
         <button class="js-tab-list select" onclick="openTabList()">
             <i class="ti-layout-media-overlay"></i>
@@ -80,14 +82,14 @@
     </div>
     <div class="js-modal-add-friend modal-add-friend">
         <form class="form-add-friend js-form-add-friend" action="user/addFriend" method="post">
-    
+
             <input type="text" name="userNameFriend" class="input-username-add" value="" placeholder="Tài khoản">
             <input type="hidden" name="userName" value="{{userChat.userName}}">
             <div>
                 <div>
                     <label for="">Họ tên:</label>
                     <p>Chu Bá Hiếu</p>
-    
+
                 </div>
                 <div>
                     <label for="">Giới tính:</label>

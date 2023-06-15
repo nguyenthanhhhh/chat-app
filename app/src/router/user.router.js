@@ -13,9 +13,10 @@ userRouter.post('/addFriend', UserController.addFriend)
 userRouter.post('/inbox/:userName', authenticate, UserController.inbox)
 userRouter.post('/createMessage', UserController.createMessage)
 userRouter.post('/updateStatus', UserController.updateStatus)
-userRouter.patch('/updateProfile', authenticate, UserController.updateProfile)
-userRouter.patch('/changePassword', authenticate, UserController.changePassword)
+userRouter.post('/changePassword', authenticate, UserController.changePassword)
 userRouter.post('/getAllMessage', authenticate, UserController.getAllMessage)
+userRouter.get('/profile', authenticate, UserController.updateProfileGet)
+userRouter.post('/profile', authenticate, UserController.updateProfilePost)
 
 // userRouter.post("/chat", authenticate, UserController.joinChat);
 // userRouter.get("/chat", authenticate, UserController.joinChat);
