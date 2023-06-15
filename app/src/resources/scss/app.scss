@@ -253,6 +253,7 @@ body{
   }
   .header-list-user{
     margin-bottom: 10px;
+    display: flex;
     .search-friend{
       width: calc(100% - 60px);
       margin: 5px;
@@ -263,6 +264,11 @@ body{
     }
     .search-friend:focus{
       outline: none;
+    }
+    form{
+      margin: 5px;
+      
+      
     }
     .btn-add-form{
       border: none;
@@ -285,7 +291,7 @@ body{
       padding: 0 10px;
     }
     form{
-      width: 100%;
+      
       button{
         width: 100%;
         padding:16px 20px;

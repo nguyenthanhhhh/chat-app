@@ -33,12 +33,12 @@
     <div class="taskbar">
         <img class="js-my-avatar" src="{{userNameFInstance.avatar}}" alt="">
 
-        <button class="js-icon-taskbar-chat icon-taskbar select" onclick="openTaskbarChat()">
+        <button class="js-icon-taskbar-chat icon-taskbar select">
             <i class="ti-comment-alt "></i>
         </button>
         {{!-- Btn friend --}}
         <form action="/friend/home" method="get">
-            <button class="js-icon-taskbar-list icon-taskbar" onclick="openTaskbarContact()">
+            <button class="js-icon-taskbar-list icon-taskbar">
                 <i class="ti-user"></i>
             </button>
 
@@ -100,7 +100,9 @@
     <div id="list-user-block" class="js-list-user-block block-list-user open">
         <div class="header-list-user">
             <input class="search-friend" type="text" placeholder="Tìm Kiếm">
-            <button class="btn-add-form js-btn-add-form"><i class="ti-plus"></i></button>
+            <form action="/friend/home" method="get">
+                <button class="btn-add-form js-btn-add-form"><i class="ti-plus"></i></button>
+            </form>
         </div>
         {{#each allFriend}}
         {{#if this.isSelect}}
@@ -725,7 +727,7 @@
 
 
 {{!-- hieu bl --}}
-<script>
+{{!-- <script>
     const btnadd = document.querySelectorAll('.js-btn-add-form')
     const modalAddFriend = document.querySelector('.js-modal-add-friend')
     const formAddFriend = document.querySelector('.js-form-add-friend')
@@ -745,7 +747,7 @@
     formAddFriend.addEventListener('click', function (even) {
         even.stopPropagation()
     })
-</script>
+</script> --}}
 
 <script>
     const btnshow = document.querySelector('.js-my-avatar')
