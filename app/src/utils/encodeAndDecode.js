@@ -1,3 +1,4 @@
+
 function encode(text) {
   var a = 3
   var b = 7

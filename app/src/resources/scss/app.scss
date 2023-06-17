@@ -75,18 +75,18 @@ body{
     background-color: #b5b0b0;
     color: #fff;
     border-radius: 18px;
-    overflow-wrap: break-word;
+    word-break: break-all;
   }
   .message__date {
     color: #181010;
     font-size: 10px;
     position: absolute;
-    top: 100%;
+    bottom: -16px;
     white-space: nowrap;
     display: none;
   }
   .message__date.message__date2{
-    top: 36px;
+    bottom: -16px;
     right: 5px;
   }
 }
@@ -136,13 +136,19 @@ body{
       border: none;
       background-color: #fff;
       text-align: left;
-      
+      display: flex;
+      .name-friend-item{
+        width: calc(216.31px - 49.4px);
+      }
       div{
         display: inline-block;
       }
       p{
         font-size: 16px;
         margin-bottom: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
     }
     .block-user-item:hover{
@@ -484,6 +490,26 @@ body{
           }
         }
       }
+      .btn-edit-profile{
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+        width: 100%;
+        button{
+          padding: 6px 16px;
+          border: none;
+          border-radius: 10px;
+          background-color: #0084ff;
+          color: #fff;
+        }
+        button:hover{
+          cursor: pointer;
+          opacity: 0.7;
+        }
+        button:focus{
+          outline: none;
+        }
+      }
       }
     }
   
@@ -692,7 +718,7 @@ body{
   background-image: url("https://i.pinimg.com/originals/8c/a7/87/8ca787d349e1fe427095f749c300e7a7.jpg");
 }
 .form-room{
-  width: 25%;
+  width: 390px;
   height: 462px;
   position: absolute;
   top: 50%;
@@ -731,54 +757,72 @@ body{
   left: 50%;
   transform: translate(-50%, -50%);
 }
-.form-create-account{
-  width: 25%;
-  height: 462px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border: none;
-  border-radius: 50px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-  background-color: #fff;
-  .create-account{
+.full-form-create{
+  width: 100vw;
+  height: 100vh;
+  background-image: url("https://i.pinimg.com/originals/8c/a7/87/8ca787d349e1fe427095f749c300e7a7.jpg");
+
+  .form-create-account{
+    width: 400px;
+    height: 580px;
     position: absolute;
-    width: 90%;
-    height: 90%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    h3{
-      margin-bottom: 20px;
-    }
-    .input-create-account{
-      padding: 8px 20px;
-      margin-bottom: 15px;
+    border: none;
+    border-radius: 50px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    background-color: #fff;
+  
+    .create-account{
+      position: absolute;
+      width: 90%;
+      height: 90%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      h3{
+        margin-bottom: 20px;
+      }
+      .input-create-account{
+        padding: 8px 20px;
+        margin-bottom: 15px;
+        width: 100%;
+        font-size: 16px;
+        border: solid 0.1px #b5b0b0;
+        border-radius: 10px;
+      }
+      #birthday{
+        padding: 4px;
+        font-size: 16px;
+      }
+      .input-gender{
+        margin-right: 10px;
+      }
+      .btn-create-account{
+        font-size: 20px;
+        padding: 9px 8px;
+        width: 70%;
+        margin-left: 15%;
+        margin-top: 30px;
+        background-color: #42B72A;
+        color: #fff;
+        border-color: #42B72A;
+        border-radius: 10px;
+      }
+      .btn-create-account:hover{
+        cursor: pointer;
+      }
+    .link-login{
       width: 100%;
-      font-size: 16px;
-      border: solid 0.1px #b5b0b0;
-      border-radius: 10px;
-    }
-    #birthday{
-      padding: 4px;
-      font-size: 16px;
-    }
-    .input-gender{
-      margin-right: 10px;
-    }
-    .btn-create-account{
-      font-size: 20px;
-      padding: 9px 8px;
-      width: 70%;
-      margin-left: 15%;
-      margin-top: 30px;
-      background-color: #42B72A;
-      color: #fff;
-      border-color: #42B72A;
-      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      margin-top: 4px;
+    }  
+
     }
   }
+
 }
 
 .form-input-room{
@@ -863,6 +907,84 @@ body{
     margin: 0;
   }
 }
+// edit-profile
+.container-edit-profile{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  background-image: linear-gradient(to bottom, #ffffff, #ddd);
+  
+  .block-edit-profile{
+    width: 600px;
+    border-left: 1px solid #b5b0b0;
+    border-right: 1px solid #b5b0b0;
+    background-color: #fff;
+    box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
+    .avatar_edit_profile{
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      img{
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+      }
+    }
+    .block-input{
+      padding: 0px 20px;
+      width: 100%;
+      display: flex;
+      .label-input{
+        width: 40%;
+        label{
+          display: block;
+          margin-top: 12px;
+          padding: 6.8px;
+          margin-bottom: 0;
+        }
+      }
+      .input-edit-profile{
+        width: 60%;
+        input{
+          display: block;
+          width: 100%;
+          margin-top: 12px;
+          padding: 6px 10px;
+          background-color: #F0F2F5;
+          border: #0084ff solid 1px;
+          border-radius: 40px;
+        }
+        input:focus{
+          outline: none;
+        }
+      }
+    }
+    .btn-update-edit{
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      margin-top: 20px;
+      button{
+        padding: 6px 16px;
+        border: none;
+        background-color: #0084ff;
+        color: #fff;
+        border-radius: 10px;
+      }
+      button:hover{
+        cursor: pointer;
+      }
+      button:focus{
+        outline: none;
+      }
+    }
+
+  }
+}
+
 
 
 @keyframes modalFadeIn{

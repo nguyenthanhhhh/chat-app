@@ -65,16 +65,16 @@ body {
     background-color: #b5b0b0;
     color: #fff;
     border-radius: 18px;
-    overflow-wrap: break-word; }
+    word-break: break-all; }
   .message__row1 .message__date {
     color: #181010;
     font-size: 10px;
     position: absolute;
-    top: 100%;
+    bottom: -16px;
     white-space: nowrap;
     display: none; }
   .message__row1 .message__date.message__date2 {
-    top: 36px;
+    bottom: -16px;
     right: 5px; }
 
 .select {
@@ -120,12 +120,18 @@ body {
       font-size: 18px;
       border: none;
       background-color: #fff;
-      text-align: left; }
+      text-align: left;
+      display: flex; }
+      .main-content-page #list-user-block .block-user-item .name-friend-item {
+        width: calc(216.31px - 49.4px); }
       .main-content-page #list-user-block .block-user-item div {
         display: inline-block; }
       .main-content-page #list-user-block .block-user-item p {
         font-size: 16px;
-        margin-bottom: 0; }
+        margin-bottom: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap; }
     .main-content-page #list-user-block .block-user-item:hover {
       cursor: pointer;
       border-radius: 8px;
@@ -381,6 +387,22 @@ body {
           .taskbar .modal-myprofile .my-profile .block-my-pro .profile-avatar .my-avatar {
             width: 100%;
             height: 100%; }
+      .taskbar .modal-myprofile .my-profile .btn-edit-profile {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+        width: 100%; }
+        .taskbar .modal-myprofile .my-profile .btn-edit-profile button {
+          padding: 6px 16px;
+          border: none;
+          border-radius: 10px;
+          background-color: #0084ff;
+          color: #fff; }
+        .taskbar .modal-myprofile .my-profile .btn-edit-profile button:hover {
+          cursor: pointer;
+          opacity: 0.7; }
+        .taskbar .modal-myprofile .my-profile .btn-edit-profile button:focus {
+          outline: none; }
   .taskbar .modal-myprofile.open {
     display: flex; }
 
@@ -549,7 +571,7 @@ body {
   background-image: url("https://i.pinimg.com/originals/8c/a7/87/8ca787d349e1fe427095f749c300e7a7.jpg"); }
 
 .form-room {
-  width: 25%;
+  width: 390px;
   height: 462px;
   position: absolute;
   top: 50%;
@@ -587,48 +609,59 @@ body {
   left: 50%;
   transform: translate(-50%, -50%); }
 
-.form-create-account {
-  width: 25%;
-  height: 462px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border: none;
-  border-radius: 50px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-  background-color: #fff; }
-  .form-create-account .create-account {
+.full-form-create {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("https://i.pinimg.com/originals/8c/a7/87/8ca787d349e1fe427095f749c300e7a7.jpg"); }
+  .full-form-create .form-create-account {
+    width: 400px;
+    height: 580px;
     position: absolute;
-    width: 90%;
-    height: 90%;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); }
-    .form-create-account .create-account h3 {
-      margin-bottom: 20px; }
-    .form-create-account .create-account .input-create-account {
-      padding: 8px 20px;
-      margin-bottom: 15px;
-      width: 100%;
-      font-size: 16px;
-      border: solid 0.1px #b5b0b0;
-      border-radius: 10px; }
-    .form-create-account .create-account #birthday {
-      padding: 4px;
-      font-size: 16px; }
-    .form-create-account .create-account .input-gender {
-      margin-right: 10px; }
-    .form-create-account .create-account .btn-create-account {
-      font-size: 20px;
-      padding: 9px 8px;
-      width: 70%;
-      margin-left: 15%;
-      margin-top: 30px;
-      background-color: #42B72A;
-      color: #fff;
-      border-color: #42B72A;
-      border-radius: 10px; }
+    transform: translate(-50%, -50%);
+    border: none;
+    border-radius: 50px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    background-color: #fff; }
+    .full-form-create .form-create-account .create-account {
+      position: absolute;
+      width: 90%;
+      height: 90%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%); }
+      .full-form-create .form-create-account .create-account h3 {
+        margin-bottom: 20px; }
+      .full-form-create .form-create-account .create-account .input-create-account {
+        padding: 8px 20px;
+        margin-bottom: 15px;
+        width: 100%;
+        font-size: 16px;
+        border: solid 0.1px #b5b0b0;
+        border-radius: 10px; }
+      .full-form-create .form-create-account .create-account #birthday {
+        padding: 4px;
+        font-size: 16px; }
+      .full-form-create .form-create-account .create-account .input-gender {
+        margin-right: 10px; }
+      .full-form-create .form-create-account .create-account .btn-create-account {
+        font-size: 20px;
+        padding: 9px 8px;
+        width: 70%;
+        margin-left: 15%;
+        margin-top: 30px;
+        background-color: #42B72A;
+        color: #fff;
+        border-color: #42B72A;
+        border-radius: 10px; }
+      .full-form-create .form-create-account .create-account .btn-create-account:hover {
+        cursor: pointer; }
+      .full-form-create .form-create-account .create-account .link-login {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 4px; }
 
 .form-input-room {
   width: 500px; }
@@ -703,6 +736,67 @@ body {
   align-items: center; }
   .message-block-default h4 {
     margin: 0; }
+
+.container-edit-profile {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  background-image: linear-gradient(to bottom, #ffffff, #ddd); }
+  .container-edit-profile .block-edit-profile {
+    width: 600px;
+    border-left: 1px solid #b5b0b0;
+    border-right: 1px solid #b5b0b0;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); }
+    .container-edit-profile .block-edit-profile .avatar_edit_profile {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-top: 40px;
+      margin-bottom: 20px; }
+      .container-edit-profile .block-edit-profile .avatar_edit_profile img {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%; }
+    .container-edit-profile .block-edit-profile .block-input {
+      padding: 0px 20px;
+      width: 100%;
+      display: flex; }
+      .container-edit-profile .block-edit-profile .block-input .label-input {
+        width: 40%; }
+        .container-edit-profile .block-edit-profile .block-input .label-input label {
+          display: block;
+          margin-top: 12px;
+          padding: 6.8px;
+          margin-bottom: 0; }
+      .container-edit-profile .block-edit-profile .block-input .input-edit-profile {
+        width: 60%; }
+        .container-edit-profile .block-edit-profile .block-input .input-edit-profile input {
+          display: block;
+          width: 100%;
+          margin-top: 12px;
+          padding: 6px 10px;
+          background-color: #F0F2F5;
+          border: #0084ff solid 1px;
+          border-radius: 40px; }
+        .container-edit-profile .block-edit-profile .block-input .input-edit-profile input:focus {
+          outline: none; }
+    .container-edit-profile .block-edit-profile .btn-update-edit {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      margin-top: 20px; }
+      .container-edit-profile .block-edit-profile .btn-update-edit button {
+        padding: 6px 16px;
+        border: none;
+        background-color: #0084ff;
+        color: #fff;
+        border-radius: 10px; }
+      .container-edit-profile .block-edit-profile .btn-update-edit button:hover {
+        cursor: pointer; }
+      .container-edit-profile .block-edit-profile .btn-update-edit button:focus {
+        outline: none; }
 
 @keyframes modalFadeIn {
   from {

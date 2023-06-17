@@ -1,8 +1,37 @@
-<form action="/user/profile" method="post">
-    <input type="text" name="fullName" value="{{user.fullName}}">
-    <input type="text" name="email" value="{{user.email}}">
-    <input type="text" name="sex" value="{{user.sex}}">
-    <input type="text" name="birthday" value="{{user.birthday}}">
-    <input type="text" name="avatar" value="{{user.avatar}}">
-    <button type="submit"> Cập nhật</button>
-</form>
+<div class="container-edit-profile">
+    <div class="block-edit-profile">
+        <div class="avatar_edit_profile">
+            <img src="https://tiengdong.com/wp-content/uploads/www_tiengdong_com-meme-meo-ho.jpg" alt="">
+        </div>
+        <div class="block-input">
+            <div class="label-input">
+                <label for="">
+                    Họ và tên
+                </label>
+                <label for="">
+                    Email
+                </label>
+                <label for="">
+                    Giới tính
+                </label>
+                <label for="">
+                    Ngày sinh
+                </label>
+                <label for="">
+                    Ảnh đại diện
+                </label>
+            </div>
+            <div class="input-edit-profile">
+                <input type="text" name="fullName" value="{{user.fullName}}">
+                <input type="text" name="email" value="{{user.email}}">
+                <input type="text" name="sex" value="{{user.sex}}">
+                <input type="text" name="birthday" value="{{user.birthday}}">
+                <input type="text" name="avatar" value="{{user.avatar}}">
+            </div >
+
+        </div>
+        <form class="btn-update-edit" action="/user/profile" method="post">
+            <button type="submit"> Cập nhật</button>
+        </form>
+    </div>
+</div>
