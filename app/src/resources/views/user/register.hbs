@@ -1,34 +1,40 @@
-<div class="form-create-account">
-    <div class="create-account">
-        <form action="/user/registerPost" , method="POST">
-            <h3 class="title">Đăng ký</h3>
-            <input type="text" class="input-create-account" name="fullName" placeholder="Họ và tên">
-            <input class="input-create-account" type="text" name="userName" class="form-control" id="userName"
-                placeholder="Tài khoản">
-            <input class="input-create-account" type="password" name="password" class="form-control" id="passwordUser"
-                placeholder="Mật khẩu">
-            <input class="input-create-account" type="password" name="retypepassword" class="form-control"
-                id="passwordUser" placeholder="Nhập lại mật khẩu">
-            <input class="input-create-account" type="email" name="email" class="form-control" id="exampleInputEmail1"
-                aria-describedby="emailHelp" placeholder="Email">
-            <input class="input-create-account" type="text" name="phone" class="form-control" id="exampleInputPhone1"
-                aria-describedby="emailHelp" placeholder="Số điện thoại">
-            {{!-- <label for="male">Nam</label>
-            <input type="radio" class="input-gender" id="male" name="gender" value="male">
+<div class="full-form-create">
+    <div class="form-create-account">
+        <div class="create-account">
+            <form action="/user/registerPost" , method="POST">
+                <h3 class="title">Đăng ký</h3>
+                <input type="text" class="input-create-account" name="fullName" placeholder="Họ và tên">
+                <input class="input-create-account" type="text" name="userName" class="form-control" id="userName"
+                    placeholder="Tài khoản">
+                <input class="input-create-account" type="password" name="password" class="form-control" id="passwordUser"
+                    placeholder="Mật khẩu">
+                <input class="input-create-account" type="password" name="retypepassword" class="form-control"
+                    id="passwordUser" placeholder="Nhập lại mật khẩu">
+                <input class="input-create-account" type="email" name="email" class="form-control" id="exampleInputEmail1"
+                    aria-describedby="emailHelp" placeholder="Email">
+                <input class="input-create-account" type="text" name="phone" class="form-control" id="exampleInputPhone1"
+                    aria-describedby="emailHelp" placeholder="Số điện thoại">
+                {{!-- <label for="male">Nam</label>
+                <input type="radio" class="input-gender" id="male" name="gender" value="male">
 
-            <label for="femal">Nữ</label>
-            <input type="radio" class="input-gender" id="female" name="gender" value="female">
+                <label for="femal">Nữ</label>
+                <input type="radio" class="input-gender" id="female" name="gender" value="female">
 
-            <label for="other">Khác</label>
-            <input type="radio" class="input-gender" id="other" name="gender" value="other"> --}}
-            <select class="input-gender" name="sex">
-                <option value="Nam">Nam</option>
-                <option value="Nữ">Nữ</option>
-                <option value="Khác">Khác</option>
-            </select>
+                <label for="other">Khác</label>
+                <input type="radio" class="input-gender" id="other" name="gender" value="other"> --}}
+                <select class="input-gender" name="sex">
+                    <option value="Nam">Nam</option>
+                    <option value="Nữ">Nữ</option>
+                    <option value="Khác">Khác</option>
+                </select>
 
-            <input type="date" id="birthday" name="birthday">
-            <button class="btn-create-account" type="submit" class="btn btn-primary">Đăng ký</button>
-        </form>
+                <input type="date" id="birthday" name="birthday">
+                <button class="btn-create-account" type="submit" class="btn btn-primary">Đăng ký</button>
+            </form>
+            <div class="link-login">
+                <a href="/user/login">Đã có tài khoản</a>
+
+            </div>
+        </div>
     </div>
 </div>

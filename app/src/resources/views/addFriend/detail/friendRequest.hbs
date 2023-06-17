@@ -22,7 +22,7 @@
                 <button class='btn-logout' type='submit'><i class='ti-shift-left'></i></button>
             </form>
             <div class='modal-myprofile js-modal-myprofile'>
-                <div class='block-profile my-profile js-my-profile'>
+                <form action="/user/profile" class='block-profile my-profile js-my-profile'>
                     <div class='header-profile'>
                         <h5>Thông tin tài khoản</h5>
                     </div>
@@ -66,10 +66,15 @@
                                 {{userNameFInstance.birthday}}
                             </span>
                         </div>
-                        <a href="/user/profile">Chỉnh sửa</a>
+                       
 
                     </div>
+                    <div class="btn-edit-profile">
+                    <button>
+                        Chỉnh sửa
+                    </button>
                 </div>
+                </form>
             </div>
         </div>
         <div class='js-menu-contact menu-contact'>
