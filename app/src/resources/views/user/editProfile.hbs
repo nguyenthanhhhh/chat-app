@@ -1,7 +1,7 @@
 <div class="container-edit-profile">
     <div class="block-edit-profile">
         <div class="avatar_edit_profile">
-            <img src="https://tiengdong.com/wp-content/uploads/www_tiengdong_com-meme-meo-ho.jpg" alt="">
+            <img src="{{user.avatar}}" alt="">
         </div>
         <div class="block-input">
             <div class="label-input">
@@ -27,7 +27,7 @@
                 <input type="text" name="sex" value="{{user.sex}}">
                 <input type="text" name="birthday" value="{{user.birthday}}">
                 <input type="text" name="avatar" value="{{user.avatar}}">
-            </div >
+            </div>
 
         </div>
         <form class="btn-update-edit" action="/user/profile" method="post">

@@ -102,35 +102,6 @@ class UserController {
     }
   }
 
-  async updateProfilePost(req, res) {
-    const { user } = req
-    const { fullName, sex, birthday, avatar, email } = req.body
-    try {
-      Users.update(
-        { fullName, sex, birthday, avatar, email },
-        { where: { userName: user.userName } }
-      )
-        .then(async () => {
-          res
-            .status(200)
-            .send(
-              '<script>alert("Cập nhật tài khoản thành công. "); window.location.href ="/";</script>'
-            )
-        })
-        .catch((err) => {
-          res.send({ message: err.message })
-        })
-    } catch (error) {
-      console.log(error)
-      res
-        .status(400)
-        .send(
-          error +
-            '<script>alert("Có lỗi,  quay lại"); window.location.href ="/";</script>'
-        )
-    }
-  }
-
   loginGet(req, res) {
     res.render('user/login')
   }
@@ -415,6 +386,35 @@ class UserController {
     const { user } = req
     const userLog = await Users.findOne({ where: { userName: user.userName } })
     res.render('user/editProfile', { user: dataToObj(userLog) })
+  }
+
+  async updateProfilePost(req, res) {
+    const { user } = req
+    const { fullName, sex, birthday, avatar, email } = req.body
+    try {
+      Users.update(
+        { fullName, sex, birthday, avatar, email },
+        { where: { userName: user.userName } }
+      )
+        .then(async () => {
+          res
+            .status(200)
+            .send(
+              '<script>alert("Cập nhật tài khoản thành công. "); window.location.href ="/";</script>'
+            )
+        })
+        .catch((err) => {
+          res.send({ message: err.message })
+        })
+    } catch (error) {
+      console.log(error)
+      res
+        .status(400)
+        .send(
+          error +
+            '<script>alert("Có lỗi,  quay lại"); window.location.href ="/";</script>'
+        )
+    }
   }
 }
 
