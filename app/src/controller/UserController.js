@@ -390,12 +390,11 @@ class UserController {
 
   async updateProfilePost(req, res) {
     const { user } = req
-    const { fullName, sex, birthday, avatar, email } = req.body
+    const payload = req.body
     try {
-      Users.update(
-        { fullName, sex, birthday, avatar, email },
-        { where: { userName: user.userName } }
-      )
+      Users.update(payload, {
+        where: { userName: user.userName },
+      })
         .then(async () => {
           res
             .status(200)
