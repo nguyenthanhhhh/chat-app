@@ -553,6 +553,7 @@
                 messageContent.textContent = messDecode;
                 var messageContainer = document.getElementById('message-block');
                 messageContainer.appendChild(messageItem);
+                messageContainer.scrollTop = chatContainer.scrollHeight;
 
             } else {
                 /*
@@ -609,6 +610,7 @@
                 messageContent.textContent = messDecode;
                 var messageContainer = document.getElementById('message-block');
                 messageContainer.appendChild(messageItem);
+                messageContainer.scrollTop = chatContainer.scrollHeight;
 
             }
 
@@ -664,6 +666,8 @@
 
                 var messageContainer = document.getElementById('message-block');
                 messageContainer.appendChild(messageItem);
+                messageContainer.scrollTop = chatContainer.scrollHeight;
+
             }
             else {
                 var messageItem = document.createElement('div');
@@ -720,10 +724,11 @@
 
                 var messageContainer = document.getElementById('message-block');
                 messageContainer.appendChild(messageItem);
+                messageContainer.scrollTop = chatContainer.scrollHeight;
+
             }
 
         });
-
     }
 
 
@@ -792,5 +797,14 @@
             profile.classList.add('open')
             message.classList.add('narrow')
         }
+    }
+</script>
+<script>     
+    const chatContainer = document.getElementById('message-block');
+    if(chatContainer)
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+
+    function newMessage(){
+        chatContainer.scrollTop = chatContainer.scrollHeight;
     }
 </script>

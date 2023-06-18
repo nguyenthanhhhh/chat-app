@@ -962,23 +962,27 @@ body{
         }
       }
     }
-    .btn-update-edit{
-      display: flex;
-      justify-content: center;
+    .form-edit-profile{
       width: 100%;
-      margin-top: 20px;
-      button{
-        padding: 6px 16px;
-        border: none;
-        background-color: #0084ff;
-        color: #fff;
-        border-radius: 10px;
-      }
-      button:hover{
-        cursor: pointer;
-      }
-      button:focus{
-        outline: none;
+      
+      .btn-update-edit{
+        display: flex;
+        width: 100%;
+        margin-top: 20px;
+        justify-content: center;
+        button{
+          padding: 6px 16px;
+          border: none;
+          background-color: #0084ff;
+          color: #fff;
+          border-radius: 10px;
+        }
+        button:hover{
+          cursor: pointer;
+        }
+        button:focus{
+          outline: none;
+        }
       }
     }
 

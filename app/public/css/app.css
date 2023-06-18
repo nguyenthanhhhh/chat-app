@@ -782,21 +782,23 @@ body {
           border-radius: 40px; }
         .container-edit-profile .block-edit-profile .block-input .input-edit-profile input:focus {
           outline: none; }
-    .container-edit-profile .block-edit-profile .btn-update-edit {
-      display: flex;
-      justify-content: center;
-      width: 100%;
-      margin-top: 20px; }
-      .container-edit-profile .block-edit-profile .btn-update-edit button {
-        padding: 6px 16px;
-        border: none;
-        background-color: #0084ff;
-        color: #fff;
-        border-radius: 10px; }
-      .container-edit-profile .block-edit-profile .btn-update-edit button:hover {
-        cursor: pointer; }
-      .container-edit-profile .block-edit-profile .btn-update-edit button:focus {
-        outline: none; }
+    .container-edit-profile .block-edit-profile .form-edit-profile {
+      width: 100%; }
+      .container-edit-profile .block-edit-profile .form-edit-profile .btn-update-edit {
+        display: flex;
+        width: 100%;
+        margin-top: 20px;
+        justify-content: center; }
+        .container-edit-profile .block-edit-profile .form-edit-profile .btn-update-edit button {
+          padding: 6px 16px;
+          border: none;
+          background-color: #0084ff;
+          color: #fff;
+          border-radius: 10px; }
+        .container-edit-profile .block-edit-profile .form-edit-profile .btn-update-edit button:hover {
+          cursor: pointer; }
+        .container-edit-profile .block-edit-profile .form-edit-profile .btn-update-edit button:focus {
+          outline: none; }
 
 @keyframes modalFadeIn {
   from {
