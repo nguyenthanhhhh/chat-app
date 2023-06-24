@@ -139,8 +139,8 @@ io.on('connection', (socket) => {
         )
         linkLocation.message = encode(linkLocation.message)
         io.to(room).emit('server-send-location-to-client', {
-          userNameF: data.userNameF,
-          userNameT: data.userNameT,
+          userNameF: newMessage.data.newMessage.userNameF,
+          userNameT: newMessage.data.newMessage.userNameT,
           message: newMessage.data.newMessage,
           userF: newMessage.data.userF,
           messEncode: linkLocation.message,

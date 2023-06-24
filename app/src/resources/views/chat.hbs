@@ -624,7 +624,7 @@
 
         //xử lý share location:
         socket.on("server-send-location-to-client", (data) => {
-            if (data.message.userNameF === userNameF) {
+            if (data.userNameF === userNameChat) {
 
                 var messageItem = document.createElement('div');
                 messageItem.classList.add('message-item');
@@ -661,7 +661,7 @@
                 messageContainer.scrollTop = chatContainer.scrollHeight;
 
             }
-            if (data.message.userNameF !== userNameF && data.message.userNameT === userNameT) {
+            if (data.userNameF !== userNameChat && data.userNameF === userNameT) {
                 console.log(data.message.userNameT)
                 console.log(userNameF)
                 var messageItem = document.createElement('div');
