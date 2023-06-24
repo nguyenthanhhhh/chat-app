@@ -566,7 +566,8 @@ body {
 
 .full-form-login {
   width: 100vw;
-  height: 100vh;
+  height: 80vh;
+  margin-top: 10vh;
   background-color: #fff;
   display: flex; }
 
@@ -578,14 +579,13 @@ body {
   justify-content: center; }
   .background-kma img {
     width: 400px;
-    margin-top: 50px;
     margin-bottom: 20px; }
 
 .form-room {
   width: 400px;
   height: 450px;
   margin-left: 50px;
-  margin-top: 100px;
+  margin-top: 10px;
   background-color: #fff; }
 
 .label-form-create {
@@ -613,26 +613,18 @@ body {
 
 .full-form-create {
   width: 100vw;
-  height: 100vh;
-  background-image: url("https://i.pinimg.com/originals/8c/a7/87/8ca787d349e1fe427095f749c300e7a7.jpg"); }
+  height: 80vh;
+  margin-top: 10vh;
+  display: flex;
+  background-color: #fff; }
   .full-form-create .form-create-account {
     width: 400px;
+    margin-left: 50px;
     height: 580px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border: none;
-    border-radius: 50px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     background-color: #fff; }
     .full-form-create .form-create-account .create-account {
-      position: absolute;
       width: 90%;
-      height: 90%;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%); }
+      height: 90%; }
       .full-form-create .form-create-account .create-account h3 {
         margin-bottom: 20px; }
       .full-form-create .form-create-account .create-account .input-create-account {

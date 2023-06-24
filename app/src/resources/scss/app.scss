@@ -713,7 +713,8 @@ body{
 
 .full-form-login{
   width: 100vw;
-  height: 100vh;
+  height: 80vh;
+  margin-top: 10vh;
   background-color: #fff;
   display: flex;
  // background: linear-gradient(to right, #000000, #ffffff);
@@ -728,7 +729,7 @@ body{
   
   img{
     width: 400px;
-    margin-top: 50px;
+    //margin-top: 50px;
     margin-bottom: 20px;
   }
 }
@@ -736,7 +737,7 @@ body{
   width: 400px;
   height: 450px;
   margin-left: 50px;
-  margin-top: 100px;
+  margin-top: 10px;
   
   // position: absolute;
   // top: 50%;
@@ -778,28 +779,31 @@ body{
 }
 .full-form-create{
   width: 100vw;
-  height: 100vh;
-  background-image: url("https://i.pinimg.com/originals/8c/a7/87/8ca787d349e1fe427095f749c300e7a7.jpg");
-
+  height: 80vh;
+  margin-top: 10vh;
+  display: flex;
+  //background-image: url("https://i.pinimg.com/originals/8c/a7/87/8ca787d349e1fe427095f749c300e7a7.jpg");
+  background-color: #fff;
   .form-create-account{
     width: 400px;
+    margin-left: 50px;
     height: 580px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border: none;
-    border-radius: 50px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    // position: absolute;
+    // top: 50%;
+    // left: 50%;
+    // transform: translate(-50%, -50%);
+    // border: none;
+    // border-radius: 50px;
+    // box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     background-color: #fff;
   
     .create-account{
-      position: absolute;
+      //position: absolute;
       width: 90%;
       height: 90%;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      // top: 50%;
+      // left: 50%;
+      // transform: translate(-50%, -50%);
       h3{
         margin-bottom: 20px;
       }
