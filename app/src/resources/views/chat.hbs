@@ -524,8 +524,6 @@
                 messageItem.classList.add('message-item');
                 messageItem.id = 'message-item';
 
-
-
                 // Tạo phần tử con (div.message__row1)
                 var messageRow1 = document.createElement('div');
                 messageRow1.classList.add('message__row1');
@@ -539,7 +537,7 @@
                 // Tạo phần tử con (p.message__date)
                 var messageDate = document.createElement('p');
                 messageDate.classList.add('message__date');
-                messageDate.textContent = data.createdAt;
+                messageDate.textContent = data.message.createdAt;
 
                 // Thêm a.message__content và p.message__date vào div.message__row1
                 messageRow1.appendChild(messageContent);
@@ -556,11 +554,6 @@
                 messageContainer.scrollTop = chatContainer.scrollHeight;
 
             } else {
-                /*
-                let html = renderMessageReceive(data.message);
-                document.getElementById("message-block").insertAdjacentHTML('beforeend', html);
-                */
-
                 // Tạo phần tử cha (div.message-item)
                 var messageItem = document.createElement('div');
                 messageItem.classList.add('message-item');
@@ -594,7 +587,7 @@
                 // Tạo phần tử con (p.message__date)
                 var messageDate = document.createElement('p');
                 messageDate.classList.add('message__date');
-                messageDate.textContent = data.createdAt;
+                messageDate.textContent = data.message.createdAt;
 
                 // Thêm a.message__content và p.message__date vào div.message__row1
                 messageRow1.appendChild(messageContent);
@@ -611,7 +604,6 @@
                 var messageContainer = document.getElementById('message-block');
                 messageContainer.appendChild(messageItem);
                 messageContainer.scrollTop = chatContainer.scrollHeight;
-
             }
 
         });
@@ -799,12 +791,12 @@
         }
     }
 </script>
-<script>     
+<script>
     const chatContainer = document.getElementById('message-block');
-    if(chatContainer)
+    if (chatContainer)
         chatContainer.scrollTop = chatContainer.scrollHeight;
 
-    function newMessage(){
+    function newMessage() {
         chatContainer.scrollTop = chatContainer.scrollHeight;
     }
 </script>
