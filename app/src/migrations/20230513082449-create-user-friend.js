@@ -2,58 +2,41 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable(
-      'userFriends',
-      {
-        id: {
-          allowNull: false,
-          autoIncrement: true,
-          primaryKey: true,
-          type: Sequelize.INTEGER,
-        },
-        userName: {
-          type: Sequelize.STRING,
-          allowNull: false,
-          references: {
-            model: 'Users',
-            key: 'userName',
-          },
-        },
-        userNameFriend: {
-          type: Sequelize.STRING,
-          allowNull: true,
-          references: {
-            model: 'Users',
-            key: 'userName',
-          },
-        },
-        latestMessage: {
-          type: Sequelize.STRING,
-        },
-        isSelect: {
-          type: Sequelize.BOOLEAN,
-        },
-        createdAt: {
-          allowNull: false,
-          type: Sequelize.DATE,
-        },
-        updatedAt: {
-          allowNull: false,
-          type: Sequelize.DATE,
-        },
+    await queryInterface.createTable('userFriends', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
       },
-      {
-        uniqueKeys: {
-          actions_unique: {
-            fields: ['userName', 'userNameFriend'],
-          },
-        },
-      }
-    )
+      userName: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      userNameFriend: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      latestMessage: {
+        type: Sequelize.STRING,
+      },
+      isSelect: {
+        type: Sequelize.BOOLEAN,
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+    })
 
     await queryInterface.addConstraint('userFriends', {
       type: 'unique',
-      fields: ['id', 'username'],
+      fields: ['userName', 'userNameFriend'],
+      name: 'userFriends_unique_constraint',
     })
   },
   async down(queryInterface, Sequelize) {

@@ -18,13 +18,13 @@ class FriendController {
       const user = req.user
       const { userName } = user
       const query = `
-      SELECT userFriends.*, u1.fullName AS userNameFullName, u2.fullName AS userNameFriendFullName,
-      u1.avatar AS userNameAvt, u2.avatar AS userNameFriendAvt
-      FROM userFriends
-      JOIN Users AS u1 ON userFriends.userName = u1.userName
-      JOIN Users AS u2 ON userFriends.userNameFriend = u2.userName
-      WHERE userFriends.userName = :userName
-      ORDER BY updatedAt DESC
+      SELECT *, u1."fullName" AS "userNameFullName", u2."fullName" AS "userNameFriendFullName",
+      u1."avatar" AS "userNameAvt", u2."avatar" AS "userNameFriendAvt"
+      FROM public."userFriends"
+      JOIN public."Users" AS u1 ON public."userFriends"."userName" = u1."userName"
+      JOIN public."Users" AS u2 ON public."userFriends"."userNameFriend" = u2."userName"
+	    WHERE "userFriends"."userName" = :userName
+      ORDER BY public."userFriends"."updatedAt" DESC;
     `
 
       const allFr = await sequelize.query(query, {

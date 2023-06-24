@@ -1,4 +1,6 @@
 const { Users, userFriend, MessageModel, sequelize } = require('../models')
+const model = require('../models')
+
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const { dataToObj } = require('../utils/dataToObj')
@@ -10,15 +12,16 @@ class UserController {
     try {
       const user = req.user
       const { userName } = user
+
       const query = `
-      SELECT userFriends.*, u1.fullName AS userNameFullName, u2.fullName AS userNameFriendFullName,
-      u1.avatar AS userNameAvt, u2.avatar AS userNameFriendAvt
-      FROM userFriends
-      JOIN Users AS u1 ON userFriends.userName = u1.userName
-      JOIN Users AS u2 ON userFriends.userNameFriend = u2.userName
-      WHERE userFriends.userName = :userName
-      ORDER BY updatedAt DESC
-    `
+       SELECT *, u1."fullName" AS "userNameFullName", u2."fullName" AS "userNameFriendFullName",
+        u1."avatar" AS "userNameAvt", u2."avatar" AS "userNameFriendAvt"
+        FROM public."userFriends"
+        JOIN "Users" AS u1 ON  public."userFriends"."userName" = u1."userName"
+        JOIN "Users" AS u2 ON  public."userFriends"."userNameFriend" = u2."userName"
+		    WHERE "userFriends"."userName" = :userName
+        ORDER BY public."userFriends"."updatedAt" DESC;
+      `
 
       const allFr = await sequelize.query(query, {
         replacements: { userName },
@@ -27,7 +30,7 @@ class UserController {
 
       let userNameFInstance = await Users.findOne({
         where: {
-          userName,
+          userName: userName,
         },
       })
 
@@ -61,6 +64,7 @@ class UserController {
       birthday,
       phone,
     } = req.body
+    console.log('alo')
     if (password === retypepassword) {
       const user = { userName, password, email, fullName, sex, birthday, phone }
       try {
@@ -82,7 +86,9 @@ class UserController {
               )
           })
           .catch((err) => {
-            res.send({ message: err.message })
+            res.send(
+              '<script>alert("Có lỗi"); window.location.href = "/";</script>'
+            )
           })
       } catch (error) {
         let err = error.message
@@ -184,96 +190,101 @@ class UserController {
   }
 
   async inbox(req, res) {
-    const { userNameF, userNameT } = req.body
-    const user = req.user
-    const { userName } = user
+    try {
+      const { userNameF, userNameT } = req.body
+      const user = req.user
+      const { userName } = user
 
-    await userFriend.update({ isSelect: false }, { where: {} })
+      await userFriend.update({ isSelect: false }, { where: {} })
 
-    await userFriend.update(
-      { isSelect: true },
-      {
+      await userFriend.update(
+        { isSelect: true },
+        {
+          where: {
+            userName: userNameF,
+            userNameFriend: userNameT,
+          },
+        }
+      )
+
+      const query = `
+        SELECT *, u1."fullName" AS "userNameFullName", u2."fullName" AS "userNameFriendFullName",
+        u1."avatar" AS "userNameAvt", u2."avatar" AS "userNameFriendAvt"
+        FROM public."userFriends"
+        JOIN "Users" AS u1 ON public."userFriends"."userName" = u1."userName"
+        JOIN "Users" AS u2 ON public."userFriends"."userNameFriend" = u2."userName"
+        WHERE public."userFriends"."userName" = :userName
+        ORDER BY public."userFriends"."updatedAt" DESC;
+      `
+      const temp = 'and userFriends.userNameFriend != :userNameT'
+
+      const allFr = await sequelize.query(query, {
+        replacements: { userName, userNameT },
+        type: sequelize.QueryTypes.SELECT,
+      })
+
+      let userNameTInstance = await Users.findOne({
+        where: { userName: userNameT },
+      })
+
+      const status = userNameTInstance.status
+
+      const fullName_userNameT = userNameTInstance.fullName
+
+      const allMessage = await MessageModel.findAll({
         where: {
-          userName: userNameF,
-          userNameFriend: userNameT,
+          [Op.or]: [
+            { userNameF, userNameT },
+            { userNameF: userNameT, userNameT: userNameF },
+          ],
         },
-      }
-    )
+      })
 
-    const query = `
-      SELECT userFriends.*, u1.fullName AS userNameFullName, u2.fullName AS userNameFriendFullName,
-      u1.avatar AS userNameAvt, u2.avatar AS userNameFriendAvt
-      FROM userFriends
-      JOIN Users AS u1 ON userFriends.userName = u1.userName
-      JOIN Users AS u2 ON userFriends.userNameFriend = u2.userName
-      WHERE userFriends.userName = :userName 
-      ORDER BY updatedAt DESC
-    `
-    const temp = 'and userFriends.userNameFriend != :userNameT'
+      const allMessageFormat = allMessage.map((message) => {
+        let newData = dataToObj(message)
+        let time = newData.createdAt
+        time = moment(time).format('DD/MM/YYYY - HH:mm:ss')
+        newData.createdAt = time
+        const messLocate = newData.message
+        if (messLocate.indexOf('https://www.google.com') != -1) {
+          newData.isLocate = true
+        }
 
-    const allFr = await sequelize.query(query, {
-      replacements: { userName, userNameT },
-      type: sequelize.QueryTypes.SELECT,
-    })
+        if (message.userNameF === user.userName) newData.isSend = true
+        return newData
+      })
 
-    let userNameTInstance = await Users.findOne({
-      where: { userName: userNameT },
-    })
+      userNameTInstance = dataToObj(userNameTInstance)
+      let time = userNameTInstance.birthday
+      time = moment(time).format('DD/MM/YYYY')
+      userNameTInstance.birthday = time
 
-    const status = userNameTInstance.status
+      let userNameFInstance = await Users.findOne({
+        where: {
+          userName,
+        },
+      })
 
-    const fullName_userNameT = userNameTInstance.fullName
+      userNameFInstance = dataToObj(userNameFInstance)
+      let time2 = userNameFInstance.birthday
+      time2 = moment(time2).format('DD/MM/YYYY')
+      userNameFInstance.birthday = time2
 
-    const allMessage = await MessageModel.findAll({
-      where: {
-        [Op.or]: [
-          { userNameF, userNameT },
-          { userNameF: userNameT, userNameT: userNameF },
-        ],
-      },
-    })
-
-    const allMessageFormat = allMessage.map((message) => {
-      let newData = dataToObj(message)
-      let time = newData.createdAt
-      time = moment(time).format('DD/MM/YYYY - HH:mm:ss')
-      newData.createdAt = time
-      const messLocate = newData.message
-      if (messLocate.indexOf('https://www.google.com') != -1) {
-        newData.isLocate = true
-      }
-
-      if (message.userNameF === user.userName) newData.isSend = true
-      return newData
-    })
-
-    userNameTInstance = dataToObj(userNameTInstance)
-    let time = userNameTInstance.birthday
-    time = moment(time).format('DD/MM/YYYY')
-    userNameTInstance.birthday = time
-
-    let userNameFInstance = await Users.findOne({
-      where: {
-        userName,
-      },
-    })
-
-    userNameFInstance = dataToObj(userNameFInstance)
-    let time2 = userNameFInstance.birthday
-    time2 = moment(time2).format('DD/MM/YYYY')
-    userNameFInstance.birthday = time2
-
-    res.render('chat', {
-      userChat: dataToObj(user),
-      allFriend: dataToObj(allFr),
-      allMessage: dataToObj(allMessageFormat),
-      userNameT_fullName: dataToObj(fullName_userNameT),
-      userNameT: dataToObj(userNameT),
-      userNameF: dataToObj(userNameF),
-      status: dataToObj(status),
-      userNameTInstance: userNameTInstance,
-      userNameFInstance: userNameFInstance,
-    })
+      res.render('chat', {
+        userChat: dataToObj(user),
+        allFriend: dataToObj(allFr),
+        allMessage: dataToObj(allMessageFormat),
+        userNameT_fullName: dataToObj(fullName_userNameT),
+        userNameT: dataToObj(userNameT),
+        userNameF: dataToObj(userNameF),
+        status: dataToObj(status),
+        userNameTInstance: userNameTInstance,
+        userNameFInstance: userNameFInstance,
+      })
+    } catch (error) {
+      console.log('[UserController][inbox] err', error)
+      res.send('<script>alert("Có lỗi"); window.location.href ="/";</script>')
+    }
   }
 
   async createMessage(req, res) {

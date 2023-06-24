@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
             msg: 'Tên đăng nhập phải dài từ 5 đến 15 ký tự',
           },
           isUnique: function (value, next) {
-            Users.findOne({ where: { username: value } })
+            Users.findOne({ where: { userName: value } })
               .then(function (user) {
                 // Reject if a different user wants to use the same email
                 if (user) {
