@@ -714,21 +714,40 @@ body{
 .full-form-login{
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(to right, #000000, #ffffff);
-  background-image: url("https://i.pinimg.com/originals/8c/a7/87/8ca787d349e1fe427095f749c300e7a7.jpg");
+  background-color: #fff;
+  display: flex;
+ // background: linear-gradient(to right, #000000, #ffffff);
+  //background-image: url("https://i.pinimg.com/originals/8c/a7/87/8ca787d349e1fe427095f749c300e7a7.jpg");
+}
+.background-kma{
+  width: calc(100% - 500px);
+  border-right: 1px solid #b5b0b0;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  
+  img{
+    width: 400px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+  }
 }
 .form-room{
-  width: 390px;
-  height: 462px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border: solid 0.1px #0084ff;
-  border-radius: 50px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  width: 400px;
+  height: 450px;
+  margin-left: 50px;
+  margin-top: 100px;
+  
+  // position: absolute;
+  // top: 50%;
+  // right: 0;
+  // transform: translate(0, -50%);
+  // border: solid 0.1px #0084ff;
+  // border-radius: 50px;
+  // box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   background-color: #fff;
 }
+
 .label-form-create{
   margin-bottom: 4px;
 }
@@ -750,12 +769,12 @@ body{
       
 }
 .input-form-room{
-  position: absolute;
+ // position: absolute;
   width: 90%;
   height: 90%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  //top: 50%;
+  //left: 50%;
+  //transform: translate(-50%, -50%);
 }
 .full-form-create{
   width: 100vw;
