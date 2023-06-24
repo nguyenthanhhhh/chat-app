@@ -105,7 +105,7 @@ io.on('connection', (socket) => {
           userNameF: data.userNameF,
           userNameT: data.userNameT,
           message: newMessage.data.newMessage,
-          userT: newMessage.data.userT,
+          userF: newMessage.data.userF,
         })
       } catch (error) {
         console.log('Error Server in [Send message to server]')
@@ -141,7 +141,7 @@ io.on('connection', (socket) => {
           userNameF: data.userNameF,
           userNameT: data.userNameT,
           message: newMessage.data.newMessage,
-          userT: newMessage.data.userT,
+          userF: newMessage.data.userF,
           messEncode: linkLocation.message,
         })
       } catch (error) {

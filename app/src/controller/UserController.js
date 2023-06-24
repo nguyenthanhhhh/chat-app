@@ -299,9 +299,9 @@ class UserController {
       time = moment(time).format('DD/MM/YYYY - HH:mm:ss')
       newData.createdAt = time
 
-      const userT = await Users.findOne({ where: { userName: userNameT } })
+      const userF = await Users.findOne({ where: { userName: userNameF } })
 
-      res.send({ newMessage: dataToObj(newData), userT: dataToObj(userT) })
+      res.send({ newMessage: dataToObj(newData), userF: dataToObj(userF) })
     } catch (error) {
       console.log('[UserController][createMEssage] error: ' + error)
     }

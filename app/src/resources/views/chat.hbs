@@ -493,10 +493,6 @@
 
             const inputMessage = document.getElementById("input-message");
 
-            //kiểm tra trạng thái tin nhắn
-            const acknowledgements = () => {
-            };
-
             //gửi dữ tin nhắn lên server
             let message = inputMessage.value;
             //mã hóa
@@ -508,9 +504,6 @@
 
                 );
             }
-
-            //xử lý theo 2 luồng, render tin nhắn ng gửi tại đây, và ng nhận render bên dưới
-
 
             inputMessage.value = "";
         });
@@ -571,7 +564,7 @@
                 // Tạo phần tử con (img.avt-friend)
                 var avatarFriend = document.createElement('img');
                 avatarFriend.classList.add('avt-friend');
-                avatarFriend.src = data.userT.avatar;
+                avatarFriend.src = data.userF.avatar;
                 avatarFriend.alt = '1';
 
                 // Thêm img.avt-friend vào div.avatar-friend-inbox
@@ -618,8 +611,6 @@
                 const latitudeEncode = encode(latitude.toString())
                 const longitudeEncode = encode(longitude.toString())
                 socket.emit("share-location", { userNameF: userNameFNhan, userNameT: userNameT, latitude: latitudeEncode, longitude: longitudeEncode, fullName, userNameT_FullName, userChat: userNameF });
-
-
             });
         });
 
@@ -678,8 +669,7 @@
                 // Tạo phần tử con (img.avt-friend)
                 var avatarFriend = document.createElement('img');
                 avatarFriend.classList.add('avt-friend');
-                //avatarFriend.src = data.userT.avatar;
-                avatarFriend.src = data.userT.avatar;
+                avatarFriend.src = data.userF.avatar;
                 avatarFriend.alt = '1';
 
                 // Thêm img.avt-friend vào div.avatar-friend-inbox
