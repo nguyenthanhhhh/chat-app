@@ -363,6 +363,9 @@
     const room = "defaultRoom"
     const userNameT = '{{userNameT}}'
     const userNameT_FullName = '{{userNameT_fullName}}'
+    const userChat = '{{userChat}}'
+    const userNameChat = '{{userNameChat}}'
+
 
     const encode = (text) => {
         var a = 3
@@ -500,7 +503,7 @@
             if (message.trim().length !== 0) {
                 socket.emit(
                     "send-message-to-server",
-                    { userNameF: userNameFNhan, userNameT: userNameT, message, fullName, userNameT_FullName, userChat: userNameF },
+                    { userNameF: userNameFNhan, userNameT: userNameT, message, fullName, userNameT_FullName, userChat: userNameF, userNameChat },
 
                 );
             }
@@ -511,7 +514,11 @@
         const messages = document.getElementById("messages");
         //Xử lý tin nhắn chat
         socket.on("server-send-message-to-client", (data) => {
-            if (data.message.userNameF === userNameF) {
+            console.log('Người gửi: ', data.userNameF)
+            console.log('Người nhận: ', data.userNameT)
+            console.log('Người đăng nhập: ', userNameChat)
+            console.log('Người đang ấn vào: ', userNameT)
+            if (data.userNameF === userNameChat) {
                 // Tạo phần tử cha (div.message-item)
                 var messageItem = document.createElement('div');
                 messageItem.classList.add('message-item');
@@ -547,7 +554,8 @@
                 messageContainer.appendChild(messageItem);
                 messageContainer.scrollTop = chatContainer.scrollHeight;
 
-            } else {
+            }
+            if (data.userNameF !== userNameChat && data.userNameF === userNameT) {
                 // Tạo phần tử cha (div.message-item)
                 var messageItem = document.createElement('div');
                 messageItem.classList.add('message-item');
@@ -653,7 +661,9 @@
                 messageContainer.scrollTop = chatContainer.scrollHeight;
 
             }
-            else {
+            if (data.message.userNameF !== userNameF && data.message.userNameT === userNameT) {
+                console.log(data.message.userNameT)
+                console.log(userNameF)
                 var messageItem = document.createElement('div');
                 messageItem.classList.add('message-item');
                 messageItem.id = 'message-item';

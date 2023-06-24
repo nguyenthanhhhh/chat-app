@@ -273,6 +273,7 @@ class UserController {
       status: dataToObj(status),
       userNameTInstance: userNameTInstance,
       userNameFInstance: userNameFInstance,
+      userNameChat: userName,
     })
   }
 

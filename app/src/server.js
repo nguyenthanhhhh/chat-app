@@ -102,10 +102,11 @@ io.on('connection', (socket) => {
         const messEncode = encode(newMessage.data.newMessage.message)
         newMessage.data.newMessage.message = messEncode
         io.to(room).emit('server-send-message-to-client', {
-          userNameF: data.userNameF,
-          userNameT: data.userNameT,
+          userNameF: newMessage.data.newMessage.userNameF,
+          userNameT: newMessage.data.newMessage.userNameT,
           message: newMessage.data.newMessage,
           userF: newMessage.data.userF,
+          userNameChat: data.userNameChat,
         })
       } catch (error) {
         console.log('Error Server in [Send message to server]')
