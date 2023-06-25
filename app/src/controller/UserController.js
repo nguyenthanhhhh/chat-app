@@ -103,7 +103,15 @@ class UserController {
   }
 
   loginGet(req, res) {
-    res.render('user/login')
+    try {
+      const token = req.cookies.auth
+      if (!token) return res.render('user/login')
+
+      return res.redirect('/')
+    } catch (error) {
+      console.log('[UserController][loginGet] error: ' + error)
+      res.send('<script>alert("Có lỗi!"); window.location.href ="/";</script>')
+    }
   }
 
   async loginPost(req, res) {
